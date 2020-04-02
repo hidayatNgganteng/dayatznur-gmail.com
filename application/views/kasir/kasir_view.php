@@ -70,9 +70,16 @@
 
       <!-- Nav Item - Tables pembelian -->
       <li class="nav-item">
-        <a class="nav-link" href="<?= site_url() ?>option/data_barang">
-          <i class="fas fa-fw fa-cubes"></i>
-          <span>Data barang</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_barang" aria-expanded="true" aria-controls="collapse_barang">
+        <i class="fas fa-fw fa-cubes"></i>
+          <span>Barang</span>
+        </a>
+        <div id="collapse_barang" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="<?= site_url() ?>option/data_barang"><i class="fas fa-table"></i> Semua Barang</a>
+            <a class="collapse-item" href="<?= site_url() ?>option/laba_diagram"><i class="far fa-chart-bar"></i> Barang Kosong</a>
+            <a class="collapse-item" href="<?= site_url() ?>option/laba_diagram"><i class="far fa-chart-bar"></i> Barang Ready</a>
+        </div>
       </li>
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -110,14 +117,14 @@
           <span>Data user</span></a>
       </li>
       <!-- Divider -->
-      <hr class="sidebar-divider">
+      <!-- <hr class="sidebar-divider"> -->
 
        <!-- Nav Item - Dashboard -->
-       <li class="nav-item">
+       <!-- <li class="nav-item">
         <a class="nav-link" href="<?= site_url() ?>option/pengunjung">
           <i class="fas fa-fw fa-globe-americas"></i>
           <span>Pengunjung</span></a>
-      </li>
+      </li> -->
       <!-- Divider -->
       <hr class="sidebar-divider">
 
@@ -169,7 +176,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $this->session->userdata('username') ?></span>
-                <img class="img-profile rounded-circle" src="<?= site_url() ?>assets/images/p.jpeg">
+                <img class="img-profile rounded-circle" src="<?= site_url() ?>assets/images/p.png">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -491,17 +498,18 @@
         });
         
         $('#selesai').click(function(){
-            var bayar=$('#bayar').val();
-            var kembali=$('#kembali').val();
-            $.ajax({
-                url:"http://localhost/bordercell/option/cetak_nota/",
-                data:{bayar:bayar,kembali:kembali},
-                method:"POST",
-                success:function(data){
-                    $('#modalNota').modal('show');
-                    $('#isiModal').html(data);
-                    }
-                });
+          cetak_struk();
+            // var bayar=$('#bayar').val();
+            // var kembali=$('#kembali').val();
+            // $.ajax({
+            //     url:"http://localhost/bordercell/option/cetak_nota/",
+            //     data:{bayar:bayar,kembali:kembali},
+            //     method:"POST",
+            //     success:function(data){
+            //         $('#modalNota').modal('show');
+            //         $('#isiModal').html(data);
+            //         }
+            //     });
         });
 
         function selesai()
@@ -533,7 +541,7 @@
 				success:function(result){
 					console.log(result)
 					if(result.status == true){
-						$('#modalNota').modal('hide');
+						// $('#modalNota').modal('hide');
 						reload_table();
 						$('.res').val('');
             $('#pencarian').focus();

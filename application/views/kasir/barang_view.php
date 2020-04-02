@@ -94,14 +94,14 @@
           <span>Data user</span></a>
       </li>
       <!-- Divider -->
-      <hr class="sidebar-divider">
+      <!-- <hr class="sidebar-divider"> -->
 
        <!-- Nav Item - Dashboard -->
-       <li class="nav-item">
+       <!-- <li class="nav-item">
         <a class="nav-link" href="<?= site_url() ?>option/pengunjung">
           <i class="fas fa-fw fa-globe-americas"></i>
           <span>Pengunjung</span></a>
-      </li>
+      </li> -->
       <!-- Divider -->
       <hr class="sidebar-divider">
 
@@ -153,7 +153,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $this->session->userdata('username') ?></span>
-                <img class="img-profile rounded-circle" src="<?= site_url() ?>assets/images/p.jpeg">
+                <img class="img-profile rounded-circle" src="<?= site_url() ?>assets/images/p.png">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -189,7 +189,7 @@
                   <th>H beli</th>
                   <th>H jual</th>
                   <th>H ahir</th>
-                  <th>Setok</th>
+                  <th>Stok</th>
                   <th>Promo</th>
                   <th>Pot</th>
                   <th>Opsi</th>
@@ -480,7 +480,7 @@
                   </div>
                        
                   <div class="form-group">
-                    <label for="setok" class="col-form-label">setok</label>
+                    <label for="setok" class="col-form-label">stok</label>
                     <input type="number" class="form-control " name="setok" >
                     <div class="invalid-feedback"></div>
                   </div>

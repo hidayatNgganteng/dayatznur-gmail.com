@@ -1,5 +1,5 @@
 # aplication-poin-of-sale-web-php-codeigniter
-Aplikasi penjualan berbasis web mempermudah pengusaha memantau penjualan harian/bulanan, setok barang, laba/rugi dan laporan-laporan. Dibangun dengan Codeigniter, MySQL, dan Bootstrap
+Aplikasi penjualan berbasis web mempermudah pengusaha memantau penjualan harian/bulanan, stok barang, laba/rugi dan laporan-laporan. Dibangun dengan Codeigniter, MySQL, dan Bootstrap
 
 ## Stack
 <ul>

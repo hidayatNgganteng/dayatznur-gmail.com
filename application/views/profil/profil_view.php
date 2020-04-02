@@ -154,7 +154,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $this->session->userdata('username') ?></span>
-                <img class="img-profile rounded-circle" src="<?= site_url() ?>assets/images/p.jpeg">
+                <img class="img-profile rounded-circle" src="<?= site_url() ?>assets/images/p.png">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -182,7 +182,7 @@
           
           <div class="row m-3">
                 <div class="col-5 p-2">
-                  <img class="img-profile rounded-circle" src="<?= site_url() ?>assets/images/p.jpeg">
+                  <img class="img-profile rounded-circle" src="<?= site_url() ?>assets/images/p.png">
                 </div>
                 <div class="col-7 p-2">
                   <a href="javascript:void(0)" onClick="edit_profil()"><i class="far fa-2x fa-edit"></i></a>

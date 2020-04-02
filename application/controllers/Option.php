@@ -179,7 +179,7 @@ class Option extends CI_Controller {
 	public function add_keranjang(){
 		$data = [
 			'id' => $this->input->post('id'),
-			'name' => str_replace(array('-', ',', '.', '+','(',')','%'), '_', $this->input->post('nama')),
+			'name' => str_replace(array('-', ',', '.', '+','(',')','%','&','/'), '_', $this->input->post('nama')),
 			'jenis' => $this->input->post('jenis_promo'),
 			'potongan' => $this->input->post('potongan'),
 			'harga_potongan' => $this->input->post('harga_potongan'),
