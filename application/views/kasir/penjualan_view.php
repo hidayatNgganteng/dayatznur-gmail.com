@@ -41,22 +41,17 @@
 				<thead>
 					<tr>
 						<th>no</th>
-						<!--th>Kode</th-->
 						<th>Nama</th>
-						<th>Qty</th>
-						<th>Kasir</th>
+            <th>Qty</th>
 						<th>Bayar</th>
-						<!--th>satuan</th-->
-						<!--th>S P</th-->
 						<th>Waktu</th>
-						<!--th>Jam</th-->
 					</tr>
 				</thead>
 				<tbody>
         </tbody>
         <tfoot>
           <tr>
-            <th colspan="5" style="text-align:right">Total:</th>
+            <th colspan="4" style="text-align:right">Total:</th>
             <th></th>
           </tr>
         </tfoot>
@@ -95,12 +90,12 @@
           table = $('#tabelBarang').DataTable({
               "columnDefs": [
               {
-                  "targets": [ 1,3,4,5 ],
+                  "targets": [ 0,1,2,3,4 ],
                   "orderable": false,
               },
               ],
               "rowCallback": function( row, data, dataIndex){
-                const inputData = data[5].split(" ")[0]
+                const inputData = data[4].split(" ")[0]
                 const d = new Date(),
                     month = `${d.getMonth() + 1}`.padStart(2, '0'),
                     day = `${d.getDate()}`.padStart(2, '0'),

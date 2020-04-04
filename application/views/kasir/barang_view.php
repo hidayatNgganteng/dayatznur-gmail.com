@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -60,80 +59,58 @@
       <?php $this->load->view('kasir/footer') ?>
 
     </div>
-    <!-- End of Content Wrapper -->
 
   </div>
-  <!-- End of Page Wrapper -->
 
-  <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <!-- Bootstrap core JavaScript-->
   <script src="<?= base_url() ?>assets/jquery/jquery-3.2.1.min.js"></script>
   <script src="<?= base_url() ?>assets/bootstrap-4.1.3/js/bootstrap.min.js"></script>
-  <!-- <script src="<-?= base_url() ?>aassets/js/bootstrap.bundle.min.js"></script> -->
-
-  <!-- Core plugin JavaScript-->
-  <!-- <script src="<-?= base_url() ?>aassets/js/jquery.easing.min.js"></script> -->
-
-  <!-- Custom scripts for all pages-->
   <script src="<?= base_url() ?>assets/js/sb-admin-2.js"></script>
-  
-  <!-- Page level plugins -->
   <script src="<?= base_url() ?>assets/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
   <script src="<?= base_url() ?>assets/DataTables-1.10.18/js/dataTables.bootstrap4.min.js"></script>
   <script src="<?= base_url() ?>assets/Responsive-2.2.2/js/dataTables.responsive.min.js"></script>
   <script src="<?= base_url() ?>assets/Responsive-2.2.2/js/responsive.bootstrap4.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <!-- <script src="<-?= base_url() ?>aassets/demo/datatables-demo.js"></script> -->
-  
   <script src="<?php echo base_url() ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-  <!-- <script src="<-?php echo base_url() ?>assets/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> -->
   <script>
-      var table;
+      var table
       $(document).ready(function(){
-          table = $('#tabelBarang').DataTable({
-              "columnDefs": [
-                {
-                    "targets": [ 0,1,2,3,4, 5]
-                },
-              ],
-              "fnRowCallback": (nRow, aData, iDisplayIndex, iDisplayIndexFull ) => {
-                if ( aData[4] == 0 ){
-                  $('td', nRow).css({
-                    "background-color":"red",
-                    "color":"#fff"})
-                }
-                if (aData[0] % 2 != 0){
-                  $(nRow).css('backgroundColor', 'rgba(0,243,255, 0.25)');
-                }
-              },
-              "order": [],
-              "serverSide": true, 
-              "ajax": {
-                  "url": "http://localhost/bordercell/option/get_barang",
-                  "type": "POST"
-                  },
-              "lengthChange": false,
-              "responsive": true,
-              });
-          //  new $.fn.dataTable.FixedHeader( table );
-       });
+        table = $('#tabelBarang').DataTable({
+          "columnDefs": [{
+            "targets": [ 0,1,2,3,4,5 ]
+          }],
+          "fnRowCallback": (nRow, aData, iDisplayIndex, iDisplayIndexFull ) => {
+            if ( aData[4] == 0 ){
+              $('td', nRow).css({
+                "background-color":"red",
+                "color":"#fff"})
+            }
+            if (aData[0] % 2 != 0){
+              $(nRow).css('backgroundColor', 'rgba(0,243,255, 0.25)');
+            }
+          },
+          "order": [],
+          "serverSide": true, 
+          "ajax": {
+            "url": "http://localhost/bordercell/option/get_barang",
+            "type": "POST"
+          },
+          "lengthChange": false,
+          "responsive": true,
+        })
+      })
        
-       function reload_table()
-       {
-           table.ajax.reload(null,false);
-       }
+      function reload_table() {
+        table.ajax.reload(null,false)
+      }
        
-      function tambah_barang ()
-      {
-          save_method = 'add';
-          $('#form')[0].reset();
-          $('.modal-title').text('Input barang');
-          $('#modal_form').modal('show'); 
+      function tambah_barang () {
+        save_method = 'add'
+        $('#form')[0].reset()
+        $('.modal-title').text('Input barang')
+        $('#modal_form').modal('show') 
       }
       
       $(function(){

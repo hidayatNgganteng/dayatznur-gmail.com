@@ -4,8 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Model_penjualan extends CI_Model {
 	
 	var $table = 'penjualan';
-	var $column_order = array(null,null,'nama_barang'); //file table
-	var $column_search = array('nama_barang'); //pencarian yg d ijinkan
+	var $column_order = array(null,null,'total_harga'); //file table
+	var $column_search = array('nama_brg'); //pencarian yg d ijinkan
 	var $order = array('id_penjualan' => 'desc'); // default order
 	
 	function get_datatables()
@@ -21,22 +21,20 @@ class Model_penjualan extends CI_Model {
 	{
 		$this->db->from($this->table);
 		$i = 0;
-		foreach ($this->column_search as $item) // loop column 
-		{
+		foreach ($this->column_search as $item) {
 			if($_POST['search']['value']) // if datatable send POST for search
 			{
-				if($i===0) // first loop
-				{
+				if($i===0) {
 					$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
 					$this->db->like($item, $_POST['search']['value']);
-				}
-				else
-				{
+				} else {
 					$this->db->or_like($item, $_POST['search']['value']);
 				}
+
 				if(count($this->column_search) - 1 == $i) //last loop
 					$this->db->group_end(); //close bracket
-			}
+				}
+
 			$i++;
 		}
 		

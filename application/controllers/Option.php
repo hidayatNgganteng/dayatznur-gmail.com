@@ -22,7 +22,8 @@ class Option extends CI_Controller {
 		$list = $this->model_barang->get_datatables();
 		$data = [];
 		$no = $_POST['start'];
-		$n=0;
+    $n=0;
+    
 		foreach ($list as $barang) {
 			$n++;
 			$row = [];
@@ -118,6 +119,58 @@ class Option extends CI_Controller {
 	
 	public function data_barang(){
 		$this->load->view('kasir/barang_view');
+  }
+
+  public function kasir_elektrik_view(){
+		$this->load->view('kasir/kasir_elektrik_view');
+  }
+
+  public function save_produk_elektrik(){
+    $this->load->library('session'); 
+    $this->load->model('model_saldo');
+
+    $data_saldo = $this->model_saldo->getSaldo();
+
+    if ($this->input->post('harga_beli') > $data_saldo->saldo) {
+      $this->session->set_flashdata('error', "Saldo anda tidak mencukupi!!");
+      $this->load->view('kasir/kasir_elektrik_view');
+    } else if ($this->input->post('harga_beli') > $this->input->post('harga_jual')) {
+      $this->session->set_flashdata('error', "Harga beli tidak boleh lebih dari harga jual!!");
+      $this->load->view('kasir/kasir_elektrik_view');
+    } else {
+      $datestring = '%H:%i';
+      $time 		= time();
+      $waktu 		= mdate($datestring, $time);
+
+      $data =[
+        'kasir' => 0,
+        'kode_brg' => 0,
+        'nama_brg' 	    => $this->input->post('nama_brg'),
+        'harga_beli' 		=> $this->input->post('harga_beli'),
+        'harga_brg' 		=> $this->input->post('harga_jual'),
+        'jumlah' 		=> 1,
+        'total_harga' 		=>  $this->input->post('harga_jual'),
+        'tgl_transaksi' => date('Y-m-d'),
+        'waktu' 			  => $waktu,
+        'type_product' => 'elektrik'
+      ];
+      
+      $this->session->set_flashdata('success', "Produk tersimpan : )");
+      $this->model_barang->insert_penjualan($data);
+
+      // kurangi saldo
+      $datasaldo =[ 'saldo' => $data_saldo->saldo - $this->input->post('harga_beli') ];
+      $this->model_saldo->update(array('id' => 0), $datasaldo);
+
+      $this->load->view('kasir/kasir_elektrik_view');
+    }
+	}  
+  
+  public function saldo(){
+    $this->load->model('model_saldo');
+    $data['data_saldo'] = $this->model_saldo->getSaldo();
+
+		$this->load->view('kasir/saldo_view', $data);
 	}
 
 	public function data_barang_kosong(){
@@ -156,6 +209,14 @@ class Option extends CI_Controller {
 		];
 		$this->model_barang->update(array('id_barang' => $this->input->post('id')), $data);
 		echo json_encode(array("status" => TRUE));
+  }
+  
+  public function update_saldo(){
+    $this->load->model('model_saldo');
+
+		$data =[ 'saldo' => $this->input->post('saldo') ];
+		$this->model_saldo->update(array('id' => $this->input->post('saldoId')), $data);
+		echo json_encode(array("status" => TRUE, "saldo" => $this->input->post('saldo')));
 	}
 	
 	function simpan_barang(){
@@ -409,7 +470,6 @@ class Option extends CI_Controller {
 			$row[] = $n;
 			$row[] = $barang->nama_brg;
 			$row[] = $barang->jumlah;
-			$row[] = $barang->kasir;
 			$row[] = $barang->total_harga;
 			$row[] = $barang->tgl_transaksi.' '.$barang->waktu;
 			$data[] = $row;

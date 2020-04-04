@@ -16,10 +16,24 @@
 
   <hr class="sidebar-divider my-0">
 
-  <li class="nav-item ">
-    <a class="nav-link" href="<?= site_url() ?>">
-    <i class="fas fa-fw fa-cash-register"></i>
-    <span>Kasir</span></a>
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_kasir" aria-expanded="true" aria-controls="collapse_kasir">
+      <i class="fas fa-fw fa-cash-register"></i>
+      <span>Kasir</span>
+    </a>
+    <div id="collapse_kasir" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" href="<?= site_url() ?>"><i class="fas fa-thermometer"></i> Kasir Produk</a>
+        <a class="collapse-item" href="<?= site_url() ?>option/kasir_elektrik_view"><i class="fas fa-thermometer-empty"></i> Kasir Elektrik</a>
+    </div>
+  </li>
+
+  <hr class="sidebar-divider">
+  
+  <li class="nav-item">
+    <a class="nav-link" href="<?= site_url() ?>option/saldo">
+    <i class="far fa-hdd"></i>
+      <span>Saldo</span></a>
   </li>
 
   <hr class="sidebar-divider">
