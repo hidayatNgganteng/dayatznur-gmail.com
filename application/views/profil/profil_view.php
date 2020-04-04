@@ -28,15 +28,15 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= site_url() ?>">
-      <div class="sidebar-brand-icon rotate-n-15">
-      <i class="fas fa-cash-register"></i>
+      <div class="sidebar-brand-icon">
+        <img style="width: auto; height: 50px" src="http://localhost/bordercell/assets/images/p.png">
       </div>
-      <div class="sidebar-brand-text mx-3">
+      <div class="sidebar-brand-text mx-1">
         <?php if($this->session->userdata('level')==1)
         {
-          echo 'admin';
+          echo 'Admin';
         }else{
-          echo 'kasir';
+          echo 'Kasir';
         }
         ?>
       </div>
@@ -107,13 +107,13 @@
     <hr class="sidebar-divider">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link" href="<?= site_url() ?>option/data_toko">
       <i class="fas fa-store"></i>
         <span>Toko</span></a>
-    </li>
+    </li> -->
     <!-- Divider -->
-    <hr class="sidebar-divider">
+    <!-- <hr class="sidebar-divider"> -->
 
     <?php
     }

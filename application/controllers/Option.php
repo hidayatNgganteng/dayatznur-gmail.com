@@ -30,31 +30,7 @@ class Option extends CI_Controller {
 			$row[] = $barang->nama_barang;
 			$row[] = number_format($barang->harga_beli,0,".",".");
 			$row[] = number_format($barang->harga_jual,0,".",".");
-			
-			if($barang->jenis_promo == 'diskon'){
-				$row[] = '<span class="text-danger">'.number_format($barang->harga_jual - ($barang->harga_jual * $barang->potongan / 100),0,".",".").'</span>';
-			}else{
-				$row[] = '<span class="text-danger">'.number_format($barang->harga_ahir / $barang->potongan,0,".",".").'</span>';
-			}
-			
 			$row[] = $barang->setok;
-			if($barang->potongan == 0){
-				$row[] = "";
-			}else{
-				if($barang->jenis_promo == 'diskon'){
-					$row[] = 'dis';
-				}else{
-					$row[] = 'min';
-				}
-			}
-			
-			if($barang->jenis_promo == 'diskon' && $barang->potongan == 0){
-				$row[] = "";
-			}else if($barang->jenis_promo == 'diskon' && $barang->potongan > 0){
-				$row[] = $barang->potongan."%";
-			}else{
-				$row[] = $barang->potongan;
-			}
 			
 			if($this->session->userdata('level') == 1 ){
 				$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_barang('."'".$barang->id_barang."'".')"><i class="far fa-edit"></i></a>
@@ -73,9 +49,83 @@ class Option extends CI_Controller {
 		];
 		echo json_encode($output);
 	}
+
+	public function get_barang_kosong(){
+		$list = $this->model_barang->get_datatables_brg_kosong();
+		$data = [];
+		$no = $_POST['start'];
+		$n=0;
+		foreach ($list as $barang) {
+			$n++;
+			$row = [];
+			$row[] = $n;
+			$row[] = $barang->nama_barang;
+			$row[] = number_format($barang->harga_beli,0,".",".");
+			$row[] = number_format($barang->harga_jual,0,".",".");
+			
+			$row[] = $barang->setok;
+			
+			if($this->session->userdata('level') == 1 ){
+				$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_barang('."'".$barang->id_barang."'".')"><i class="far fa-edit"></i></a>
+				  	  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_barang('."'".$barang->id_barang."'".')"><i class="far fa-trash-alt"></i></a>';
+			}else{
+				$row[] = '<a class="btn btn-sm btn-warning disabled" href="javascript:void(0)" title="Edit" ><i class="far fa-edit"></i></a>
+				  	  <a class="btn btn-sm btn-danger disabled" href="javascript:void(0)" title="Hapus" ><i class="far fa-trash-alt"></i></a>';
+			}
+			$data[] = $row;
+		}
+		$output = [
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->model_barang->count_stok_kosong(),
+			"recordsFiltered" => $this->model_barang->count_filtered_kosong(),
+			"data" => $data,
+		];
+		echo json_encode($output);
+	}
+
+	public function get_barang_hampir_habis(){
+		$list = $this->model_barang->get_datatables_brg_hampir_habis();
+		$data = [];
+		$no = $_POST['start'];
+		$n=0;
+		foreach ($list as $barang) {
+			$n++;
+			$row = [];
+			$row[] = $n;
+			$row[] = $barang->nama_barang;
+			$row[] = number_format($barang->harga_beli,0,".",".");
+			$row[] = number_format($barang->harga_jual,0,".",".");
+			
+			$row[] = $barang->setok;
+			
+			if($this->session->userdata('level') == 1 ){
+				$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_barang('."'".$barang->id_barang."'".')"><i class="far fa-edit"></i></a>
+				  	  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_barang('."'".$barang->id_barang."'".')"><i class="far fa-trash-alt"></i></a>';
+			}else{
+				$row[] = '<a class="btn btn-sm btn-warning disabled" href="javascript:void(0)" title="Edit" ><i class="far fa-edit"></i></a>
+				  	  <a class="btn btn-sm btn-danger disabled" href="javascript:void(0)" title="Hapus" ><i class="far fa-trash-alt"></i></a>';
+			}
+			$data[] = $row;
+		}
+		$output = [
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->model_barang->count_stok_hampir_habis(),
+			"recordsFiltered" => $this->model_barang->count_filtered_hampir_habis(),
+			"data" => $data,
+		];
+		echo json_encode($output);
+	}
 	
 	public function data_barang(){
 		$this->load->view('kasir/barang_view');
+	}
+
+	public function data_barang_kosong(){
+		$this->load->view('kasir/barang_kosong_view');
+	}
+
+	public function data_barang_hampir_habis(){
+		$this->load->view('kasir/barang_hampir_habis_view');
 	}
 	
 	public function hapus_barang($id){

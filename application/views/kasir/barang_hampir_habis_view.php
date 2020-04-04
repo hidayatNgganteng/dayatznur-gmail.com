@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,29 +18,28 @@
 </head>
 
 <body id="page-top">
-
-  <!-- Page Wrapper -->
   <div id="wrapper">
     <?php $this->load->view('kasir/menu') ?>
 
-    <div id="content-wrapper" class="d-flex flex-column">  
+    <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
 
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
-          <div class="h3 ml-auto">Semua Barang</div>
+          <div class="h3 ml-auto">Barang Hampir Habis</div>
 
           <?php $this->load->view('kasir/menu_kanan') ?>
         </nav>
 
+        <!-- Begin Page Content -->
         <div class="container-fluid">
-          <?php
-            if($this->session->userdata('level')==1) {
-              echo '<button class="btn btn-success" onclick="tambah_barang()"><i class="glyphicon glyphicon-plus"></i> tambah</button><br><br>';
-            } ?>
-            
+          <?php if($this->session->userdata('level')==1)
+        //   {
+        //     echo '<button class="btn btn-success" onclick="tambah_barang()"><i class="glyphicon glyphicon-plus"></i> tambah</button><br><br>';
+        //   }
+          ?>
             <table id="tabelBarang" class="table table-striped table-bordered nowrap" style="width:100%">
               <thead>
                 <tr>
@@ -51,11 +51,14 @@
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody>
+              </tbody>
             </table>
         </div>
+        <!-- /.container-fluid -->
 
       </div>
+      <!-- End of Main Content -->
 
       <?php $this->load->view('kasir/footer') ?>
 
@@ -97,24 +100,20 @@
       $(document).ready(function(){
           table = $('#tabelBarang').DataTable({
               "columnDefs": [
-                {
-                    "targets": [ 0,1,2,3,4, 5]
-                },
-              ],
-              "fnRowCallback": (nRow, aData, iDisplayIndex, iDisplayIndexFull ) => {
-                if ( aData[4] == 0 ){
-                  $('td', nRow).css({
-                    "background-color":"red",
-                    "color":"#fff"})
-                }
-                if (aData[0] % 2 != 0){
-                  $(nRow).css('backgroundColor', 'rgba(0,243,255, 0.25)');
-                }
+              {
+                  "targets": [ 0,1,2,3,4,5],
+                  // "orderable": true,
               },
+              ],
+              "rowCallback": function( row, data, dataIndex){
+                  if (data[0] % 2 != 0) {
+                    $(row).css('backgroundColor', 'rgba(252,255,0, 0.25)');
+                  }
+                },
               "order": [],
               "serverSide": true, 
               "ajax": {
-                  "url": "http://localhost/bordercell/option/get_barang",
+                  "url": "http://localhost/bordercell/option/get_barang_hampir_habis",
                   "type": "POST"
                   },
               "lengthChange": false,

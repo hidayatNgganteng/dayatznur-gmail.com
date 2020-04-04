@@ -16,6 +16,26 @@ class Model_barang extends CI_Model {
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+	function get_datatables_brg_kosong()
+	{
+		$this->_get_datatables_query();
+		if($_POST['length'] != -1)
+		$this->db->limit($_POST['length'], $_POST['start']);
+		$this->db->where('setok', '0');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function get_datatables_brg_hampir_habis()
+	{
+		$this->_get_datatables_query();
+		if($_POST['length'] != -1)
+		$this->db->limit($_POST['length'], $_POST['start']);
+		$this->db->where('setok', '1');
+		$query = $this->db->get();
+		return $query->result();
+	}
 	
 	private function _get_datatables_query()
 	{
@@ -58,10 +78,42 @@ class Model_barang extends CI_Model {
 		return $query->num_rows();
 	}
 
+	function count_filtered_kosong()
+	{
+		$this->_get_datatables_query();
+		$this->db->where('setok', '0');
+		$query = $this->db->get();
+		return $query->num_rows();
+	}
+
+	function count_filtered_hampir_habis()
+	{
+		$this->_get_datatables_query();
+		$this->db->where('setok', '1');
+		$query = $this->db->get();
+		return $query->num_rows();
+	}
+
 	public function count_all()
 	{
 		$this->db->from($this->table);
 		return $this->db->count_all_results();
+	}
+
+	public function count_stok_kosong()
+	{
+		$this->_get_datatables_query();
+		$this->db->where('setok', '0');
+		$query = $this->db->get();
+		return $query->num_rows();
+	}
+
+	public function count_stok_hampir_habis()
+	{
+		$this->_get_datatables_query();
+		$this->db->where('setok', '1');
+		$query = $this->db->get();
+		return $query->num_rows();
 	}
 	
 	public function save($data)
