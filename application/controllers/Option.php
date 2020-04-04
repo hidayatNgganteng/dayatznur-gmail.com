@@ -146,7 +146,7 @@ class Option extends CI_Controller {
         'kasir' => 0,
         'kode_brg' => 0,
         'nama_brg' 	    => $this->input->post('nama_brg'),
-        'harga_beli' 		=> $this->input->post('harga_beli'),
+        'harga_beli_elektrik' 		=> $this->input->post('harga_beli'),
         'harga_brg' 		=> $this->input->post('harga_jual'),
         'jumlah' 		=> 1,
         'total_harga' 		=>  $this->input->post('harga_jual'),
@@ -566,20 +566,9 @@ class Option extends CI_Controller {
 	}
 	
 	public function diagram(){
-		$min = date('Y-m-').'01';
-		$max = date('Y-m-').'31';
-		$this->db->select('tgl_transaksi');
-		$this->db->where('tgl_transaksi >=', $min);
-		$this->db->where('tgl_transaksi <=', $max);
-		$this->db->select_sum('total_harga');
-		$this->db->group_by('tgl_transaksi');
-		$query=    $this->db->get('penjualan');
-		$data=[];
-		foreach($query->result() as $row)
-		{
-			$data[]=$row;
-		}
-		print json_encode($data);
+    $this->load->model('model_laba');
+		$list = $this->model_laba->get_data_laba_diagram();
+    echo json_encode($list);
 	}
 
 	public function laba_tabel(){
@@ -591,24 +580,17 @@ class Option extends CI_Controller {
 	}
 
 	public function cari_diagram(){
-		$bulan = $this->input->post('bulan')+1;
+    $this->load->model('model_laba');
+
+    $bulan = $this->input->post('bulan')+1;
 		$tahun = $this->input->post('tahun');
 		$tw = 01;
 		$th = 31;
 		$min = $tahun.'-'.$bulan.'-'.$tw;
-		$max = $tahun.'-'.$bulan.'-'.$th;
-		$this->db->select('tgl_transaksi');
-		$this->db->where('tgl_transaksi >=', $min);
-		$this->db->where('tgl_transaksi <=', $max);
-		$this->db->select_sum('total_harga');
-		$this->db->group_by('tgl_transaksi');
-		$query=    $this->db->get('penjualan');
-		$data=[];
-		foreach($query->result() as $row)
-		{
-			$data[]=$row;
-		}
-		print json_encode($data);
+    $max = $tahun.'-'.$bulan.'-'.$th;
+
+		$list = $this->model_laba->get_data_laba_diagram_cari($min, $max);
+    echo json_encode($list);
 	}
 
 	public function logout(){
