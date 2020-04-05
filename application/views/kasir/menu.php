@@ -70,8 +70,8 @@
       <div class="bg-white py-2 collapse-inner rounded">
         <!-- <a class="collapse-item" href="<?= site_url() ?>option/laba_tabel"><i class="fas fa-table"></i> Tabel</a> -->
         <a class="collapse-item" href="<?= site_url() ?>option/laba_diagram"><i class="far fa-chart-bar"></i> Diagram / Hari</a>
-        <a class="collapse-item" href="<?= site_url() ?>option/laba_diagram_per_bulan"><i class="far fa-chart-bar"></i> Diagram / Bulan</a>
-        <a class="collapse-item" href="<?= site_url() ?>option/laba_diagram"><i class="far fa-chart-bar"></i> Diagram / Tahun</a>
+        <a class="collapse-item" href="<?= site_url() ?>option/laba_diagram_per_bulan"><i class="fas fa-building"></i> Diagram / Bulan</a>
+        <a class="collapse-item" href="<?= site_url() ?>option/laba_diagram_per_tahun"><i class="fas fa-hospital-alt"></i> Diagram / Tahun</a>
     </div>
   </li>
 

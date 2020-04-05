@@ -575,6 +575,12 @@ class Option extends CI_Controller {
 		$this->load->model('model_laba');
 		$list = $this->model_laba->get_data_laba_diagram_perbulan();
 		echo json_encode($list);
+  }
+  
+  public function diagram_pertahun(){
+		$this->load->model('model_laba');
+		$list = $this->model_laba->get_data_laba_diagram_pertahun();
+		echo json_encode($list);
 	}
 
 	public function laba_tabel(){
@@ -587,7 +593,18 @@ class Option extends CI_Controller {
 
 	public function laba_diagram_per_bulan(){
 		$this->load->view('kasir/diagram_view_bulan');
-	}
+  }
+
+  public function laba_diagram_per_tahun(){
+		$this->load->view('kasir/diagram_view_tahun');
+  }
+  
+  public function cari_diagram_perbulan(){
+    $this->load->model('model_laba');
+    $tahun = $this->input->post('tahun');
+    $list = $this->model_laba->get_data_laba_diagram_perbulan_cari($tahun);
+    echo json_encode($list);
+  }
 
 	public function cari_diagram(){
     $this->load->model('model_laba');

@@ -26,51 +26,15 @@
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
-          <div class="h3 ml-auto">Pendapatan Harian</div>
+          <div class="h3 ml-auto">Pendapatan Tahunan</div>
 
           <?php $this->load->view('kasir/menu_kanan') ?>
         </nav>
 
         <div class="container-fluid">
-            
 
-          <div class="form-row">
-            <div class="form-group col-md-3">
-              <label for="satuan">bulan</label>
-              <select class="form-control " id="bulan" onChange="cek_bulan()" name="bulan">
-                <?php
-                $bulan=array("January","February","March","April","Mey","June","July","Agust","September","October","November","December");
-                $jlh_bln=count($bulan);
-
-                for($c=0; $c < (date("m")-1); $c++){ ?>
-                  <option value="<?= $c ?>"> <?= $bulan[$c] ?></option> <?php
-                } ?>
-
-                  <option value="<?= date("m")-1; ?>" selected="selected"><?= date("F") ?></option> <?php
-                  $sisa = 12 - date('m'); //5
-                  $tgl = 12 - $sisa;
-
-                  for($b=$tgl; $b < 12; $b++){?>
-                    <option value="<?= $b ?>"> <?= $bulan[$b] ?> </option> <?php
-                  }?>     
-              </select>
-            </div>
-            
-            <div class="form-group col-md-3">
-              <label for="satuan">Tahun</label>
-              <select class="form-control " id="tahun" name="tahun" onChange="cek_bulan()">
-                <?php
-                $now=date("Y") -1;
-                for($thn=$now - 3; $thn<=$now; $thn++){
-                  echo "<option value=$thn>$thn</option>";
-                }?>
-                  <option value="<?= date("Y") ?>" selected="selected"><?= date("Y") ?></option>
-              </select>
-            </div>
-          </div>
-      
           <canvas id="myChart" width="100%" height="40px"></canvas>
-          
+      
         </div>
 
       </div>
@@ -113,56 +77,6 @@
   <script src="<?php echo base_url() ?>assets/js/Chart.min.js"></script>
   <script src="<?php echo base_url() ?>assets/js/custom.js"></script>
   <script>
-      var myChart = null
-
-      function cek_bulan()
-      {
-        var bulan = $("#bulan").val();
-        var tahun = $("#tahun").val();
-        $.ajax({
-            url:'http://localhost/bordercell/option/cari_diagram',
-            data:{bulan:bulan, tahun:tahun},
-            method: "POST",
-              success:function(data)
-              {
-                  var obj=JSON.parse(data);
-                  let dataSend = []
-
-                  obj.map(item => {
-                    if (dataSend.length == 0) {
-                      dataSend = [{
-                        tgl_transaksi: item.tgl_transaksi,
-                        neto: handleNeto(item)
-                      }]
-                    } else {
-                      const searchIndata = dataSend.find(i => i.tgl_transaksi == item.tgl_transaksi)
-
-                      if (searchIndata == undefined) {
-                        dataSend = [...dataSend, {
-                          tgl_transaksi: item.tgl_transaksi,
-                          neto: handleNeto(item)
-                        }]
-                      } else {
-                        dataSend = dataSend.map(e => {
-                          if (e.tgl_transaksi == item.tgl_transaksi) {
-                            return {...e, neto: e.neto + handleNeto(item)}
-                          } else {
-                            return e
-                          }
-                        })
-                      }
-                    }
-                  })
-
-                  diagram(dataSend, 1);
-              },
-              error: function(data)
-              {
-                  console.log(data);
-              }
-        });
-      }
-
       function handleNeto(item) {
         if (item.type_product == 'elektrik') {
           return item.total_harga - item.harga_beli_elektrik
@@ -172,9 +86,8 @@
       }
        
       $(function(){
-        //cek_bulan();
           $.ajax({
-              url:"http://localhost/bordercell/option/diagram",
+              url:"http://localhost/bordercell/option/diagram_pertahun",
               method: "GET",
               success:function(data)
               {
@@ -184,20 +97,20 @@
                   obj.map(item => {
                     if (dataSend.length == 0) {
                       dataSend = [{
-                        tgl_transaksi: item.tgl_transaksi,
+                        tahun: getNameYear(item.tgl_transaksi),
                         neto: handleNeto(item)
                       }]
                     } else {
-                      const searchIndata = dataSend.find(i => i.tgl_transaksi == item.tgl_transaksi)
+                      const searchIndata = dataSend.find(i => i.tahun == getNameYear(item.tgl_transaksi))
 
                       if (searchIndata == undefined) {
                         dataSend = [...dataSend, {
-                          tgl_transaksi: item.tgl_transaksi,
+                          tahun: getNameYear(item.tgl_transaksi),
                           neto: handleNeto(item)
                         }]
                       } else {
                         dataSend = dataSend.map(e => {
-                          if (e.tgl_transaksi == item.tgl_transaksi) {
+                          if (e.tahun == getNameYear(item.tgl_transaksi)) {
                             return {...e, neto: e.neto + handleNeto(item)}
                           } else {
                             return e
@@ -207,7 +120,7 @@
                     }
                   })
 
-                  diagram(dataSend, 0);
+                  diagram(dataSend);
               },
               error: function(data)
               {
@@ -230,26 +143,19 @@
         return d.getFullYear()
       }
       
-      function diagram(obj, refresh){
+      function diagram(obj){
         if (!obj.length) {
           $("#no-data-diagram").modal('show')
           return
         }
 
-        if (refresh) {
-          myChart.destroy();
-        }
-
         var ctx = $('#myChart');
-        myChart = new Chart(ctx, {
-            type: 'line',
+        var myChart = new Chart(ctx, {
+            type: 'bar',
             data: {
-                labels: obj.map(item => {
-                  const d = new Date(item.tgl_transaksi)
-                  return d.getDate()
-                }),
+                labels: obj.map(item => item.tahun),
                 datasets: [{
-                    label: `${getNameMonth(obj[0].tgl_transaksi)} ${getNameYear(obj[0].tgl_transaksi)}`,
+                    label: 'Sepanjang tahun',
                     data: obj.map(item => item.neto),
                     backgroundColor: [
                         'rgba(66, 133, 244, 0.1)'
