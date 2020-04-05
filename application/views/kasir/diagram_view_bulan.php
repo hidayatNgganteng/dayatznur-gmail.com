@@ -26,7 +26,7 @@
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
-          <div class="h3 ml-auto">Pendapatan Harian</div>
+          <div class="h3 ml-auto">Pendapatan Bulanan</div>
 
           <?php $this->load->view('kasir/menu_kanan') ?>
         </nav>
@@ -179,7 +179,7 @@
       $(function(){
         //cek_bulan();
           $.ajax({
-              url:"http://localhost/bordercell/option/diagram",
+              url:"http://localhost/bordercell/option/diagram_perbulan",
               method: "GET",
               success:function(data)
               {
@@ -189,20 +189,24 @@
                   obj.map(item => {
                     if (dataSend.length == 0) {
                       dataSend = [{
-                        tgl_transaksi: item.tgl_transaksi,
+                        tgl_transaksi: getNameMonth(item.tgl_transaksi),
+                        tahun: getNameYear(item.tgl_transaksi),
+                        tgl_transaksi_full: item.tgl_transaksi,
                         neto: handleNeto(item)
                       }]
                     } else {
-                      const searchIndata = dataSend.find(i => i.tgl_transaksi == item.tgl_transaksi)
+                      const searchIndata = dataSend.find(i => i.tgl_transaksi == getNameMonth(item.tgl_transaksi))
 
                       if (searchIndata == undefined) {
                         dataSend = [...dataSend, {
-                          tgl_transaksi: item.tgl_transaksi,
+                          tgl_transaksi: getNameMonth(item.tgl_transaksi),
+                          tahun: getNameYear(item.tgl_transaksi),
+                          tgl_transaksi_full: item.tgl_transaksi,
                           neto: handleNeto(item)
                         }]
                       } else {
                         dataSend = dataSend.map(e => {
-                          if (e.tgl_transaksi == item.tgl_transaksi) {
+                          if (e.tgl_transaksi == getNameMonth(item.tgl_transaksi)) {
                             return {...e, neto: e.neto + handleNeto(item)}
                           } else {
                             return e
@@ -244,10 +248,10 @@
         var options = {
           animationEnabled: true,  
           title:{
-            text: `${getNameMonth(obj[0].tgl_transaksi)} ${getNameYear(obj[0].tgl_transaksi)}`
+            text: `${obj[0].tahun}`
           },
           axisX: {
-            valueFormatString: "DD-MMM"
+            valueFormatString: "MMMM"
           },
           axisY: {
             title: "",
@@ -256,10 +260,10 @@
           },
           data: [{
             yValueFormatString: "Rp#,###",
-            xValueFormatString: "DD MMM",
+            xValueFormatString: "MMMM",
             type: "spline",
             dataPoints: obj.map(item => {
-              const date = item.tgl_transaksi.split("-").join(',')
+              const date = item.tgl_transaksi_full.split("-").join(',')
               return { x: new Date(date), y: item.neto }
             })
           }]

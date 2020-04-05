@@ -566,9 +566,15 @@ class Option extends CI_Controller {
 	}
 	
 	public function diagram(){
-    $this->load->model('model_laba');
+    	$this->load->model('model_laba');
 		$list = $this->model_laba->get_data_laba_diagram();
-    echo json_encode($list);
+    	echo json_encode($list);
+	}
+
+	public function diagram_perbulan(){
+		$this->load->model('model_laba');
+		$list = $this->model_laba->get_data_laba_diagram_perbulan();
+		echo json_encode($list);
 	}
 
 	public function laba_tabel(){
@@ -577,6 +583,10 @@ class Option extends CI_Controller {
 
 	public function laba_diagram(){
 		$this->load->view('kasir/diagram_view');
+	}
+
+	public function laba_diagram_per_bulan(){
+		$this->load->view('kasir/diagram_view_bulan');
 	}
 
 	public function cari_diagram(){

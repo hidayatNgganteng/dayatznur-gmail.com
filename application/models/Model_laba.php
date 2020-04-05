@@ -28,6 +28,17 @@ class Model_laba extends CI_Model {
 		return $query->result();
 	}
 
+	function get_data_laba_diagram_perbulan() {
+		$min = date('Y-').'01-01';
+    	$max = date('Y-').'12-31';
+		$this->db->from($this->table);
+		$this->db->where('tgl_transaksi >=', $min);
+		$this->db->where('tgl_transaksi <=', $max);
+		$this->db->join('barang', 'barang.id_barang = penjualan.kode_brg', 'left');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 	function get_data_laba_diagram_cari($min, $max) {
 		$this->db->from($this->table);
 		$this->db->where('tgl_transaksi >=', $min);
