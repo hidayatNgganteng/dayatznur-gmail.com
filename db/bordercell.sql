@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2020 at 11:55 AM
+-- Generation Time: Apr 09, 2020 at 09:57 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.28
 
@@ -67,7 +67,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `l
 (25, 'PERDANA AXIS PULSA NOL / PERDANA AXIS 0 K- Cahyo Sales', 1000, 3000, 2000, 'pcs', 0, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (26, 'VOUCHER INDOSAT 1GB (7 HARI)', 10000, 12000, 2000, 'pcs', 6, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (27, 'VOUCHER SMARTFREN 4GB 2GB24Jam_2GBmalam (30 HR)', 9550, 12000, 2450, 'pcs', 0, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(28, 'VOUCHER SMARTFREN UNLIMITED _1GB/HR_(28 HR) - ricky glorie', 71000, 73000, 2000, 'pcs', 4, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
+(28, 'VOUCHER SMARTFREN UNLIMITED _1GB/HR_(28 HR) - ricky glorie', 71000, 73000, 2000, 'pcs', 3, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (29, 'PERDANA INDOSAT 0K', 2300, 5000, 2700, 'pcs', 3, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (30, 'PERDANA INDOSAT 1GB UNLIMITED', 22700, 25000, 2300, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (31, 'SOFTCASE POLOS SAMSUNG A20S,Y5 - missconnie.id', 11286, 25000, 13714, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
@@ -186,7 +186,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `l
 (147, '3D Diamond Softcase VIVO iQOO NEO', 7470, 20000, 12530, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (148, '3D Diamond Softcase REALME A5/ A3S/ AX5/ REALME C1', 7470, 20000, 12530, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (149, 'PERDANA INDOSAT FREEDOM 8GB (30 HR)', 30000, 35000, 5000, 'pcs', 3, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(150, 'VOUCHER AXIS 1 GB (5 HR)- Cahyo Sales', 7800, 10000, 2200, 'pcs', 5, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
+(150, 'VOUCHER AXIS 1 GB (5 HR)- Cahyo Sales', 7800, 10000, 2200, 'pcs', 4, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (152, 'VOUCHER XL 4,5 GB (30 HR)- Cahyo Sales', 26500, 30000, 3500, 'pcs', 2, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (153, 'VOUCHER TRI 1,5 GB (1 TH)  - Indy cell', 12500, 15000, 2500, 'pcs', 5, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (154, 'VOUCHER TRI 6 GB (1 TH) - Indy cell', 33500, 36000, 2500, 'pcs', 4, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
@@ -202,7 +202,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `l
 (164, 'VOUCHER AXIS 3 GB (15 HARI)', 19000, 21000, 2000, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (165, 'VOUCHER INDOSAT 3 GB + ULT YOUTUBE (30 HARI)', 57000, 60000, 3000, 'pcs', 4, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (166, 'VOUCHER INDOSAT 1 GB + UNLIMITED APP (30 HARI)', 25000, 27000, 2000, 'pcs', 8, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(167, 'VOUCHER TELKOMSEL 8 GB (30 HARI)', 58000, 60000, 2000, 'pcs', 2, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
+(167, 'VOUCHER TELKOMSEL 8 GB (30 HARI)', 58000, 60000, 2000, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (170, 'VOUCHER SMARTFREN UNLIMITED LITE _500MB/HR_(28 HR) - ricky glorie', 46950, 50000, 3050, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (171, 'VOUCHER SMARTFREN UNLIMITED _1GB/HR_(5 HR) - ricky glorie', 18150, 21000, 2850, 'pcs', 3, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (172, 'VOUCHER SMARTFREN 10N+ 1,5GB_24JAM_(7 HR) - ricky glorie', 10000, 12000, 2000, 'pcs', 3, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
@@ -231,7 +231,7 @@ CREATE TABLE `barang_elektrik` (
 --
 
 INSERT INTO `barang_elektrik` (`id`, `saldo`) VALUES
-(0, '109537');
+(0, '168507');
 
 -- --------------------------------------------------------
 
@@ -251,7 +251,7 @@ CREATE TABLE `cookie` (
 
 INSERT INTO `cookie` (`id_cookie`, `id_user_cookie`, `cookie`) VALUES
 (1, 1, '0ge2vwm2f428783kngpw11e58xcrapm1'),
-(2, 4, '2qlc3zhc3f48eyu1sa5u5bqfvqo92blbuk2tqh84s5t7phq8d5kfy9xrj4kn3wq2anee4n6k1ox25l0l6uljzmu2lrfzsqzh4k6fui2p3m00z1r8kae3s3vzifcado0c');
+(2, 4, 'zyqtzp2bsijb5p3eiehlvhlgf0dxl7ljga3ullh8uazsyvri2asnd5raiikhmx3sgunjqvvui2j1ppt4zzxpewzeb667qttn3uks4hfrxbl8e84v7w7thmjdfkwjlpgu');
 
 -- --------------------------------------------------------
 
@@ -363,7 +363,12 @@ INSERT INTO `login` (`id_login`, `id_user`, `browser`, `browser_version`, `os`, 
 (118, 4, 'Chrome', '80.0.3987.149', 'Windows 7', '::1', 0, '2020-04-04 04:28:42'),
 (119, 4, 'Chrome', '80.0.3987.149', 'Windows 7', '::1', 0, '2020-04-04 08:55:27'),
 (120, 4, 'Chrome', '80.0.3987.149', 'Windows 7', '::1', 0, '2020-04-04 11:08:55'),
-(121, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 09:14:04');
+(121, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 09:14:04'),
+(122, 4, 'Chrome', '80.0.3987.149', 'Mac OS X', '::1', 0, '2020-04-04 05:28:40'),
+(123, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 09:18:26'),
+(124, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 11:31:19'),
+(125, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 11:31:20'),
+(126, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 01:32:36');
 
 -- --------------------------------------------------------
 
@@ -485,7 +490,15 @@ INSERT INTO `penjualan` (`id_penjualan`, `kasir`, `kode_brg`, `nama_brg`, `harga
 (145, 0, 0, 'Pulsa indosat 5k', 5950, 7000, 1, 7000, '2020-04-08', '14:05:00', 'elektrik'),
 (146, 0, 162, 'VOUCHER AXIS 2GB _ 1 GB LOKAL _30 HR__ Cahyo Sales', 0, 25000, 1, 25000, '2020-04-08', '16:42:00', 'non-elektrik'),
 (147, 0, 164, 'VOUCHER AXIS 3 GB _15 HARI_', 0, 21000, 1, 21000, '2020-04-08', '16:49:00', 'non-elektrik'),
-(148, 0, 0, 'Pulsa Telkomsel 10k', 10475, 12000, 1, 12000, '2020-04-08', '16:50:00', 'elektrik');
+(148, 0, 0, 'Pulsa Telkomsel 10k', 10475, 12000, 1, 12000, '2020-04-08', '16:50:00', 'elektrik'),
+(149, 0, 0, 'pulsa xl 10k', 10750, 12000, 1, 12000, '2020-04-08', '19:15:00', 'elektrik'),
+(150, 0, 0, 'pulsa xl 25k', 24690, 27000, 1, 27000, '2020-04-08', '19:15:00', 'elektrik'),
+(151, 0, 0, 'Pulsa Indosat 5k', 5950, 7000, 1, 7000, '2020-04-08', '20:02:00', 'elektrik'),
+(152, 0, 0, 'paket data smartfren 10 rb', 9990, 12000, 1, 12000, '2020-04-08', '20:02:00', 'elektrik'),
+(153, 0, 28, 'VOUCHER SMARTFREN UNLIMITED _1GB_HR__28 HR_ _ ricky glorie', 0, 73000, 1, 73000, '2020-04-08', '20:12:00', 'non-elektrik'),
+(154, 0, 0, 'token listrik 50k', 50500, 52000, 1, 52000, '2020-04-08', '20:13:00', 'elektrik'),
+(155, 0, 167, 'VOUCHER TELKOMSEL 8 GB _30 HARI_', 0, 60000, 1, 60000, '2020-04-09', '09:22:00', 'non-elektrik'),
+(156, 0, 150, 'VOUCHER AXIS 1 GB _5 HR__ Cahyo Sales', 0, 10000, 1, 10000, '2020-04-09', '11:31:00', 'non-elektrik');
 
 -- --------------------------------------------------------
 
@@ -633,13 +646,13 @@ ALTER TABLE `cookie`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
+  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
 
 --
 -- AUTO_INCREMENT for table `token`
