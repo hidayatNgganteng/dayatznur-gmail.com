@@ -70,6 +70,15 @@
           </div>
       
           <canvas id="myChart" width="100%" height="40px"></canvas>
+
+          <hr>
+
+          <div class="alert alert-info" role="alert">
+            <p>Total hari: <b id="total_hari"></b></p>
+            <p>Total produk terjual: <b id="total_produk_terjual"></b></p>
+            <p>Total keuntungan: <b id="total_keuntungan"></b></p>
+            <p>Rata-rata keuntungan / hari: <b id="rata_rata"></b></p>
+          </div>
           
         </div>
 
@@ -154,6 +163,20 @@
                     }
                   })
 
+                  const totalKeuntungan = dataSend.reduce((accumulator, currentValue) => {
+                    if (typeof(accumulator) == 'object') {
+                      return accumulator.neto + currentValue.neto
+                    } else {
+                       return accumulator + Number(currentValue.neto) 
+                    }
+                  })
+                  console.log("totalKeuntungan", totalKeuntungan)
+
+                  $("#total_produk_terjual").text(obj.length)
+                  $("#total_hari").text(dataSend.length)
+                  $("#total_keuntungan").text(`Rp. ${totalKeuntungan}`)
+                  $("#rata_rata").text(`Rp. ${totalKeuntungan / dataSend.length}`)
+
                   diagram(dataSend, 1);
               },
               error: function(data)
@@ -206,6 +229,21 @@
                       }
                     }
                   })
+
+
+                  const totalKeuntungan = dataSend.reduce((accumulator, currentValue) => {
+                    if (typeof(accumulator) == 'object') {
+                      return accumulator.neto + currentValue.neto
+                    } else {
+                       return accumulator + Number(currentValue.neto) 
+                    }
+                  })
+                  console.log("totalKeuntungan", totalKeuntungan)
+
+                  $("#total_produk_terjual").text(obj.length)
+                  $("#total_hari").text(dataSend.length)
+                  $("#total_keuntungan").text(`Rp. ${totalKeuntungan}`)
+                  $("#rata_rata").text(`Rp. ${totalKeuntungan / dataSend.length}`)
 
                   diagram(dataSend, 0);
               },
