@@ -28,30 +28,31 @@
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
-          <div class="h3 ml-auto">Saldo</div>
+          <div class="h3 ml-auto">Saldo Fisik</div>
 
           <?php $this->load->view('kasir/menu_kanan') ?>
         </nav>
 
         <div class="container-fluid">
           <?php
-            if ($data_saldo->saldo > 250000) { ?>
-              <h2 class="alert alert-success" role="alert" data-saldo="<?php echo $data_saldo->saldo ?>" data-saldoId="<?php echo $data_saldo->id ?>" id="saldo_view"> <?php
-            } else if ($data_saldo->saldo > 100000 && $data_saldo->saldo <= 250000) { ?>
-              <h2 class="alert alert-warning" role="alert" data-saldo="<?php echo $data_saldo->saldo ?>" data-saldoId="<?php echo $data_saldo->id ?>" id="saldo_view"> <?php
-            } else { ?>
-              <h2 class="alert alert-danger" role="alert" data-saldo="<?php echo $data_saldo->saldo ?>" data-saldoId="<?php echo $data_saldo->id ?>" id="saldo_view"> <?php
-            }
-              $saldo = number_format($data_saldo->saldo,2,',','.');
-              $saldoInArray = explode(",",$saldo);
-              echo "Rp " . $saldoInArray[0];
-            ?>
-          </h2>
+              if ($data_saldo_fisik->saldo > 250000) { ?>
+                <h2 class="alert alert-success" role="alert" data-saldo="<?php echo $data_saldo_fisik->saldo ?>" data-saldoId="<?php echo $data_saldo_fisik->id ?>" id="saldo_view_fisik"> <?php
+              } else if ($data_saldo_fisik->saldo > 100000 && $data_saldo_fisik->saldo <= 250000) { ?>
+                <h2 class="alert alert-warning" role="alert" data-saldo="<?php echo $data_saldo_fisik->saldo ?>" data-saldoId="<?php echo $data_saldo_fisik->id ?>" id="saldo_view_fisik"> <?php
+              } else { ?>
+                <h2 class="alert alert-danger" role="alert" data-saldo="<?php echo $data_saldo_fisik->saldo ?>" data-saldoId="<?php echo $data_saldo_fisik->id ?>" id="saldo_view_fisik"> <?php
+              }
+                $saldo = number_format($data_saldo_fisik->saldo,2,',','.');
+                $saldoInArray = explode(",",$saldo);
+                echo "Rp " . $saldoInArray[0];
+              ?>
+            </h2>
 
-          <?php
-          if($this->session->userdata('level')==1) {
-            echo '<button class="btn btn-success" onclick="edit_barang()"><i class="glyphicon glyphicon-plus"></i> edit</button><br><br>';
-          } ?>
+            <!-- <?php
+            if($this->session->userdata('level')==1) {
+              echo '<button class="btn btn-danger" onclick="kurangi_saldo()"><i class="glyphicon glyphicon-plus"></i> Kurangi</button>';
+              echo '<button class="btn btn-success" style="margin-left: 10px" onclick="tambah_saldo()"><i class="glyphicon glyphicon-plus"></i> Tambah</button><br><br>';
+            } ?> -->
         </div>
 
       </div>
@@ -66,6 +67,19 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
+  <div class="modal fade" id="error_kurang" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nominal tidak boleh kurang dari saldo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="<?= base_url() ?>assets/jquery/jquery-3.2.1.min.js"></script>
   <script src="<?= base_url() ?>assets/bootstrap-4.1.3/js/bootstrap.min.js"></script>
   <script src="<?= base_url() ?>assets/js/sb-admin-2.js"></script>
@@ -75,76 +89,80 @@
   <script src="<?= base_url() ?>assets/Responsive-2.2.2/js/responsive.bootstrap4.min.js"></script>
   <script src="<?php echo base_url() ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
   <script>
-      function edit_barang () {
-        const saldo = $("#saldo_view").attr('data-saldo')
-        const saldoId = $("#saldo_view").attr('data-saldoId')
-        $('#saldo').val(saldo)
+      var statusUbah = ''
+
+      function tambah_saldo () {
+        statusUbah = 'tambahFisik'
+        const saldo = $("#saldo_view_fisik").attr('data-saldo')
+        const saldoId = $("#saldo_view_fisik").attr('data-saldoId')
+        $('#saldo').val('')
+        $("#currentSaldo").val(saldo)
         $("#saldoId").val(saldoId)
+        $("#title").text('Tambah Saldo')
+        $('#modal_form').modal('show') 
+      }
+
+      function kurangi_saldo () {
+        statusUbah = 'kurangiFisik'
+        const saldo = $("#saldo_view_fisik").attr('data-saldo')
+        const saldoId = $("#saldo_view_fisik").attr('data-saldoId')
+        $('#saldo').val('')
+        $("#currentSaldo").val(saldo)
+        $("#saldoId").val(saldoId)
+        $("#title").text('Kurangi Saldo')
         $('#modal_form').modal('show') 
       }
           
-       function save()
-       {
-           
-          const url = "<?php echo site_url('option/update_saldo')?>";
+       function save() {
+          if (statusUbah == 'tambahFisik') {
+            const url = "<?php echo site_url('option/tambah_saldo_fisik')?>";
 
-           $.ajax({
-               url : url,
-               type: "POST",
-               data: $('#form').serialize(),
-               dataType: "JSON",
-               success: function(data)
-               {
-                  if(data.status){
-                    location.reload();
-                    $('#modal_form').modal('hide');
-                  }
-               },
-               error: function (jqXHR, textStatus, errorThrown) {
-                alert('error');
-               }
-           });
-       }
-       
-       function tanggal()
-       {
-           $('[data-toggle="mulai_promo"]').datepicker({
-               dateFormat: "yy-mm-dd",
-               onSelect: function (selected) {
-                   var dt = new Date(selected);
-                   dt.setDate(dt.getDate() + 1);
-                   $('[data-toggle="ahir_promo"]').datepicker("option", "minDate", dt);
-                   }
-               });
-           $('[data-toggle="ahir_promo"]').datepicker({
-               dateFormat: "yy-mm-dd",
-               onSelect: function (selected) {
-                   var dt = new Date(selected);
-                   dt.setDate(dt.getDate() - 1);
-                   $('[data-toggle="mulai_promo"]').datepicker("option", "maxDate", dt);
-                   }
-               });
-       }
-       
-       function delete_barang(id)
-       {
-         if(confirm('yakin ingin di hapus?')){
-               $.ajax({
-                   url : "<?php echo site_url('option/hapus_barang')?>/"+id,
-                   type: "POST",
-                   dataType: "JSON",
-                   success: function(data)
-                   {
-                       
-                       reload_table();
-                   },
-                   error: function (jqXHR, textStatus, errorThrown)
-                   {
-                       alert('Error deleting data');
-                   }
-              });
-           
-           }
+            $.ajax({
+                url : url,
+                type: "POST",
+                data: $('#form').serialize(),
+                dataType: "JSON",
+                success: function(data)
+                {
+                    if(data.status){
+                      location.reload();
+                      $('#modal_form').modal('hide');
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                  alert('error');
+                }
+            });
+          }  else {
+            // const saldoSaatIni = $("#saldo_view_fisik").attr('data-saldo')
+            // const saldoMauDikurang = $('#saldo').val()
+            // console.log(saldoSaatIni, saldoMauDikurang)
+
+            // if (saldoMauDikurang > saldoSaatIni) {
+            //   $('#modal_form').modal('hide');
+            //   $("#error_kurang").modal('show')
+            //   return
+            // }
+
+            const url = "<?php echo site_url('option/kurangi_saldo_fisik')?>";
+
+            $.ajax({
+                url : url,
+                type: "POST",
+                data: $('#form').serialize(),
+                dataType: "JSON",
+                success: function(data)
+                {
+                    if(data.status){
+                      location.reload();
+                      $('#modal_form').modal('hide');
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                  alert('error');
+                }
+            });
+          } 
        }
   </script>
   
@@ -155,7 +173,7 @@
         <div class="modal-content">
 
           <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">edit</h5>
+              <h5 class="modal-title" id="title"></h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
               </button>
@@ -165,10 +183,10 @@
               <form id="form" class="form-horizontal">
 
                 <input type="hidden" name="saldoId" id="saldoId"/> 
+                <input type="hidden" name="currentSaldo" id="currentSaldo"/> 
                 <div class="form-body">
                        
                   <div class="form-group">
-                      <label for="saldo" class="col-form-label">Saldo</label>
                       <input type="text" class="form-control" name="saldo" id="saldo">
                       <div class="invalid-feedback"></div>
                   </div>

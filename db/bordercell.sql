@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 09, 2020 at 09:57 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.2.28
+-- Host: localhost
+-- Generation Time: Apr 11, 2020 at 04:57 AM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.1.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -231,7 +231,7 @@ CREATE TABLE `barang_elektrik` (
 --
 
 INSERT INTO `barang_elektrik` (`id`, `saldo`) VALUES
-(0, '168507');
+(0, '218007');
 
 -- --------------------------------------------------------
 
@@ -251,7 +251,7 @@ CREATE TABLE `cookie` (
 
 INSERT INTO `cookie` (`id_cookie`, `id_user_cookie`, `cookie`) VALUES
 (1, 1, '0ge2vwm2f428783kngpw11e58xcrapm1'),
-(2, 4, 'zyqtzp2bsijb5p3eiehlvhlgf0dxl7ljga3ullh8uazsyvri2asnd5raiikhmx3sgunjqvvui2j1ppt4zzxpewzeb667qttn3uks4hfrxbl8e84v7w7thmjdfkwjlpgu');
+(2, 4, 'mxxyv4nan3qp0grlfqb5qznfm6vuqvgss9he0q5kkujxm6if1yhf1b45gmtnhcn43r24tuyrngltqeqjuw9z3zd00m6qfmnhks099y3hmto8qkg4pc2ryui0opn3dfl4');
 
 -- --------------------------------------------------------
 
@@ -368,7 +368,38 @@ INSERT INTO `login` (`id_login`, `id_user`, `browser`, `browser_version`, `os`, 
 (123, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 09:18:26'),
 (124, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 11:31:19'),
 (125, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 11:31:20'),
-(126, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 01:32:36');
+(126, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 01:32:36'),
+(127, 4, 'Chrome', '80.0.3987.163', 'Mac OS X', '::1', 0, '2020-04-04 11:19:53'),
+(128, 4, 'Chrome', '80.0.3987.163', 'Mac OS X', '::1', 0, '2020-04-04 02:49:24'),
+(129, 4, 'Chrome', '80.0.3987.163', 'Mac OS X', '::1', 0, '2020-04-04 06:39:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pemasukan`
+--
+
+CREATE TABLE `pemasukan` (
+  `id_pemasukan` int(7) NOT NULL,
+  `nama` varchar(150) NOT NULL,
+  `nominal` int(20) NOT NULL,
+  `date` date NOT NULL,
+  `time` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pengeluaran`
+--
+
+CREATE TABLE `pengeluaran` (
+  `id_pengeluaran` int(7) NOT NULL,
+  `nama` varchar(150) NOT NULL,
+  `nominal` int(20) NOT NULL,
+  `date` date NOT NULL,
+  `time` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -498,7 +529,27 @@ INSERT INTO `penjualan` (`id_penjualan`, `kasir`, `kode_brg`, `nama_brg`, `harga
 (153, 0, 28, 'VOUCHER SMARTFREN UNLIMITED _1GB_HR__28 HR_ _ ricky glorie', 0, 73000, 1, 73000, '2020-04-08', '20:12:00', 'non-elektrik'),
 (154, 0, 0, 'token listrik 50k', 50500, 52000, 1, 52000, '2020-04-08', '20:13:00', 'elektrik'),
 (155, 0, 167, 'VOUCHER TELKOMSEL 8 GB _30 HARI_', 0, 60000, 1, 60000, '2020-04-09', '09:22:00', 'non-elektrik'),
-(156, 0, 150, 'VOUCHER AXIS 1 GB _5 HR__ Cahyo Sales', 0, 10000, 1, 10000, '2020-04-09', '11:31:00', 'non-elektrik');
+(156, 0, 150, 'VOUCHER AXIS 1 GB _5 HR__ Cahyo Sales', 0, 10000, 1, 10000, '2020-04-09', '11:31:00', 'non-elektrik'),
+(157, 0, 0, 'token listrik 50k', 50500, 52000, 1, 52000, '2020-04-10', '17:45:00', 'elektrik'),
+(158, 0, 0, 'pulsa xl 25k', 24900, 27000, 1, 27000, '2020-04-10', '17:45:00', 'elektrik');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `saldo_fisik`
+--
+
+CREATE TABLE `saldo_fisik` (
+  `id` int(7) NOT NULL,
+  `saldo` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `saldo_fisik`
+--
+
+INSERT INTO `saldo_fisik` (`id`, `saldo`) VALUES
+(1, 0);
 
 -- --------------------------------------------------------
 
@@ -597,10 +648,28 @@ ALTER TABLE `login`
   ADD PRIMARY KEY (`id_login`);
 
 --
+-- Indexes for table `pemasukan`
+--
+ALTER TABLE `pemasukan`
+  ADD PRIMARY KEY (`id_pemasukan`);
+
+--
+-- Indexes for table `pengeluaran`
+--
+ALTER TABLE `pengeluaran`
+  ADD PRIMARY KEY (`id_pengeluaran`);
+
+--
 -- Indexes for table `penjualan`
 --
 ALTER TABLE `penjualan`
   ADD PRIMARY KEY (`id_penjualan`);
+
+--
+-- Indexes for table `saldo_fisik`
+--
+ALTER TABLE `saldo_fisik`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `token`
@@ -628,7 +697,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
 
 --
 -- AUTO_INCREMENT for table `barang_elektrik`
@@ -646,13 +715,31 @@ ALTER TABLE `cookie`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+
+--
+-- AUTO_INCREMENT for table `pemasukan`
+--
+ALTER TABLE `pemasukan`
+  MODIFY `id_pemasukan` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `pengeluaran`
+--
+ALTER TABLE `pengeluaran`
+  MODIFY `id_pengeluaran` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
+  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
+
+--
+-- AUTO_INCREMENT for table `saldo_fisik`
+--
+ALTER TABLE `saldo_fisik`
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `token`

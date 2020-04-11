@@ -160,7 +160,20 @@ class Option extends CI_Controller {
 
       // kurangi saldo
       $datasaldo =[ 'saldo' => $data_saldo->saldo - $this->input->post('harga_beli') ];
-      $this->model_saldo->update(array('id' => 0), $datasaldo);
+	    $this->model_saldo->update(array('id' => 0), $datasaldo);
+	  
+      // tambah saldo fisik
+      $this->ubah_saldo_fisik('tambah', $this->input->post('harga_jual') - $this->input->post('harga_beli'));
+
+      // input ke pemasukan
+      $this->load->model('model_io');
+			$dataPemasukan =[
+				'nama' 		=> 'PENJUALAN: '.$this->input->post('nama_brg'),
+				'nominal' 		=> $this->input->post('harga_jual') - $this->input->post('harga_beli'),
+				'date' => date('Y-m-d'),
+				'time' => $waktu
+			];
+			$this->model_io->save($dataPemasukan);
 
       $this->load->view('kasir/kasir_elektrik_view');
     }
@@ -169,8 +182,16 @@ class Option extends CI_Controller {
   public function saldo(){
     $this->load->model('model_saldo');
     $data['data_saldo'] = $this->model_saldo->getSaldo();
+    $data['data_saldo_fisik'] = $this->model_saldo->getSaldoFisik();
 
 		$this->load->view('kasir/saldo_view', $data);
+  }
+  
+  public function saldo_elektrik(){
+    $this->load->model('model_saldo');
+    $data['data_saldo'] = $this->model_saldo->getSaldo();
+
+		$this->load->view('kasir/saldo_view_elektrik', $data);
 	}
 
 	public function data_barang_kosong(){
@@ -218,6 +239,22 @@ class Option extends CI_Controller {
 		$this->model_saldo->update(array('id' => $this->input->post('saldoId')), $data);
 		echo json_encode(array("status" => TRUE, "saldo" => $this->input->post('saldo')));
 	}
+
+	public function tambah_saldo_fisik(){
+		$this->load->model('model_saldo');
+
+    $data =[ 'saldo' => $this->input->post('currentSaldo') + $this->input->post('saldo') ];
+    $this->model_saldo->updateSaldoFisik(array('id' => $this->input->post('saldoId')), $data);
+    echo json_encode(array("status" => TRUE, "saldo" => $this->input->post('currentSaldo') + $this->input->post('saldo')));
+  }
+  
+  public function kurangi_saldo_fisik(){
+		$this->load->model('model_saldo');
+
+    $data =[ 'saldo' => $this->input->post('currentSaldo') - $this->input->post('saldo') ];
+    $this->model_saldo->updateSaldoFisik(array('id' => $this->input->post('saldoId')), $data);
+    echo json_encode(array("status" => TRUE, "saldo" => $this->input->post('currentSaldo') - $this->input->post('saldo')));
+	}
 	
 	function simpan_barang(){
 		$this->_validate();
@@ -239,6 +276,79 @@ class Option extends CI_Controller {
 		$insert = $this->model_barang->save($data);
 		echo json_encode(array("status" => TRUE));
 	}
+
+	function simpan_pemasukan(){
+		$datestring = '%H:%i';
+		$time 		= time();
+		$waktu 		= mdate($datestring, $time);
+
+		$this->load->model('model_io');
+		$this->_validate_pemasukan();
+		$data =[
+			'nama' 		=> $this->input->post('nama_barang'),
+			'nominal' 		=> $this->input->post('nominal'),
+			'date' => date('Y-m-d'),
+			'time' => $waktu
+		];
+		$insert = $this->model_io->save($data);
+		$this->ubah_saldo_fisik('tambah', $this->input->post('nominal'));
+		echo json_encode(array("status" => TRUE));
+	}
+
+	function simpan_pengeluaran(){
+		$datestring = '%H:%i';
+		$time 		= time();
+		$waktu 		= mdate($datestring, $time);
+
+		$this->load->model('model_io');
+		$this->_validate_pemasukan();
+		$data =[
+			'nama' 		=> $this->input->post('nama_barang'),
+			'nominal' 		=> $this->input->post('nominal'),
+			'date' => date('Y-m-d'),
+			'time' => $waktu
+		];
+		$insert = $this->model_io->save_pengeluaran($data);
+		$this->ubah_saldo_fisik('kurang', $this->input->post('nominal'));
+		echo json_encode(array("status" => TRUE));
+	}
+
+	private function ubah_saldo_fisik($status, $nominal){
+		$this->load->model('model_saldo');
+		$data_saldo_fisik = $this->model_saldo->getSaldoFisik();
+
+		if ($status == 'tambah') {
+			$data =[ 'saldo' => $data_saldo_fisik->saldo + $nominal ];
+		} else {
+			$data =[ 'saldo' => $data_saldo_fisik->saldo - $nominal ];
+		}
+
+		$this->model_saldo->updateSaldoFisik(array('id' => '1'), $data);
+	}
+
+	private function _validate_pemasukan(){
+        $data = [];
+        $data['error_string'] = [];
+        $data['inputerror'] = [];
+        $data['status'] = TRUE;
+ 
+        if($this->input->post('nama_barang') == ''){
+            $data['inputerror'][] = 'nama_barang';
+            $data['error_string'][] = 'Nama barang harus di isi bung!';
+            $data['status'] = FALSE;
+        }
+        
+        if($this->input->post('nominal') == ''){
+            $data['inputerror'][] = 'nominal';
+            $data['error_string'][] = 'Nominal harus di isi bung!';
+            $data['status'] = FALSE;
+        }
+ 
+        if($data['status'] === FALSE){
+            echo json_encode($data);
+            exit();
+        }
+    }
 	
 	private function _validate(){
         $data = [];
@@ -409,40 +519,49 @@ class Option extends CI_Controller {
 	}
 	
 	public function shoping(){
-		if($this->cart->contents() !==[]){
-			foreach ($this->cart->contents() as $insert){
-				$id 		= $insert['id'];
-				$q 			= $insert['qty'];
-				$rowid 		= $insert['rowid'];
-				$tgl 		= date('Y-m-d');
-				$datestring = '%H:%i';
-				$time 		= time();
-				$waktu 		= mdate($datestring, $time);
-				
-				$data = [
-					'kode_brg' => $insert['id'],
-					'jumlah' => $insert['qty'],
-					'nama_brg' => $insert['name'],
-					'harga_brg' => $insert['price'],
-					'total_harga' => $insert['subtotal'],
-					'tgl_transaksi' => $tgl,
-					'waktu' => $waktu
-				];
-			}
-			$insert =  $this->model_barang->insert_penjualan($data);
+		$datestring = '%H:%i';
+		$time 		= time();
+		$waktu 		= mdate($datestring, $time);
+		$harga = str_replace('.', '', $this->input->post('harga'));
+		$quantity = $this->input->post('qty');
+		
+		$data = [
+			'kode_brg' => $this->input->post('id'),
+			'jumlah' => $quantity,
+			'nama_brg' => $this->input->post('nama'),
+			'harga_brg' => $harga,
+			'total_harga' => $harga * $quantity,
+			'tgl_transaksi' => date('Y-m-d'),
+			'waktu' => $waktu
+		];
+
+		$insert =  $this->model_barang->insert_penjualan($data);
+		
+		if($insert){
+			$hasil = $this->model_barang->get_setok($this->input->post('id'));
+			$sisa =  $hasil->setok;
+			$qty = $sisa-$quantity;
+			$aksi = $this->model_barang->update_setok($this->input->post('id'),$qty);
+
+
+			$brg = $this->model_barang->get_by_id($this->input->post('id'));
 			
-			if($insert){
-				$hasil = $this->model_barang->get_setok($id);
-				$sisa =  $hasil->setok;
-				$qty = $sisa-$q;
-				$aksi = $this->model_barang->update_setok($id,$qty);
-				$this->cart->destroy();
-				echo json_encode(["status" => TRUE]);
-			}else{
-				echo json_encode(["status" => FALSE]);
-			}
+			// tambah saldo fisik
+			$this->ubah_saldo_fisik('tambah', $quantity * $brg->laba);
+
+			// input brg ke pemasukan
+			$this->load->model('model_io');
+			$dataPemasukan =[
+				'nama' 		=> 'PENJUALAN: '.$brg->nama_barang,
+				'nominal' 		=> $quantity * $brg->laba,
+				'date' => date('Y-m-d'),
+				'time' => $waktu
+			];
+			$this->model_io->save($dataPemasukan);
+
+			redirect('/');
 		}else{
-			echo('404');
+			echo json_encode(["status" => FALSE]);
 		}
 	}
 	
@@ -455,6 +574,14 @@ class Option extends CI_Controller {
 	
 	public function data_penjualan(){
 		$this->load->view('kasir/penjualan_view');
+	}
+
+	public function data_pemasukan(){
+		$this->load->view('kasir/pemasukan_view');
+	}
+
+	public function data_pengeluaran(){
+		$this->load->view('kasir/pengeluaran_view');
 	}
 	
 	public function get_penjualan(){
@@ -479,6 +606,58 @@ class Option extends CI_Controller {
 			"draw" => $_POST['draw'],
 			"recordsTotal" => $this->model_penjualan->count_all(),
 			"recordsFiltered" => $this->model_penjualan->count_filtered(),
+			"data" => $data,
+		];
+		echo json_encode($output);
+	}
+
+	public function get_pemasukan(){
+		$this->load->model('model_io');
+		$list = $this->model_io->get_datatables();
+		$data = [];
+		$no = $_POST['start'];
+		$n=0;
+
+		foreach ($list as $barang) {
+			$n++;
+			$row = [];
+			$row[] = $n;
+			$row[] = $barang->nama;
+			$row[] = 'Rp. '.$barang->nominal;
+			$row[] = $barang->date.' '.$barang->time;
+			$data[] = $row;
+		}
+		
+		$output = [
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->model_io->count_all(),
+			"recordsFiltered" => $this->model_io->count_filtered(),
+			"data" => $data,
+		];
+		echo json_encode($output);
+	}
+
+	public function get_pengeluaran(){
+		$this->load->model('model_io');
+		$list = $this->model_io->get_datatables_pengeluaran();
+		$data = [];
+		$no = $_POST['start'];
+		$n=0;
+
+		foreach ($list as $barang) {
+			$n++;
+			$row = [];
+			$row[] = $n;
+			$row[] = $barang->nama;
+			$row[] = 'Rp. '.$barang->nominal;
+			$row[] = $barang->date.' '.$barang->time;
+			$data[] = $row;
+		}
+		
+		$output = [
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->model_io->count_all_pengeluaran(),
+			"recordsFiltered" => $this->model_io->count_filtered_pengeluaran(),
 			"data" => $data,
 		];
 		echo json_encode($output);

@@ -31,9 +31,15 @@
   <hr class="sidebar-divider">
   
   <li class="nav-item">
-    <a class="nav-link" href="<?= site_url() ?>option/saldo">
-    <i class="far fa-hdd"></i>
-      <span>Saldo</span></a>
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_saldo" aria-expanded="true" aria-controls="collapse_barang">
+        <i class="far fa-hdd"></i>
+        <span>Saldo</span>
+      </a>
+      <div id="collapse_saldo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item" href="<?= site_url() ?>option/saldo"><i class="fas fa-gem"></i> Saldo Fisik</a>
+          <a class="collapse-item" href="<?= site_url() ?>option/saldo_elektrik"><i class="far fa-gem"></i> Saldo Elektrik</a>
+      </div>
   </li>
 
   <hr class="sidebar-divider">
@@ -77,6 +83,20 @@
 
   <hr class="sidebar-divider">
 
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseIO" aria-expanded="true" aria-controls="collapseTwo">
+    <i class="fas fa-clipboard-list"></i>
+      <span>Input / Ouput</span>
+    </a>
+    <div id="collapseIO" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" href="<?= site_url() ?>option/data_pemasukan"><i class="fas fa-box"></i> Pemasukan</a>
+        <a class="collapse-item" href="<?= site_url() ?>option/data_pengeluaran"><i class="fas fa-dolly-flatbed"></i> Pengeluaran</a>
+    </div>
+  </li>
+
+  <!-- <hr class="sidebar-divider">
+
   <?php
     if($this->session->userdata('level')==1){ ?>
       <li class="nav-item">
@@ -87,7 +107,7 @@
 
       <hr class="sidebar-divider">
 
-  <?php } ?>
+  <?php } ?> -->
 
   <div class="text-center d-none d-md-inline">
     <button class="rounded-circle border-0" id="sidebarToggle"></button>

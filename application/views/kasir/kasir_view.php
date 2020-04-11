@@ -56,7 +56,7 @@
                 <div class="row">
                     <div class="col-sm-12 col-md-6 ">
 
-                        <form class="form-horizontal" id="form_transaksi" role="form">
+                        <form class="form-horizontal" action="<?= site_url() ?>option/shoping" method="post" id="form_transaksi" role="form">
 
                             <div class="form-group row">
                               <label class="col-md-3 col-form-label">id/nama (f2)</label>
@@ -86,50 +86,16 @@
                             <div class="form-group row">
                               <label class="col-md-3 col-form-label">qty</label>
                                 <div class="col-md-9">
-                                  <input class="form-control reset" type="number" readonly="readonly" onkeyup="subTotal(this.value)" id="qty" min="0" name="qty" placeholder="qty">
+                                  <input class="form-control reset" type="number" readonly="readonly" id="qty" min="0" name="qty" placeholder="qty">
                                 </div>
                             </div>
-                            
-                            <div class="form-group row">
-                              <label class="col-md-3 col-form-label">sub total</label>
-                                <div class="col-md-9">
-                                  <input class="form-control reset" type="text" name="sub_total" id="sub_total"  readonly="" placeholder="0" value="">
-                                </div>
-                            </div>
+                            <button type="submit" class="btn btn-md btn-primary"> Selesai</button>
                         </form>
-
-                        <button type="button" class="btn btn-md btn-primary" id="tambah" disabled="disabled" onclick="addbarang()"><i class="fa fa-shopping-cart"></i> input</button>
-                    </div>
-
-                    <div class="col-sm-12 col-md-6 ">
-
-                        <div class="form-group row">
-                          <label class="col-md-3 col-form-label">total</label>
-                            <div class="col-md-9">
-                              <input class="form-control form-control-lg res" type="text" readonly="" name="total" id="total" value="<?= number_format( 
-                                  $this->cart->total(), 0 , '' , '.' ); ?>" >
-                            </div>
-                        </div>
-						
-                        <div class="form-group row">
-                          <label class="col-md-3 col-form-label">bayar</label>
-                            <div class="col-md-9">
-                              <input class="form-control form-control-lg res" type="number" id="bayar" name="bayar" onkeyup="showKembali(this.value)"  placeholder="0">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group row">
-                          <label class="col-md-3 col-form-label">kembali</label>
-                            <div class="col-md-9">
-                              <input class="form-control form-control-lg res" type="text" id="kembali" readonly="" name="kembali"  >
-                            </div>
-                        </div>
-						
                     </div>
                 </div>
             </div>
 			
-              <table id="tabelBarang" class="table table-striped table-bordered nowrap" style="width:100%">
+              <!-- <table id="tabelBarang" class="table table-striped table-bordered nowrap" style="width:100%">
                 <thead>
                   <tr>
                     <th>no</th>
@@ -146,7 +112,7 @@
                 <tbody>
                 </tbody>
               </table>
-			      <button type="button" class="btn btn-md btn-primary" id="selesai" disabled="disabled" >selesai </button>
+			      <button type="button" class="btn btn-md btn-primary" id="selesai" disabled="disabled" >selesai </button> -->
         </div>
         <!-- /.container-fluid -->
 
