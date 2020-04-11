@@ -163,13 +163,13 @@ class Option extends CI_Controller {
 	    $this->model_saldo->update(array('id' => 0), $datasaldo);
 	  
       // tambah saldo fisik
-      $this->ubah_saldo_fisik('tambah', $this->input->post('harga_jual') - $this->input->post('harga_beli'));
+      $this->ubah_saldo_fisik('tambah', $this->input->post('harga_jual'));
 
       // input ke pemasukan
       $this->load->model('model_io');
 			$dataPemasukan =[
 				'nama' 		=> 'PENJUALAN: '.$this->input->post('nama_brg'),
-				'nominal' 		=> $this->input->post('harga_jual') - $this->input->post('harga_beli'),
+				'nominal' 		=> $this->input->post('harga_jual'),
 				'date' => date('Y-m-d'),
 				'time' => $waktu
 			];
@@ -547,13 +547,13 @@ class Option extends CI_Controller {
 			$brg = $this->model_barang->get_by_id($this->input->post('id'));
 			
 			// tambah saldo fisik
-			$this->ubah_saldo_fisik('tambah', $quantity * $brg->laba);
+			$this->ubah_saldo_fisik('tambah', $quantity * $harga);
 
 			// input brg ke pemasukan
 			$this->load->model('model_io');
 			$dataPemasukan =[
 				'nama' 		=> 'PENJUALAN: '.$brg->nama_barang,
-				'nominal' 		=> $quantity * $brg->laba,
+				'nominal' 		=> $quantity * $harga,
 				'date' => date('Y-m-d'),
 				'time' => $waktu
 			];
