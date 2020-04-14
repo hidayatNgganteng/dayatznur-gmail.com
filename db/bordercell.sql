@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 14, 2020 at 12:32 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.2.28
+-- Host: localhost
+-- Generation Time: Apr 15, 2020 at 12:43 AM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.1.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -477,7 +477,8 @@ INSERT INTO `pengeluaran` (`id_pengeluaran`, `nama`, `nominal`, `date`, `time`) 
 (7, 'Bensin LindZul', 10000, '2020-04-13', '16:56:00'),
 (8, 'BELANJA VOUCHER MAS YOGA', 518000, '2020-04-13', '18:24:00'),
 (9, 'Beli Kartu Telkomsel 8GB', 200000, '2020-04-14', '14:14:00'),
-(10, 'beli es torabika', 5000, '2020-04-14', '14:15:00');
+(10, 'beli es torabika', 5000, '2020-04-14', '14:15:00'),
+(11, 'TAMBAHAN BIAYA SATIR + MINUM TUKANG', 169000, '2020-04-14', '20:03:00');
 
 -- --------------------------------------------------------
 
@@ -655,7 +656,7 @@ CREATE TABLE `saldo_fisik` (
 --
 
 INSERT INTO `saldo_fisik` (`id`, `saldo`) VALUES
-(1, 729300);
+(1, 560300);
 
 -- --------------------------------------------------------
 
@@ -845,7 +846,7 @@ ALTER TABLE `pemasukan`
 -- AUTO_INCREMENT for table `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
-  MODIFY `id_pengeluaran` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_pengeluaran` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `penjualan`
