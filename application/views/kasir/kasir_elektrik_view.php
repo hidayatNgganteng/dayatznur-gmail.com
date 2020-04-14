@@ -86,7 +86,8 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-md btn-primary" id="input"> Input</button>
+                    <button type="submit" class="btn btn-md btn-primary" id="input"> Selesai</button>
+                    <button type="button" onClick="hutang_save()" class="btn btn-md btn-warning" id="hutang"> Hutang</button>
                   </form>
               </div>
             </div>
@@ -110,6 +111,31 @@
   <script src="<?= base_url() ?>assets/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
   <script src="<?php echo base_url() ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
   <script src="<?php echo base_url() ?>assets/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+  <script>
+    function hutang_save(){
+      var url = "<?php echo site_url('option/hutang_simpan')?>";
+      
+      $.ajax({
+        url : url,
+        type: "POST",
+        data: $('#form_transaksi').serialize(),
+        dataType: "JSON",
+        success: function(data) {
+          if(data.status){
+            $('#modal_form').modal('hide');
+            $('#form_transaksi').trigger("reset");
+            alert(data.message);  
+          } else {
+            $('#modal_form').modal('hide');
+            alert(data.message);
+          }            
+        },
+        error: function (jqXHR, textStatus, errorThrown){
+          console.log(errorThrown)
+        }
+      });
+    }
+  </script>
 </body>
 
 </html>

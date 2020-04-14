@@ -177,7 +177,97 @@ class Option extends CI_Controller {
 
       $this->load->view('kasir/kasir_elektrik_view');
     }
-	}  
+  }  
+  
+  public function hutang_simpan(){
+    $this->load->model('model_saldo');
+    $this->load->model('model_hutang');
+
+    $data_saldo = $this->model_saldo->getSaldo();
+
+    if ($this->input->post('harga_beli') > $data_saldo->saldo) {
+      echo json_encode([
+        "status" => FALSE,
+        "message" => 'Saldo anda tidak mencukupi!!',
+      ]);
+    } else if ($this->input->post('harga_beli') > $this->input->post('harga_jual')) {
+      echo json_encode([
+        "status" => FALSE,
+        "message" => 'Harga beli tidak boleh lebih dari harga jual!!',
+      ]);
+    } else {
+      $datestring = '%H:%i';
+      $time 		= time();
+      $waktu 		= mdate($datestring, $time);
+
+      $data =[
+        'nama_brg' 	    => $this->input->post('nama_brg'),
+        'harga_beli' 		=> $this->input->post('harga_beli'),
+        'harga_jual' 		=> $this->input->post('harga_jual'),
+        'date'          => date('Y-m-d'),
+        'time' 			  => $waktu
+      ];
+
+      // insert ke tabel hutang
+      $this->model_hutang->insert_hutang($data);
+
+      // kurangi saldo
+      $datasaldo =[ 'saldo' => $data_saldo->saldo - $this->input->post('harga_beli') ];
+	    $this->model_saldo->update(array('id' => 0), $datasaldo);
+
+      echo json_encode([
+        "status" => TRUE,
+        "message" => 'Produk tersimpan : )',
+      ]);
+    }
+  } 
+
+  public function lunasi_hutang($id){
+    $this->load->model('model_hutang');
+
+    // update status di tabel hutang
+    $data =[ 'status' 	    => 'lunas' ];
+    $this->model_hutang->update(array('id_hutang_elektrik' => $id), $data);
+
+    $data_hutang = $this->model_hutang->get_by_id($id);
+    
+    // insert ke penjualan
+    $datestring = '%H:%i';
+    $time 		= time();
+    $waktu 		= mdate($datestring, $time);
+
+    $data_penjualan =[
+      'kasir' => 0,
+      'kode_brg' => 0,
+      'nama_brg' 	    => $data_hutang->nama_brg,
+      'harga_beli_elektrik' 		=> $data_hutang->harga_beli,
+      'harga_brg' 		=> $data_hutang->harga_jual,
+      'jumlah' 		=> 1,
+      'total_harga' 		=>  $data_hutang->harga_jual,
+      'tgl_transaksi' => date('Y-m-d'),
+      'waktu' 			  => $waktu,
+      'type_product' => 'elektrik'
+    ];
+    
+    $this->model_barang->insert_penjualan($data_penjualan);
+
+
+    // tambah saldo fisik
+    $this->ubah_saldo_fisik('tambah', $data_hutang->harga_jual);
+
+    
+    // input ke pemasukan
+    $this->load->model('model_io');
+    $dataPemasukan =[
+      'nama' 		=> 'PENJUALAN: '.$data_hutang->nama_brg,
+      'nominal' 		=> $data_hutang->harga_jual,
+      'date' => date('Y-m-d'),
+      'time' => $waktu
+    ];
+    $this->model_io->save($dataPemasukan);
+
+    echo json_encode([ "status" => TRUE ]);
+  }
   
   public function saldo(){
     $this->load->model('model_saldo');
@@ -574,6 +664,10 @@ class Option extends CI_Controller {
 	
 	public function data_penjualan(){
 		$this->load->view('kasir/penjualan_view');
+  }
+  
+  public function data_hutang(){
+		$this->load->view('kasir/hutang_view');
 	}
 
 	public function data_pemasukan(){
@@ -609,7 +703,42 @@ class Option extends CI_Controller {
 			"data" => $data,
 		];
 		echo json_encode($output);
-	}
+  }
+  
+  public function get_hutang(){
+    $this->load->model('model_hutang');
+		$list = $this->model_hutang->get_datatables();
+		$data = [];
+		$no = $_POST['start'];
+		$n=0;
+
+		foreach ($list as $barang) {
+			$n++;
+			$row = [];
+			$row[] = $n;
+			$row[] = $barang->nama_brg;
+			$row[] = $barang->harga_beli;
+			$row[] = $barang->harga_jual;
+      $row[] = $barang->date.' '.$barang->time;
+      $row[] = $barang->status;
+
+      if($barang->status == 'hutang'){
+				$row[] = '<button class="btn btn-sm btn-warning" onclick="lunasi_hutang('."'".$barang->id_hutang_elektrik."'".')">Lunasi</button>';
+			}else{
+				$row[] = '<button class="btn btn-sm btn-info disabled">Sudah Lunas</button>';
+			}
+
+			$data[] = $row;
+		}
+		
+		$output = [
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->model_hutang->count_all(),
+			"recordsFiltered" => $this->model_hutang->count_filtered(),
+			"data" => $data,
+		];
+		echo json_encode($output);
+  }
 
 	public function get_pemasukan(){
 		$this->load->model('model_io');

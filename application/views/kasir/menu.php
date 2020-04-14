@@ -95,6 +95,14 @@
     </div>
   </li>
 
+  <hr class="sidebar-divider">
+
+  <li class="nav-item">
+    <a class="nav-link" href="<?= site_url() ?>option/data_hutang">
+    <i class="fas fa-torii-gate"></i>
+      <span>Daftar Hutang</span></a>
+  </li>
+
   <!-- <hr class="sidebar-divider">
 
   <?php
