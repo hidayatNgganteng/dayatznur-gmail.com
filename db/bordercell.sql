@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 16, 2020 at 11:34 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.2.28
+-- Host: localhost
+-- Generation Time: Apr 17, 2020 at 03:03 AM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.1.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -186,11 +186,11 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `l
 (147, '3D Diamond Softcase VIVO iQOO NEO', 7470, 20000, 12530, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (148, '3D Diamond Softcase REALME A5/ A3S/ AX5/ REALME C1', 7470, 20000, 12530, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (149, 'PERDANA INDOSAT FREEDOM 8GB (30 HR)', 30000, 35000, 5000, 'pcs', 3, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(150, 'VOUCHER AXIS 1 GB (5 HR)- Cahyo Sales', 7800, 10000, 2200, 'pcs', 3, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
+(150, 'VOUCHER AXIS 1 GB (5 HR)- Cahyo Sales', 7800, 10000, 2200, 'pcs', 2, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (152, 'VOUCHER XL 4,5 GB (30 HR)- Cahyo Sales', 26500, 30000, 3500, 'pcs', 2, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (153, 'VOUCHER TRI 1,5 GB (1 TH)  - Indy cell', 12500, 15000, 2500, 'pcs', 2, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (154, 'VOUCHER TRI 6 GB (1 TH) - Indy cell', 33500, 36000, 2500, 'pcs', 4, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(155, 'VOUCHER TRI 2 GB (1  TH)  - Indy cell', 17800, 20000, 2200, 'pcs', 5, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
+(155, 'VOUCHER TRI 2 GB (1  TH)  - Indy cell', 17800, 20000, 2200, 'pcs', 4, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (156, 'VOUCHER TRI 3 GB AON (1 TH)  - Indy cell', 24000, 26000, 2000, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (157, 'VOUCHER TRI 1 GB (5 HR)  - Indy cell', 8500, 10000, 1500, 'pcs', 2, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (158, 'PERDANA + VOUCHER XL 4,5 GB (30 HR)- Cahyo Sales', 27500, 30000, 2500, 'pcs', 5, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
@@ -232,7 +232,7 @@ CREATE TABLE `barang_elektrik` (
 --
 
 INSERT INTO `barang_elektrik` (`id`, `saldo`) VALUES
-(0, '479357');
+(0, '289757');
 
 -- --------------------------------------------------------
 
@@ -252,7 +252,7 @@ CREATE TABLE `cookie` (
 
 INSERT INTO `cookie` (`id_cookie`, `id_user_cookie`, `cookie`) VALUES
 (1, 1, '0ge2vwm2f428783kngpw11e58xcrapm1'),
-(2, 4, 'wvy1gtz21uykq3j89i4tznh9fxqunyrcav89vle4n6gqbzvzybuh0y9ilvomfic7dz67fjoy2g58akjzrzdklk8y5zt31a1m1jqxr2knkylnjk0k6wxtx480s0mlxu0s');
+(2, 4, 'dndocmr5houomutqtf789y9wn407j2wzlxci9aviw9vddxu5j1f8nq1f73fe8wo6qm6xhxdzn2cb8dmvrr41a7028vnrzqbcd3a47v3gjm39icwvxvkbcillisyw6dlk');
 
 -- --------------------------------------------------------
 
@@ -269,6 +269,13 @@ CREATE TABLE `hutang_elektrik` (
   `time` time NOT NULL,
   `status` varchar(20) NOT NULL DEFAULT 'hutang'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `hutang_elektrik`
+--
+
+INSERT INTO `hutang_elektrik` (`id_hutang_elektrik`, `nama_brg`, `harga_beli`, `harga_jual`, `date`, `time`, `status`) VALUES
+(3, 'Pulsa telkomsel 25k - mamake fathur', 24900, 27000, '2020-04-16', '19:45:00', 'hutang');
 
 -- --------------------------------------------------------
 
@@ -398,7 +405,8 @@ INSERT INTO `login` (`id_login`, `id_user`, `browser`, `browser_version`, `os`, 
 (135, 4, 'Chrome', '80.0.3987.163', 'Mac OS X', '::1', 0, '2020-04-04 07:44:55'),
 (136, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 10:56:34'),
 (137, 4, 'Chrome', '80.0.3987.163', 'Mac OS X', '::1', 0, '2020-04-04 07:40:09'),
-(138, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 02:06:08');
+(138, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 02:06:08'),
+(139, 4, 'Chrome', '80.0.3987.163', 'Mac OS X', '::1', 0, '2020-04-04 07:21:22');
 
 -- --------------------------------------------------------
 
@@ -476,7 +484,14 @@ INSERT INTO `pemasukan` (`id_pemasukan`, `nama`, `nominal`, `date`, `time`) VALU
 (79, 'INVESTASI CEO (Dalam miliyar)', 500, '2020-04-16', '11:18:00'),
 (80, 'PENJUALAN: Pulsa Telkomsel 10k', 12000, '2020-04-16', '14:07:00'),
 (81, 'PENJUALAN: Pulsa xl 5k', 7000, '2020-04-16', '14:27:00'),
-(82, 'tambahan dari uang saku', 5000, '2020-04-16', '16:14:00');
+(82, 'tambahan dari uang saku', 5000, '2020-04-16', '16:14:00'),
+(83, 'PENJUALAN: VOUCHER TRI 2 GB (1  TH)  - Indy cell', 20000, '2020-04-16', '17:59:00'),
+(84, 'PENJUALAN: pulsa tri 10k', 12000, '2020-04-16', '18:00:00'),
+(85, 'PENJUALAN: VOUCHER AXIS 1 GB (5 HR)- Cahyo Sales', 10000, '2020-04-16', '19:36:00'),
+(86, 'PENJUALAN: PDAM', 58000, '2020-04-16', '19:37:00'),
+(87, 'PENJUALAN: Pulsa XL 50k', 52000, '2020-04-17', '07:22:00'),
+(88, 'PENJUALAN: Pulsa tri 50k', 52000, '2020-04-17', '07:22:00'),
+(89, 'PENJUALAN: Pulsa tri 10k', 12000, '2020-04-17', '07:23:00');
 
 -- --------------------------------------------------------
 
@@ -507,7 +522,8 @@ INSERT INTO `pengeluaran` (`id_pengeluaran`, `nama`, `nominal`, `date`, `time`) 
 (10, 'beli es torabika', 5000, '2020-04-14', '14:15:00'),
 (11, 'TAMBAHAN BIAYA SATIR + MINUM TUKANG', 169000, '2020-04-14', '20:03:00'),
 (12, 'Ambil buat isi saldo elektrik', 300000, '2020-04-15', '20:49:00'),
-(13, 'CEO ambil dari perusahaan', 100000, '2020-04-16', '11:14:00');
+(13, 'CEO ambil dari perusahaan', 100000, '2020-04-16', '11:14:00'),
+(14, 'Banner satir ', 113000, '2020-04-16', '19:38:00');
 
 -- --------------------------------------------------------
 
@@ -687,7 +703,14 @@ INSERT INTO `penjualan` (`id_penjualan`, `kasir`, `kode_brg`, `nama_brg`, `harga
 (221, 0, 156, 'VOUCHER TRI 3 GB AON (1 TH)  - Indy cell', 0, 26000, 1, 26000, '2020-04-16', '11:06:00', 'non-elektrik'),
 (222, 0, 0, 'Pulsa Tri 50k ', 49200, 52000, 1, 52000, '2020-04-16', '11:07:00', 'elektrik'),
 (223, 0, 0, 'Pulsa Telkomsel 10k', 10375, 12000, 1, 12000, '2020-04-16', '14:07:00', 'elektrik'),
-(224, 0, 0, 'Pulsa xl 5k', 5775, 7000, 1, 7000, '2020-04-16', '14:27:00', 'elektrik');
+(224, 0, 0, 'Pulsa xl 5k', 5775, 7000, 1, 7000, '2020-04-16', '14:27:00', 'elektrik'),
+(225, 0, 155, 'VOUCHER TRI 2 GB (1  TH)  - Indy cell', 0, 20000, 1, 20000, '2020-04-16', '17:59:00', 'non-elektrik'),
+(226, 0, 0, 'pulsa tri 10k', 10000, 12000, 1, 12000, '2020-04-16', '18:00:00', 'elektrik'),
+(227, 0, 150, 'VOUCHER AXIS 1 GB (5 HR)- Cahyo Sales', 0, 10000, 1, 10000, '2020-04-16', '19:36:00', 'non-elektrik'),
+(228, 0, 0, 'PDAM', 56000, 58000, 1, 58000, '2020-04-16', '19:37:00', 'elektrik'),
+(229, 0, 0, 'Pulsa XL 50k', 49500, 52000, 1, 52000, '2020-04-17', '07:22:00', 'elektrik'),
+(230, 0, 0, 'Pulsa tri 50k', 49200, 52000, 1, 52000, '2020-04-17', '07:22:00', 'elektrik'),
+(231, 0, 0, 'Pulsa tri 10k', 10250, 12000, 1, 12000, '2020-04-17', '07:23:00', 'elektrik');
 
 -- --------------------------------------------------------
 
@@ -705,7 +728,7 @@ CREATE TABLE `saldo_fisik` (
 --
 
 INSERT INTO `saldo_fisik` (`id`, `saldo`) VALUES
-(1, 670100);
+(1, 773100);
 
 -- --------------------------------------------------------
 
@@ -877,31 +900,31 @@ ALTER TABLE `cookie`
 -- AUTO_INCREMENT for table `hutang_elektrik`
 --
 ALTER TABLE `hutang_elektrik`
-  MODIFY `id_hutang_elektrik` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_hutang_elektrik` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
 
 --
 -- AUTO_INCREMENT for table `pemasukan`
 --
 ALTER TABLE `pemasukan`
-  MODIFY `id_pemasukan` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id_pemasukan` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
-  MODIFY `id_pengeluaran` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_pengeluaran` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=225;
+  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=232;
 
 --
 -- AUTO_INCREMENT for table `saldo_fisik`
