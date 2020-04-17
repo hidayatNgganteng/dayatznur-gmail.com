@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 17, 2020 at 03:03 AM
--- Server version: 10.4.8-MariaDB
--- PHP Version: 7.1.32
+-- Host: 127.0.0.1
+-- Generation Time: Apr 17, 2020 at 10:52 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.2.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -51,10 +51,10 @@ CREATE TABLE `barang` (
 
 INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `laba`, `satuan`, `setok`, `mulai_promo`, `ahir_promo`, `jenis_promo`, `potongan`, `harga_ahir`, `setatus_promo`, `setatus_barang`) VALUES
 (10, 'CHARGER XIAOMI ORIGINIAL 100% QUALCOMM 3.0 Fast Charging MDY-08-EI', 27500, 40000, 12500, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(11, 'VOUCHER INDOSAT UNLIMITED Youtube 2 hari + 500mb', 5700, 8000, 2300, 'pcs', 2, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
+(11, 'VOUCHER INDOSAT UNLIMITED Youtube 2 hari + 500mb', 5700, 8000, 2300, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (12, 'PERDANA SMARTFREN 2GB KUOTA 2GB', 8700, 11000, 2300, 'pcs', 2, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (13, 'PERDANA SMARTFREN GSM PULSA 0K', 2500, 5000, 2500, 'pcs', 0, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(14, 'VOUCHER INDOSAT FREEDOM INTERNET 2GB (15 HR) NASIONAL', 15000, 17000, 2000, 'pcs', 4, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
+(14, 'VOUCHER INDOSAT FREEDOM INTERNET 2GB (15 HR) NASIONAL', 15000, 17000, 2000, 'pcs', 3, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (15, 'VOUCHER TRI DATA AMI 4GB bonus unlimited youtube  - Indy cell', 27250, 32000, 4750, 'pcs', 0, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (16, 'VOUCHER INDOSAT FREEDOM 14GB', 47200, 55000, 7800, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (17, 'VOUCHER INDOSAT FREEDOM 8GB', 33300, 36000, 2700, 'pcs', 2, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
@@ -186,8 +186,8 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `l
 (147, '3D Diamond Softcase VIVO iQOO NEO', 7470, 20000, 12530, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (148, '3D Diamond Softcase REALME A5/ A3S/ AX5/ REALME C1', 7470, 20000, 12530, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (149, 'PERDANA INDOSAT FREEDOM 8GB (30 HR)', 30000, 35000, 5000, 'pcs', 3, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(150, 'VOUCHER AXIS 1 GB (5 HR)- Cahyo Sales', 7800, 10000, 2200, 'pcs', 2, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(152, 'VOUCHER XL 4,5 GB (30 HR)- Cahyo Sales', 26500, 30000, 3500, 'pcs', 2, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
+(150, 'VOUCHER AXIS 1 GB (5 HR)- Cahyo Sales', 7800, 10000, 2200, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
+(152, 'VOUCHER XL 4,5 GB (30 HR)- Cahyo Sales', 26500, 30000, 3500, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (153, 'VOUCHER TRI 1,5 GB (1 TH)  - Indy cell', 12500, 15000, 2500, 'pcs', 2, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (154, 'VOUCHER TRI 6 GB (1 TH) - Indy cell', 33500, 36000, 2500, 'pcs', 4, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (155, 'VOUCHER TRI 2 GB (1  TH)  - Indy cell', 17800, 20000, 2200, 'pcs', 4, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
@@ -204,7 +204,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `l
 (166, 'VOUCHER INDOSAT 1 GB + UNLIMITED APP (30 HARI)', 25000, 27000, 2000, 'pcs', 10, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (167, 'VOUCHER TELKOMSEL 8 GB (30 HARI)', 59000, 61000, 2000, 'pcs', 4, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (170, 'VOUCHER SMARTFREN UNLIMITED LITE _500MB/HR_(28 HR) - ricky glorie', 46950, 50000, 3050, 'pcs', 2, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(171, 'VOUCHER SMARTFREN UNLIMITED _1GB/HR_(5 HR) - ricky glorie', 18150, 21000, 2850, 'pcs', 3, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
+(171, 'VOUCHER SMARTFREN UNLIMITED _1GB/HR_(5 HR) - ricky glorie', 18150, 21000, 2850, 'pcs', 2, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (172, 'VOUCHER SMARTFREN 10N+ 1,5GB_24JAM_(7 HR) - ricky glorie', 9550, 12000, 2450, 'pcs', 11, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (173, 'VOUCHER SMARTFREN 10N+ 1GB_24JAM_(7 HR) - ricky glorie', 7500, 10000, 2500, 'pcs', 3, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (174, 'PERDANA SMARTFREN UNLIMITED 30 HR', 72000, 75000, 3000, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
@@ -232,7 +232,7 @@ CREATE TABLE `barang_elektrik` (
 --
 
 INSERT INTO `barang_elektrik` (`id`, `saldo`) VALUES
-(0, '289757');
+(0, '518157');
 
 -- --------------------------------------------------------
 
@@ -252,7 +252,7 @@ CREATE TABLE `cookie` (
 
 INSERT INTO `cookie` (`id_cookie`, `id_user_cookie`, `cookie`) VALUES
 (1, 1, '0ge2vwm2f428783kngpw11e58xcrapm1'),
-(2, 4, 'dndocmr5houomutqtf789y9wn407j2wzlxci9aviw9vddxu5j1f8nq1f73fe8wo6qm6xhxdzn2cb8dmvrr41a7028vnrzqbcd3a47v3gjm39icwvxvkbcillisyw6dlk');
+(2, 4, 'tls91wkci2f0ten9plosyr0qeeg2bc2totnz4fhzqpo83t39j08c8umydnfr38vonws8za0y4haifrsdhztodjvt6wqv6whjhg0f69ig0jdr04yx4ga58dp36jdqh75w');
 
 -- --------------------------------------------------------
 
@@ -406,7 +406,8 @@ INSERT INTO `login` (`id_login`, `id_user`, `browser`, `browser_version`, `os`, 
 (136, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 10:56:34'),
 (137, 4, 'Chrome', '80.0.3987.163', 'Mac OS X', '::1', 0, '2020-04-04 07:40:09'),
 (138, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 02:06:08'),
-(139, 4, 'Chrome', '80.0.3987.163', 'Mac OS X', '::1', 0, '2020-04-04 07:21:22');
+(139, 4, 'Chrome', '80.0.3987.163', 'Mac OS X', '::1', 0, '2020-04-04 07:21:22'),
+(140, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 08:11:12');
 
 -- --------------------------------------------------------
 
@@ -491,7 +492,14 @@ INSERT INTO `pemasukan` (`id_pemasukan`, `nama`, `nominal`, `date`, `time`) VALU
 (86, 'PENJUALAN: PDAM', 58000, '2020-04-16', '19:37:00'),
 (87, 'PENJUALAN: Pulsa XL 50k', 52000, '2020-04-17', '07:22:00'),
 (88, 'PENJUALAN: Pulsa tri 50k', 52000, '2020-04-17', '07:22:00'),
-(89, 'PENJUALAN: Pulsa tri 10k', 12000, '2020-04-17', '07:23:00');
+(89, 'PENJUALAN: Pulsa tri 10k', 12000, '2020-04-17', '07:23:00'),
+(90, 'PENJUALAN: VOUCHER INDOSAT FREEDOM INTERNET 2GB (15 HR) NASIONAL', 17000, '2020-04-17', '09:50:00'),
+(91, 'PENJUALAN: Pulsa Telkomsel 10k', 12000, '2020-04-17', '10:06:00'),
+(92, 'PENJUALAN: VOUCHER XL 4,5 GB (30 HR)- Cahyo Sales', 30000, '2020-04-17', '11:15:00'),
+(93, 'PENJUALAN: VOUCHER AXIS 1 GB (5 HR)- Cahyo Sales', 10000, '2020-04-17', '11:16:00'),
+(94, 'Donasi dr CEO ', 1500, '2020-04-17', '11:20:00'),
+(95, 'PENJUALAN: VOUCHER SMARTFREN UNLIMITED _1GB/HR_(5 HR) - ricky glorie', 21000, '2020-04-17', '12:25:00'),
+(96, 'PENJUALAN: Pulsa Tri 5k ', 7000, '2020-04-17', '14:07:00');
 
 -- --------------------------------------------------------
 
@@ -523,7 +531,8 @@ INSERT INTO `pengeluaran` (`id_pengeluaran`, `nama`, `nominal`, `date`, `time`) 
 (11, 'TAMBAHAN BIAYA SATIR + MINUM TUKANG', 169000, '2020-04-14', '20:03:00'),
 (12, 'Ambil buat isi saldo elektrik', 300000, '2020-04-15', '20:49:00'),
 (13, 'CEO ambil dari perusahaan', 100000, '2020-04-16', '11:14:00'),
-(14, 'Banner satir ', 113000, '2020-04-16', '19:38:00');
+(14, 'Banner satir ', 113000, '2020-04-16', '19:38:00'),
+(15, 'Isi saldo mitra + amin utang', 300000, '2020-04-17', '11:19:00');
 
 -- --------------------------------------------------------
 
@@ -710,7 +719,13 @@ INSERT INTO `penjualan` (`id_penjualan`, `kasir`, `kode_brg`, `nama_brg`, `harga
 (228, 0, 0, 'PDAM', 56000, 58000, 1, 58000, '2020-04-16', '19:37:00', 'elektrik'),
 (229, 0, 0, 'Pulsa XL 50k', 49500, 52000, 1, 52000, '2020-04-17', '07:22:00', 'elektrik'),
 (230, 0, 0, 'Pulsa tri 50k', 49200, 52000, 1, 52000, '2020-04-17', '07:22:00', 'elektrik'),
-(231, 0, 0, 'Pulsa tri 10k', 10250, 12000, 1, 12000, '2020-04-17', '07:23:00', 'elektrik');
+(231, 0, 0, 'Pulsa tri 10k', 10250, 12000, 1, 12000, '2020-04-17', '07:23:00', 'elektrik'),
+(232, 0, 14, 'VOUCHER INDOSAT FREEDOM INTERNET 2GB (15 HR) NASIONAL', 0, 17000, 1, 17000, '2020-04-17', '09:50:00', 'non-elektrik'),
+(233, 0, 0, 'Pulsa Telkomsel 10k', 10375, 12000, 1, 12000, '2020-04-17', '10:06:00', 'elektrik'),
+(234, 0, 152, 'VOUCHER XL 4,5 GB (30 HR)- Cahyo Sales', 0, 30000, 1, 30000, '2020-04-17', '11:15:00', 'non-elektrik'),
+(235, 0, 150, 'VOUCHER AXIS 1 GB (5 HR)- Cahyo Sales', 0, 10000, 1, 10000, '2020-04-17', '11:16:00', 'non-elektrik'),
+(236, 0, 171, 'VOUCHER SMARTFREN UNLIMITED _1GB/HR_(5 HR) - ricky glorie', 0, 21000, 1, 21000, '2020-04-17', '12:25:00', 'non-elektrik'),
+(237, 0, 0, 'Pulsa Tri 5k ', 5275, 7000, 1, 7000, '2020-04-17', '14:07:00', 'elektrik');
 
 -- --------------------------------------------------------
 
@@ -728,7 +743,7 @@ CREATE TABLE `saldo_fisik` (
 --
 
 INSERT INTO `saldo_fisik` (`id`, `saldo`) VALUES
-(1, 773100);
+(1, 571600);
 
 -- --------------------------------------------------------
 
@@ -906,25 +921,25 @@ ALTER TABLE `hutang_elektrik`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
+  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
 
 --
 -- AUTO_INCREMENT for table `pemasukan`
 --
 ALTER TABLE `pemasukan`
-  MODIFY `id_pemasukan` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id_pemasukan` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
-  MODIFY `id_pengeluaran` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_pengeluaran` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=232;
+  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=239;
 
 --
 -- AUTO_INCREMENT for table `saldo_fisik`
