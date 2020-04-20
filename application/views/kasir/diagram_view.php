@@ -299,6 +299,34 @@
                     pointBorderWidth: 10,
                     pointHitRadius: 20,
                     pointHoverBorderColor: 'rgba(15, 157, 88, 0.75)'
+                },
+                {
+                    label: `Target`,
+                    data: obj.map(item => {
+                      const tgltahun = `${getNameMonth(obj[0].tgl_transaksi)} ${getNameYear(obj[0].tgl_transaksi)}`
+                      
+                      if (tgltahun == 'March 2020') {
+                        return 20000
+                      } else if (tgltahun == 'April 2020') {
+                        return 25000
+                      } else  if (tgltahun == 'May 2020') {
+                        return 30000
+                      } else if (tgltahun == 'June 2020') {
+                        return 35000
+                      } else {
+                        return 0
+                      }
+                    }),
+                    backgroundColor: [
+                        'rgba(219, 68, 55, 0.1)'
+                    ],
+                    borderColor: [
+                        'rgba(219, 68, 55, 0.7)'
+                    ],
+                    borderWidth: 1,
+                    pointBorderWidth: 1,
+                    pointHitRadius: 1,
+                    pointHoverBorderColor: 'rgba(219, 68, 55, 1)'
                 }]
             },
             options: {
