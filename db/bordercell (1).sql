@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 20, 2020 at 03:35 AM
--- Server version: 10.4.8-MariaDB
--- PHP Version: 7.1.32
+-- Host: 127.0.0.1
+-- Generation Time: Apr 20, 2020 at 12:13 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.2.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -180,7 +180,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `l
 (141, 'HEADSET XIAOMI PISTON 2', 10499, 25000, 14501, 'pcs', 3, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (142, 'KABEL DATA QTOP TOPLES IPHONE', 5000, 15000, 10000, 'pcs', 50, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (143, 'HANDSFREE / HEADSET / EARPHONE SAMSUNG HS330', 5000, 20000, 15000, 'pcs', 5, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(144, 'CHARGER SAMSUNG NOTE 4 ORIGINAL', 16000, 25000, 9000, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
+(144, 'CHARGER SAMSUNG NOTE 4 ORIGINAL', 16000, 25000, 9000, 'pcs', 0, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (145, 'CHARGER SAMSUNG i9000/ GALAXY MINI PACK DUS ', 4299, 15000, 10701, 'pcs', 5, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (146, 'KABEL DATA VIVAN 1 TOPLES - micro usb', 6000, 15000, 9000, 'pcs', 31, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (147, '3D Diamond Softcase VIVO iQOO NEO', 7470, 20000, 12530, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
@@ -201,7 +201,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `l
 (163, 'VOUCHER AXIS 1 GB (30 HARI)', 13000, 15000, 2000, 'pcs', 6, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (164, 'VOUCHER AXIS 3 GB (15 HARI)', 19000, 21000, 2000, 'pcs', 5, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (165, 'VOUCHER INDOSAT 3 GB + ULT YOUTUBE (30 HARI)', 57000, 60000, 3000, 'pcs', 4, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(166, 'VOUCHER INDOSAT 1 GB + UNLIMITED APP (30 HARI)', 25000, 27000, 2000, 'pcs', 10, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
+(166, 'VOUCHER INDOSAT 1 GB + UNLIMITED APP (30 HARI)', 25000, 27000, 2000, 'pcs', 9, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (167, 'VOUCHER TELKOMSEL 8 GB (30 HARI)', 59000, 61000, 2000, 'pcs', 3, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (170, 'VOUCHER SMARTFREN UNLIMITED LITE _500MB/HR_(28 HR) - ricky glorie', 46950, 50000, 3050, 'pcs', 2, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (171, 'VOUCHER SMARTFREN UNLIMITED _1GB/HR_(5 HR) - ricky glorie', 18150, 21000, 2850, 'pcs', 2, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
@@ -214,25 +214,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `l
 (178, 'PERDANA AXIS 2GB 30 HARI ', 19000, 22000, 3000, 'pcs', 4, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (179, 'PERDANA TRI 1 GB ', 6000, 10000, 4000, 'pcs', 5, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
 (180, 'VOUCHER TRI 6 GB + UNLIMITED YOUTUBE (30 HR)', 49000, 52000, 3000, 'pcs', 3, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(183, 'PERDANA SMARTFREN 1ON+ 3GB 930 HR)', 18500, 21000, 2500, 'pcs', 8, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(184, 'sell-redmi 4a', 1, 1, 0, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(185, 'sell-redmi 4x', 1, 1, 0, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(186, 'sell-redmi 5a', 1, 1, 0, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(187, 'sell-redmi 6a', 1, 1, 0, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(188, 'sell-redmi s2', 1, 1, 0, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(189, 'sell-redmi note4x', 1, 1, 0, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(190, 'sell-redmi note5/note5pro', 1, 1, 0, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(191, 'sell-redmi note5a', 1, 1, 0, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(192, 'sell-redmi note6/note6pro', 1, 1, 0, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(193, 'sell-redmi note7', 1, 1, 0, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(194, 'sell-redmi note8', 1, 1, 0, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(195, 'sell-redmi note8pro', 1, 1, 0, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(196, 'sell-vivo y65/v5lite', 1, 1, 0, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(197, 'sell-vivo y71', 1, 1, 0, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(198, 'sell-vivo v5/v5s', 1, 1, 0, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(199, 'sell-vivo y91/y93/y95', 1, 1, 0, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(200, 'sell-vivo v11', 1, 1, 0, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1),
-(201, 'sell-vivo v15', 1, 1, 0, 'pcs', 1, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1);
+(183, 'PERDANA SMARTFREN 1ON+ 3GB 930 HR)', 18500, 21000, 2500, 'pcs', 8, '0000-00-00', '0000-00-00', 'diskon', 0, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -250,7 +232,7 @@ CREATE TABLE `barang_elektrik` (
 --
 
 INSERT INTO `barang_elektrik` (`id`, `saldo`) VALUES
-(0, '328825');
+(0, '453525');
 
 -- --------------------------------------------------------
 
@@ -270,7 +252,7 @@ CREATE TABLE `cookie` (
 
 INSERT INTO `cookie` (`id_cookie`, `id_user_cookie`, `cookie`) VALUES
 (1, 1, '0ge2vwm2f428783kngpw11e58xcrapm1'),
-(2, 4, 'iia4bamuxmuc1r6e9b29kasskljshrq41utvs7ytwv4jv1j5t1cey3pxxuja7x6feguuw93cio8h8yb7l4g7j1t9b8v7dllveqx16ejvfx7ypizv5z939gcte6uhq2sz');
+(2, 4, '5nw6hz5uy4pycs742cbytmdjgh81p9gsvpb4mowdsxd0hhjbwufnvbxaab9n727e8o15kekh6201v5csba5gjcigz3abe8jd7tatd0uitsfy1j5hhp70qitxp8sf9qx4');
 
 -- --------------------------------------------------------
 
@@ -432,7 +414,9 @@ INSERT INTO `login` (`id_login`, `id_user`, `browser`, `browser_version`, `os`, 
 (144, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 10:36:44'),
 (145, 4, 'Chrome', '80.0.3987.163', 'Mac OS X', '::1', 0, '2020-04-04 04:46:55'),
 (146, 4, 'Chrome', '80.0.3987.163', 'Mac OS X', '::1', 0, '2020-04-04 07:57:47'),
-(147, 4, 'Chrome', '80.0.3987.163', 'Mac OS X', '::1', 0, '2020-04-04 07:34:17');
+(147, 4, 'Chrome', '80.0.3987.163', 'Mac OS X', '::1', 0, '2020-04-04 07:34:17'),
+(148, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 08:42:43'),
+(149, 4, 'Chrome', '80.0.3987.163', 'Windows 7', '::1', 0, '2020-04-04 03:22:13');
 
 -- --------------------------------------------------------
 
@@ -539,7 +523,11 @@ INSERT INTO `pemasukan` (`id_pemasukan`, `nama`, `nominal`, `date`, `time`) VALU
 (110, 'PENJUALAN: VOUCHER TRI 6 GB (1 TH) - Indy cell', 36000, '2020-04-20', '07:46:00'),
 (111, 'PENJUALAN: VOUCHER TELKOMSEL 8 GB (30 HARI)', 61000, '2020-04-20', '07:46:00'),
 (112, 'PENJUALAN: Tagihan PLN', 37500, '2020-04-20', '08:19:00'),
-(113, 'PENJUALAN: Pulsa telkomsel 25k - mamake fathur', 27000, '2020-04-20', '08:33:00');
+(113, 'PENJUALAN: Pulsa telkomsel 25k - mamake fathur', 27000, '2020-04-20', '08:33:00'),
+(114, 'PENJUALAN: VOUCHER INDOSAT 1 GB + UNLIMITED APP (30 HARI)', 27000, '2020-04-20', '09:34:00'),
+(115, 'PENJUALAN: Token Listrik 50k', 52000, '2020-04-20', '09:35:00'),
+(116, 'PENJUALAN: paket data telkomsel ', 27000, '2020-04-20', '12:08:00'),
+(117, 'PENJUALAN: CHARGER SAMSUNG NOTE 4 ORIGINAL', 25000, '2020-04-20', '16:30:00');
 
 -- --------------------------------------------------------
 
@@ -574,7 +562,10 @@ INSERT INTO `pengeluaran` (`id_pengeluaran`, `nama`, `nominal`, `date`, `time`) 
 (14, 'Banner satir ', 113000, '2020-04-16', '19:38:00'),
 (15, 'Isi saldo mitra + amin utang', 300000, '2020-04-17', '11:19:00'),
 (16, 'beli voucher mas yoga', 430000, '2020-04-18', '11:12:00'),
-(17, 'BAN BOCOR', 65000, '2020-04-18', '16:02:00');
+(17, 'BAN BOCOR', 65000, '2020-04-18', '16:02:00'),
+(18, 'TOP UP Saldo Mitra', 200000, '2020-04-20', '12:22:00'),
+(19, 'JAJAN CEO DAN PARA STAFF', 20000, '2020-04-20', '12:49:00'),
+(20, 'REM BLONG SIBOS', 30000, '2020-04-20', '15:23:00');
 
 -- --------------------------------------------------------
 
@@ -780,7 +771,11 @@ INSERT INTO `penjualan` (`id_penjualan`, `kasir`, `kode_brg`, `nama_brg`, `harga
 (249, 0, 154, 'VOUCHER TRI 6 GB (1 TH) - Indy cell', 0, 36000, 1, 36000, '2020-04-20', '07:46:00', 'non-elektrik'),
 (250, 0, 167, 'VOUCHER TELKOMSEL 8 GB (30 HARI)', 0, 61000, 1, 61000, '2020-04-20', '07:46:00', 'non-elektrik'),
 (251, 0, 0, 'Tagihan PLN', 35717, 37500, 1, 37500, '2020-04-20', '08:19:00', 'elektrik'),
-(252, 0, 0, 'Pulsa telkomsel 25k - mamake fathur', 24900, 27000, 1, 27000, '2020-04-20', '08:33:00', 'elektrik');
+(252, 0, 0, 'Pulsa telkomsel 25k - mamake fathur', 24900, 27000, 1, 27000, '2020-04-20', '08:33:00', 'elektrik'),
+(253, 0, 166, 'VOUCHER INDOSAT 1 GB + UNLIMITED APP (30 HARI)', 0, 27000, 1, 27000, '2020-04-20', '09:34:00', 'non-elektrik'),
+(254, 0, 0, 'Token Listrik 50k', 50500, 52000, 1, 52000, '2020-04-20', '09:35:00', 'elektrik'),
+(255, 0, 0, 'paket data telkomsel ', 24800, 27000, 1, 27000, '2020-04-20', '12:08:00', 'elektrik'),
+(256, 0, 144, 'CHARGER SAMSUNG NOTE 4 ORIGINAL', 0, 25000, 1, 25000, '2020-04-20', '16:30:00', 'non-elektrik');
 
 -- --------------------------------------------------------
 
@@ -798,7 +793,7 @@ CREATE TABLE `saldo_fisik` (
 --
 
 INSERT INTO `saldo_fisik` (`id`, `saldo`) VALUES
-(1, 403300);
+(1, 284300);
 
 -- --------------------------------------------------------
 
@@ -976,25 +971,25 @@ ALTER TABLE `hutang_elektrik`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 
 --
 -- AUTO_INCREMENT for table `pemasukan`
 --
 ALTER TABLE `pemasukan`
-  MODIFY `id_pemasukan` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id_pemasukan` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
-  MODIFY `id_pengeluaran` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_pengeluaran` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=253;
+  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=257;
 
 --
 -- AUTO_INCREMENT for table `saldo_fisik`
