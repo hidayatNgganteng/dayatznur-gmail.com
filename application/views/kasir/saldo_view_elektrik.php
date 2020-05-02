@@ -34,24 +34,50 @@
         </nav>
 
         <div class="container-fluid">
-            <?php
-                if ($data_saldo->saldo > 250000) { ?>
-                    <h2 class="alert alert-success" role="alert" data-saldo="<?php echo $data_saldo->saldo ?>" data-saldoId="<?php echo $data_saldo->id ?>" id="saldo_view"> <?php
-                } else if ($data_saldo->saldo > 100000 && $data_saldo->saldo <= 250000) { ?>
-                    <h2 class="alert alert-warning" role="alert" data-saldo="<?php echo $data_saldo->saldo ?>" data-saldoId="<?php echo $data_saldo->id ?>" id="saldo_view"> <?php
-                } else { ?>
-                    <h2 class="alert alert-danger" role="alert" data-saldo="<?php echo $data_saldo->saldo ?>" data-saldoId="<?php echo $data_saldo->id ?>" id="saldo_view"> <?php
-                }
-                    $saldo = number_format($data_saldo->saldo,2,',','.');
-                    $saldoInArray = explode(",",$saldo);
-                    echo "Rp " . $saldoInArray[0];
-                ?>
-                </h2>
+          <div class="row">
+            <div class="col-md-6">
+              <h4>Saldo Mitra</h4>
+              <?php
+                  if ($data_saldo_mitra->saldo > 250000) { ?>
+                      <h2 class="alert alert-success" role="alert" data-saldo="<?php echo $data_saldo_mitra->saldo ?>" data-saldoId="<?php echo $data_saldo_mitra->id ?>" id="saldo_view_mitra"> <?php
+                  } else if ($data_saldo_mitra->saldo > 100000 && $data_saldo_mitra->saldo <= 250000) { ?>
+                      <h2 class="alert alert-warning" role="alert" data-saldo="<?php echo $data_saldo_mitra->saldo ?>" data-saldoId="<?php echo $data_saldo_mitra->id ?>" id="saldo_view_mitra"> <?php
+                  } else { ?>
+                      <h2 class="alert alert-danger" role="alert" data-saldo="<?php echo $data_saldo_mitra->saldo ?>" data-saldoId="<?php echo $data_saldo_mitra->id ?>" id="saldo_view_mitra"> <?php
+                  }
+                      $saldo = number_format($data_saldo_mitra->saldo,2,',','.');
+                      $saldoInArray = explode(",",$saldo);
+                      echo "Rp " . $saldoInArray[0];
+                  ?>
+                  </h2>
 
-                <?php
-                if($this->session->userdata('level')==1) {
-                echo '<button class="btn btn-success" onclick="edit_barang()"><i class="glyphicon glyphicon-plus"></i> edit</button><br><br>';
-            } ?>
+                  <?php
+                  if($this->session->userdata('level')==1) {
+                  echo '<button class="btn btn-success" onclick="edit_barang(0)"><i class="glyphicon glyphicon-plus"></i> edit</button><br><br>';
+              } ?>
+            </div>
+            <div class="col-md-6">
+              <h4>Saldo OrderKuota</h4>
+              <?php
+                  if ($data_order_kuota->saldo > 250000) { ?>
+                      <h2 class="alert alert-success" role="alert" data-saldo="<?php echo $data_order_kuota->saldo ?>" data-saldoId="<?php echo $data_order_kuota->id ?>" id="saldo_view_orderkuota"> <?php
+                  } else if ($data_order_kuota->saldo > 100000 && $data_order_kuota->saldo <= 250000) { ?>
+                      <h2 class="alert alert-warning" role="alert" data-saldo="<?php echo $data_order_kuota->saldo ?>" data-saldoId="<?php echo $data_order_kuota->id ?>" id="saldo_view_orderkuota"> <?php
+                  } else { ?>
+                      <h2 class="alert alert-danger" role="alert" data-saldo="<?php echo $data_order_kuota->saldo ?>" data-saldoId="<?php echo $data_order_kuota->id ?>" id="saldo_view_orderkuota"> <?php
+                  }
+                      $saldo = number_format($data_order_kuota->saldo,2,',','.');
+                      $saldoInArray = explode(",",$saldo);
+                      echo "Rp " . $saldoInArray[0];
+                  ?>
+                  </h2>
+
+                  <?php
+                  if($this->session->userdata('level')==1) {
+                  echo '<button class="btn btn-info" onclick="edit_barang(1)"><i class="glyphicon glyphicon-plus"></i> edit</button><br><br>';
+              } ?>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -75,11 +101,20 @@
   <script src="<?= base_url() ?>assets/Responsive-2.2.2/js/responsive.bootstrap4.min.js"></script>
   <script src="<?php echo base_url() ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
   <script>
-      function edit_barang () {
-        const saldo = $("#saldo_view").attr('data-saldo')
-        const saldoId = $("#saldo_view").attr('data-saldoId')
-        $('#saldo').val(saldo)
-        $("#saldoId").val(saldoId)
+      function edit_barang (type) {
+        // 0 = mitra 1 = orderkuota
+        if (type == 0) {
+          const saldo = $("#saldo_view_mitra").attr('data-saldo')
+          const saldoId = $("#saldo_view_mitra").attr('data-saldoId')
+          $('#saldo').val(saldo)
+          $("#saldoId").val(saldoId)  
+        } else {
+          const saldo = $("#saldo_view_orderkuota").attr('data-saldo')
+          const saldoId = $("#saldo_view_orderkuota").attr('data-saldoId')
+          $('#saldo').val(saldo)
+          $("#saldoId").val(saldoId)
+        }
+
         $('#modal_form').modal('show') 
       }
           

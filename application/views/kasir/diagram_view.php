@@ -77,6 +77,7 @@
             <p>Total hari: <b id="total_hari"></b></p>
             <p>Total produk terjual: <b id="total_produk_terjual"></b></p>
             <p>Total keuntungan: <b id="total_keuntungan"></b></p>
+            <p>Sedekah 2.5%: <b id="total_sedekah"></b></p>
             <p>Rata-rata keuntungan / hari: <b id="rata_rata"></b></p>
           </div>
           
@@ -163,21 +164,27 @@
                     }
                   })
 
-                  const totalKeuntungan = dataSend.reduce((accumulator, currentValue) => {
-                    if (typeof(accumulator) == 'object') {
-                      return accumulator.neto + currentValue.neto
-                    } else {
-                       return accumulator + Number(currentValue.neto) 
-                    }
-                  })
+                  let totalKeuntungan = 0
+                  if (dataSend.length && dataSend.length == 1) {
+                    totalKeuntungan = dataSend[0].neto
+                  } else {
+                    totalKeuntungan = dataSend.reduce((accumulator, currentValue) => {
+                      if (typeof(accumulator) == 'object') {
+                        return accumulator.neto + currentValue.neto
+                      } else {
+                         return accumulator + Number(currentValue.neto) 
+                      }
+                    })
+                  }
                   console.log("totalKeuntungan", totalKeuntungan)
 
                   $("#total_produk_terjual").text(obj.length)
                   $("#total_hari").text(dataSend.length)
-                  $("#total_keuntungan").text(`Rp. ${totalKeuntungan}`)
-                  $("#rata_rata").text(`Rp. ${totalKeuntungan / dataSend.length}`)
+                  $("#total_keuntungan").text(`Rp. ${toIdrFormat(totalKeuntungan)}`)
+                  $("#total_sedekah").text(`Rp. ${toIdrFormat(totalKeuntungan * 2.5 / 100)}`)
+                  $("#rata_rata").text(`Rp. ${toIdrFormat(totalKeuntungan / dataSend.length)}`)
 
-                  diagram(dataSend, 1);
+                  diagram(dataSend);
               },
               error: function(data)
               {
@@ -192,6 +199,21 @@
         } else {
           return item.total_harga - item.harga_beli
         }
+      }
+
+      function toIdrFormat(nominal) {
+        var bilangan = parseInt(nominal)
+        var number_string = bilangan.toString(),
+          sisa  = number_string.length % 3,
+          rupiah  = number_string.substr(0, sisa),
+          ribuan  = number_string.substr(sisa).match(/\d{3}/g);
+            
+        if (ribuan) {
+          separator = sisa ? '.' : '';
+          rupiah += separator + ribuan.join('.');
+        }
+
+        return rupiah
       }
        
       $(function(){
@@ -230,22 +252,27 @@
                     }
                   })
 
-
-                  const totalKeuntungan = dataSend.reduce((accumulator, currentValue) => {
-                    if (typeof(accumulator) == 'object') {
-                      return accumulator.neto + currentValue.neto
-                    } else {
-                       return accumulator + Number(currentValue.neto) 
-                    }
-                  })
+                  let totalKeuntungan = 0
+                  if (dataSend.length && dataSend.length == 1) {
+                    totalKeuntungan = dataSend[0].neto
+                  } else {
+                    totalKeuntungan = dataSend.reduce((accumulator, currentValue) => {
+                      if (typeof(accumulator) == 'object') {
+                        return accumulator.neto + currentValue.neto
+                      } else {
+                         return accumulator + Number(currentValue.neto) 
+                      }
+                    })
+                  }
                   console.log("totalKeuntungan", totalKeuntungan)
 
                   $("#total_produk_terjual").text(obj.length)
                   $("#total_hari").text(dataSend.length)
-                  $("#total_keuntungan").text(`Rp. ${totalKeuntungan}`)
-                  $("#rata_rata").text(`Rp. ${totalKeuntungan / dataSend.length}`)
+                  $("#total_keuntungan").text(`Rp. ${toIdrFormat(totalKeuntungan)}`)
+                  $("#total_sedekah").text(`Rp. ${toIdrFormat(totalKeuntungan * 2.5 / 100)}`)
+                  $("#rata_rata").text(`Rp. ${toIdrFormat(totalKeuntungan / dataSend.length)}`)
 
-                  diagram(dataSend, 0);
+                  diagram(dataSend);
               },
               error: function(data)
               {
@@ -268,13 +295,13 @@
         return d.getFullYear()
       }
       
-      function diagram(obj, refresh){
+      function diagram(obj){
         if (!obj.length) {
           $("#no-data-diagram").modal('show')
           return
         }
 
-        if (refresh) {
+        if (myChart) {
           myChart.destroy();
         }
 
@@ -293,12 +320,12 @@
                         'rgba(66, 133, 244, 0.1)'
                     ],
                     borderColor: [
-                        'rgba(15, 157, 88, 01)'
+                        'rgba(15, 157, 88, 1)'
                     ],
                     borderWidth: 1,
                     pointBorderWidth: 10,
                     pointHitRadius: 20,
-                    pointHoverBorderColor: 'rgba(15, 157, 88, 0.75)'
+                    pointHoverBorderColor: 'rgba(15, 157, 88, 1)'
                 },
                 {
                     label: `Target`,
@@ -321,12 +348,26 @@
                         'rgba(219, 68, 55, 0.1)'
                     ],
                     borderColor: [
-                        'rgba(219, 68, 55, 0.7)'
+                        'rgba(219, 68, 55, 1)'
                     ],
                     borderWidth: 1,
                     pointBorderWidth: 1,
                     pointHitRadius: 1,
                     pointHoverBorderColor: 'rgba(219, 68, 55, 1)'
+                },
+                {
+                    label: `Sedekah 2.5%`,
+                    data: obj.map(item => item.neto * 2.5 / 100),
+                    backgroundColor: [
+                        'rgba(247, 202, 24, 0.1)'
+                    ],
+                    borderColor: [
+                        'rgba(247, 202, 24, 1)'
+                    ],
+                    borderWidth: 1,
+                    pointBorderWidth: 2,
+                    pointHitRadius: 2,
+                    pointHoverBorderColor: 'rgba(247, 202, 24, 1)'
                 }]
             },
             options: {

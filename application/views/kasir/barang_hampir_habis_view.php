@@ -254,6 +254,7 @@
                    $('[name="nama_barang"]').val(data.nama_barang);
                    $('[name="harga_beli"]').val(data.harga_beli);
                    $('[name="harga_jual"]').val(data.harga_jual);
+                   $('[name="deskripsi"]').val(data.deskripsi);
                    $('[name="setok"]').val(data.setok);
                    $('[name="satuan"]').val(data.satuan);
                    $('[name="mulai_promo"]').val(data.mulai_promo);
@@ -274,6 +275,12 @@
                    alert('Error get data from ajax');
                }
                });
+       }
+
+       function open_deskripsi(id){
+        var deskripsi = $(`#${id}`).attr('deskripsi')
+        $("#deskripsi").text(deskripsi)
+        $("#modal_deskripsi").modal('show')
        }
   </script>
   
@@ -307,6 +314,12 @@
                   <div class="form-group">
                       <label for="nama_barang" class="col-form-label">nama barang</label>
                       <input type="text" class="form-control " name="nama_barang" >
+                      <div class="invalid-feedback"></div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="deskripsi" class="col-form-label">deskripsi</label>
+                      <textarea class="form-control" name="deskripsi"></textarea>
                       <div class="invalid-feedback"></div>
                   </div>
                         
@@ -405,6 +418,22 @@
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
   <!-- End Bootstrap modal -->
+
+  <div class="modal fade" id="modal_deskripsi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5>Deskripsi</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body form">
+            <pre id="deskripsi"></pre>
+          </div>
+        </div>
+    </div>
+  </div>
       
 </body>
 

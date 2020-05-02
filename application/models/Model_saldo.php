@@ -11,6 +11,18 @@ class Model_saldo extends CI_Model {
 		$query = $this->db->get($this->table);
 		return $query->row();
     }
+
+    function getSaldoMitra()
+    {
+    	$query = $this->db->get_where($this->table, array('id' => 0));
+		return $query->row();	
+    }
+
+    function getSaldoOrderKuota()
+    {
+    	$query = $this->db->get_where($this->table, array('id' => 1));
+		return $query->row();	
+    }
     
     public function update($where, $data)
 	{

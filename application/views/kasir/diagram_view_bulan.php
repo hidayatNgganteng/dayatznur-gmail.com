@@ -241,7 +241,7 @@
                         'rgba(66, 133, 244, 0.1)'
                     ],
                     borderColor: [
-                        'rgba(15, 157, 88, 01)'
+                        'rgba(15, 157, 88, 1)'
                     ],
                     borderWidth: 1,
                     pointBorderWidth: 10,
@@ -268,12 +268,25 @@
                         'rgba(219, 68, 55, 0.1)'
                     ],
                     borderColor: [
-                        'rgba(219, 68, 55, 0.7)'
+                        'rgba(219, 68, 55, 1)'
                     ],
                     borderWidth: 1,
                     pointBorderWidth: 1,
                     pointHitRadius: 1,
                     pointHoverBorderColor: 'rgba(219, 68, 55, 1)'
+                },{
+                    label: 'Sedekah 2.5%',
+                    data: obj.map(item => item.neto * 2.5 / 100),
+                    backgroundColor: [
+                        'rgba(247, 202, 24, 0.1)'
+                    ],
+                    borderColor: [
+                        'rgba(247, 202, 24, 1)'
+                    ],
+                    borderWidth: 1,
+                    pointBorderWidth: 2,
+                    pointHitRadius: 2,
+                    pointHoverBorderColor: 'rgba(247, 202, 24, 1)'
                 }]
             },
             options: {

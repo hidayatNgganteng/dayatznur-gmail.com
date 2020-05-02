@@ -35,10 +35,12 @@ class Option extends CI_Controller {
 			
 			if($this->session->userdata('level') == 1 ){
 				$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_barang('."'".$barang->id_barang."'".')"><i class="far fa-edit"></i></a>
-				  	  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_barang('."'".$barang->id_barang."'".')"><i class="far fa-trash-alt"></i></a>';
+				  	  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_barang('."'".$barang->id_barang."'".')"><i class="far fa-trash-alt"></i></a>
+				  	  <a deskripsi="'.$barang->deskripsi.'" id="'.$barang->id_barang.'" class="btn btn-sm btn-info" href="javascript:void(0)" title="Info" onclick="open_deskripsi('."'".$barang->id_barang."'".')"><i class="far fa-comment"></i></a>';
 			}else{
 				$row[] = '<a class="btn btn-sm btn-warning disabled" href="javascript:void(0)" title="Edit" ><i class="far fa-edit"></i></a>
-				  	  <a class="btn btn-sm btn-danger disabled" href="javascript:void(0)" title="Hapus" ><i class="far fa-trash-alt"></i></a>';
+				  	  <a class="btn btn-sm btn-danger disabled" href="javascript:void(0)" title="Hapus" ><i class="far fa-trash-alt"></i></a>
+				  	  <a deskripsi="'.$barang->deskripsi.'" id="'.$barang->id_barang.'" class="btn btn-sm btn-info" href="javascript:void(0)" title="Info" onclick="open_deskripsi('."'".$barang->id_barang."'".')"><i class="far fa-comment"></i></a>';
 			}
 			$data[] = $row;
 		}
@@ -68,10 +70,12 @@ class Option extends CI_Controller {
 			
 			if($this->session->userdata('level') == 1 ){
 				$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_barang('."'".$barang->id_barang."'".')"><i class="far fa-edit"></i></a>
-				  	  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_barang('."'".$barang->id_barang."'".')"><i class="far fa-trash-alt"></i></a>';
+				  	  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_barang('."'".$barang->id_barang."'".')"><i class="far fa-trash-alt"></i></a>
+				  	  <a deskripsi="'.$barang->deskripsi.'" id="'.$barang->id_barang.'" class="btn btn-sm btn-info" href="javascript:void(0)" title="Info" onclick="open_deskripsi('."'".$barang->id_barang."'".')"><i class="far fa-comment"></i></a>';
 			}else{
 				$row[] = '<a class="btn btn-sm btn-warning disabled" href="javascript:void(0)" title="Edit" ><i class="far fa-edit"></i></a>
-				  	  <a class="btn btn-sm btn-danger disabled" href="javascript:void(0)" title="Hapus" ><i class="far fa-trash-alt"></i></a>';
+				  	  <a class="btn btn-sm btn-danger disabled" href="javascript:void(0)" title="Hapus" ><i class="far fa-trash-alt"></i></a>
+				  	  <a deskripsi="'.$barang->deskripsi.'" id="'.$barang->id_barang.'" class="btn btn-sm btn-info" href="javascript:void(0)" title="Info" onclick="open_deskripsi('."'".$barang->id_barang."'".')"><i class="far fa-comment"></i></a>';
 			}
 			$data[] = $row;
 		}
@@ -101,10 +105,12 @@ class Option extends CI_Controller {
 			
 			if($this->session->userdata('level') == 1 ){
 				$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_barang('."'".$barang->id_barang."'".')"><i class="far fa-edit"></i></a>
-				  	  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_barang('."'".$barang->id_barang."'".')"><i class="far fa-trash-alt"></i></a>';
+				  	  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_barang('."'".$barang->id_barang."'".')"><i class="far fa-trash-alt"></i></a>
+				  	  <a deskripsi="'.$barang->deskripsi.'" id="'.$barang->id_barang.'" class="btn btn-sm btn-info" href="javascript:void(0)" title="Info" onclick="open_deskripsi('."'".$barang->id_barang."'".')"><i class="far fa-comment"></i></a>';
 			}else{
 				$row[] = '<a class="btn btn-sm btn-warning disabled" href="javascript:void(0)" title="Edit" ><i class="far fa-edit"></i></a>
-				  	  <a class="btn btn-sm btn-danger disabled" href="javascript:void(0)" title="Hapus" ><i class="far fa-trash-alt"></i></a>';
+				  	  <a class="btn btn-sm btn-danger disabled" href="javascript:void(0)" title="Hapus" ><i class="far fa-trash-alt"></i></a>
+				  	  <a deskripsi="'.$barang->deskripsi.'" id="'.$barang->id_barang.'" class="btn btn-sm btn-info" href="javascript:void(0)" title="Info" onclick="open_deskripsi('."'".$barang->id_barang."'".')"><i class="far fa-comment"></i></a>';
 			}
 			$data[] = $row;
 		}
@@ -279,7 +285,8 @@ class Option extends CI_Controller {
   
   public function saldo_elektrik(){
     $this->load->model('model_saldo');
-    $data['data_saldo'] = $this->model_saldo->getSaldo();
+    $data['data_saldo_mitra'] = $this->model_saldo->getSaldoMitra();
+    $data['data_order_kuota'] = $this->model_saldo->getSaldoOrderKuota();
 
 		$this->load->view('kasir/saldo_view_elektrik', $data);
 	}
@@ -308,6 +315,7 @@ class Option extends CI_Controller {
 			'nama_barang' 		=> $this->input->post('nama_barang'),
 			'harga_beli' 		=> $this->input->post('harga_beli'),
 			'harga_jual' 		=> $this->input->post('harga_jual'),
+			'deskripsi' 		=> $this->input->post('deskripsi'),
 			'laba' 				=> $this->input->post('harga_jual')-$this->input->post('harga_beli'),
 			'satuan' 			=> $this->input->post('satuan'),
 			'setok' 			=> $this->input->post('setok'),
@@ -353,6 +361,7 @@ class Option extends CI_Controller {
 			'nama_barang' 		=> $this->input->post('nama_barang'),
 			'harga_beli' 		=> $this->input->post('harga_beli'),
 			'harga_jual' 		=> $this->input->post('harga_jual'),
+			'deskripsi' 		=> $this->input->post('deskripsi'),
 			'laba' 				=> $this->input->post('harga_jual')-$this->input->post('harga_beli'),
 			'satuan' 			=> $this->input->post('satuan'),
 			'setok' 			=> $this->input->post('setok'),

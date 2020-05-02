@@ -81,6 +81,7 @@
   <script src="<?php echo base_url() ?>assets/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
   <script>
       var table;
+      var lunasiHutangProses = false
       $(document).ready(function(){
           table = $('#tabelBarang').DataTable({
               "columnDefs": [
@@ -119,24 +120,30 @@
        }
 
        function lunasi_hutang(idHutang) {
-        var url = "<?php echo site_url('option/lunasi_hutang/') ?>" + idHutang;
+        if (!lunasiHutangProses) {
+          lunasiHutangProses = true
+          var url = "<?php echo site_url('option/lunasi_hutang/') ?>" + idHutang;
           
-        $.ajax({
-          url : url,
-          type: "POST",
-          dataType: "JSON",
-          success: function(data){
-            if(data.status) {
-              $('#modal_form').modal('hide');
-              reload_table();
-            } else {
-              alert('error');  
-            }            
-          },
-          error: function (jqXHR, textStatus, errorThrown){
-            alert('error');
-          }
-        });
+          $.ajax({
+            url : url,
+            type: "POST",
+            dataType: "JSON",
+            success: function(data){
+              lunasiHutangProses = false
+
+              if(data.status) {
+                $('#modal_form').modal('hide');
+                reload_table();
+              } else {
+                alert('error');  
+              }            
+            },
+            error: function (jqXHR, textStatus, errorThrown){
+              lunasiHutangProses = false
+              alert('error');
+            }
+          });
+        }
        }
       
   </script>
