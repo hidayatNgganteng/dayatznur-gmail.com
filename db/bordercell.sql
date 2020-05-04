@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 02, 2020 at 12:08 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.2.28
+-- Host: localhost
+-- Generation Time: May 04, 2020 at 02:17 AM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.1.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -243,8 +243,8 @@ CREATE TABLE `barang_elektrik` (
 --
 
 INSERT INTO `barang_elektrik` (`id`, `saldo`) VALUES
-(0, '457195'),
-(1, '500000');
+(0, '323625'),
+(1, '72605');
 
 -- --------------------------------------------------------
 
@@ -305,7 +305,8 @@ INSERT INTO `hutang_elektrik` (`id_hutang_elektrik`, `nama_brg`, `harga_beli`, `
 (20, 'Pulsa Telkomsel 10k - yu omah', 10450, 12000, '2020-05-02', '07:18:00', 'lunas'),
 (21, 'isi ulang data smarfren unlimited lite - temen zulfa', 47000, 50000, '2020-05-02', '07:24:00', 'lunas'),
 (22, 'Pulsa Telkomsel 20k- Alfi', 20029, 22000, '2020-05-02', '09:31:00', 'lunas'),
-(23, 'Pulsa xl 10k - fathur', 10815, 12000, '2020-05-02', '16:18:00', 'hutang');
+(23, 'Pulsa xl 10k - fathur', 10815, 12000, '2020-05-02', '16:18:00', 'hutang'),
+(24, 'Pulsa XL 10K - pakde nur', 10815, 12000, '2020-05-03', '11:59:00', 'hutang');
 
 -- --------------------------------------------------------
 
@@ -726,7 +727,8 @@ INSERT INTO `pengeluaran` (`id_pengeluaran`, `nama`, `nominal`, `date`, `time`) 
 (36, 'Serabikan My Mom', 10000, '2020-05-01', '07:52:00'),
 (37, 'isi saldo mitra + order quota', 350000, '2020-05-02', '10:39:00'),
 (38, 'sumbangan coviddd CHINA', 2000, '2020-05-02', '10:46:00'),
-(39, 'ISI SALDO ORDER KUOTA', 100000, '2020-05-02', '14:16:00');
+(39, 'ISI SALDO ORDER KUOTA', 100000, '2020-05-02', '14:16:00'),
+(40, 'Pak bos nyolong katanya buat jajan utun, tp kayaknya pak bos bohong', 110000, '2020-05-03', '12:03:00');
 
 -- --------------------------------------------------------
 
@@ -1046,7 +1048,7 @@ CREATE TABLE `saldo_fisik` (
 --
 
 INSERT INTO `saldo_fisik` (`id`, `saldo`) VALUES
-(1, 535800);
+(1, 425800);
 
 -- --------------------------------------------------------
 
@@ -1218,7 +1220,7 @@ ALTER TABLE `cookie`
 -- AUTO_INCREMENT for table `hutang_elektrik`
 --
 ALTER TABLE `hutang_elektrik`
-  MODIFY `id_hutang_elektrik` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_hutang_elektrik` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `login`
@@ -1236,7 +1238,7 @@ ALTER TABLE `pemasukan`
 -- AUTO_INCREMENT for table `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
-  MODIFY `id_pengeluaran` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_pengeluaran` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `penjualan`

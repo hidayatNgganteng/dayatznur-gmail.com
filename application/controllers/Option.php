@@ -135,10 +135,11 @@ class Option extends CI_Controller {
     $this->load->library('session'); 
     $this->load->model('model_saldo');
 
-    $data_saldo = $this->model_saldo->getSaldo();
+	$jenis_saldo = $this->input->post('jenis_saldo');
+    $data_saldo = $jenis_saldo == 'mitra' ? $this->model_saldo->getSaldoMitra() : $this->model_saldo->getSaldoOrderKuota();
 
     if ($this->input->post('harga_beli') > $data_saldo->saldo) {
-      $this->session->set_flashdata('error', "Saldo anda tidak mencukupi!!");
+      $this->session->set_flashdata('error', "Saldo ".$jenis_saldo." anda tidak mencukupi!!");
       $this->load->view('kasir/kasir_elektrik_view');
     } else if ($this->input->post('harga_beli') > $this->input->post('harga_jual')) {
       $this->session->set_flashdata('error', "Harga beli tidak boleh lebih dari harga jual!!");
@@ -166,7 +167,7 @@ class Option extends CI_Controller {
 
       // kurangi saldo
       $datasaldo =[ 'saldo' => $data_saldo->saldo - $this->input->post('harga_beli') ];
-	    $this->model_saldo->update(array('id' => 0), $datasaldo);
+	    $this->model_saldo->update(array('id' => $jenis_saldo == 'mitra' ? 0 : 1), $datasaldo);
 	  
       // tambah saldo fisik
       $this->ubah_saldo_fisik('tambah', $this->input->post('harga_jual'));
@@ -189,12 +190,13 @@ class Option extends CI_Controller {
     $this->load->model('model_saldo');
     $this->load->model('model_hutang');
 
-    $data_saldo = $this->model_saldo->getSaldo();
+	$jenis_saldo = $this->input->post('jenis_saldo');
+    $data_saldo = $jenis_saldo == 'mitra' ? $this->model_saldo->getSaldoMitra() : $this->model_saldo->getSaldoOrderKuota();
 
     if ($this->input->post('harga_beli') > $data_saldo->saldo) {
       echo json_encode([
         "status" => FALSE,
-        "message" => 'Saldo anda tidak mencukupi!!',
+        "message" => 'Saldo '.$jenis_saldo.' anda tidak mencukupi!!',
       ]);
     } else if ($this->input->post('harga_beli') > $this->input->post('harga_jual')) {
       echo json_encode([
@@ -219,7 +221,7 @@ class Option extends CI_Controller {
 
       // kurangi saldo
       $datasaldo =[ 'saldo' => $data_saldo->saldo - $this->input->post('harga_beli') ];
-	    $this->model_saldo->update(array('id' => 0), $datasaldo);
+	    $this->model_saldo->update(array('id' => $jenis_saldo == 'mitra' ? 0 : 1), $datasaldo);
 
       echo json_encode([
         "status" => TRUE,
@@ -277,7 +279,6 @@ class Option extends CI_Controller {
   
   public function saldo(){
     $this->load->model('model_saldo');
-    $data['data_saldo'] = $this->model_saldo->getSaldo();
     $data['data_saldo_fisik'] = $this->model_saldo->getSaldoFisik();
 
 		$this->load->view('kasir/saldo_view', $data);

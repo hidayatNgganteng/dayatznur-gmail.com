@@ -68,25 +68,35 @@
                     <div class="form-group row">
                       <label class="col-md-3 col-form-label"> Nama Produk</label>
                         <div class="col-md-9">
-                          <input class="form-control reset" type="text" id="nama_brg" name="nama_brg" placeholder="nama" >
+                          <input required class="form-control reset" type="text" id="nama_brg" name="nama_brg" placeholder="nama" >
                         </div>
                     </div>
                     
                     <div class="form-group row">
                       <label class="col-md-3 col-form-label"> Harga beli</label>
                         <div class="col-md-9">
-                          <input class="form-control reset" type="text" name="harga_beli" id="harga_beli"  placeholder="0">
+                          <input required class="form-control reset" type="text" name="harga_beli" id="harga_beli"  placeholder="0">
                         </div>
                     </div>
 
                     <div class="form-group row">
                       <label class="col-md-3 col-form-label"> Harga jual</label>
                         <div class="col-md-9">
-                          <input class="form-control reset" type="text" name="harga_jual" id="harga_jual"  placeholder="0">
+                          <input required class="form-control reset" type="text" name="harga_jual" id="harga_jual"  placeholder="0">
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-md btn-primary" id="input"> Selesai</button>
+                    <div class="form-group row">
+                      <label class="col-md-3 col-form-label"> Pilih saldo</label>
+                        <div class="col-md-9">
+                          <select required class="form-control" name="jenis_saldo" id="jenis_saldo">
+                            <option value="mitra">Mitra</option>
+                            <option value="orderkuota">Order Kuota</option>
+                          </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" onclick="if(confirm('Apakah sudah yakin ini bukan hutang?')){}else{return false;};" class="btn btn-md btn-primary" id="input"> Selesai</button>
                     <button type="button" onClick="hutang_save()" class="btn btn-md btn-warning" id="hutang"> Hutang</button>
                   </form>
               </div>
@@ -113,6 +123,11 @@
   <script src="<?php echo base_url() ?>assets/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
   <script>
     function hutang_save(){
+      if ($('#nama_brg').val() == '' || $('#harga_beli').val() == '' || $('#harga_jual').val() == '' || $('#jenis_saldo').val() == '') {
+        alert('Semua input harus diisi!!!')
+        return
+      }
+
       var url = "<?php echo site_url('option/hutang_simpan')?>";
       
       $.ajax({

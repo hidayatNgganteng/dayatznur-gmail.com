@@ -5,12 +5,6 @@ class Model_saldo extends CI_Model {
 	
 	var $table = 'barang_elektrik';
 	var $table_fisik = 'saldo_fisik';
-	
-	function getSaldo()
-	{
-		$query = $this->db->get($this->table);
-		return $query->row();
-    }
 
     function getSaldoMitra()
     {
