@@ -31,6 +31,8 @@ class Option extends CI_Controller {
 			$row[] = $barang->nama_barang;
 			$row[] = number_format($barang->harga_beli,0,".",".");
 			$row[] = number_format($barang->harga_jual,0,".",".");
+			$row[] = number_format($barang->harga_jual_online,0,".",".");
+			$row[] = number_format($barang->harga_jual_reseller,0,".",".");
 			$row[] = $barang->setok;
 			
 			if($this->session->userdata('level') == 1 ){
@@ -65,6 +67,8 @@ class Option extends CI_Controller {
 			$row[] = $barang->nama_barang;
 			$row[] = number_format($barang->harga_beli,0,".",".");
 			$row[] = number_format($barang->harga_jual,0,".",".");
+			$row[] = number_format($barang->harga_jual_online,0,".",".");
+			$row[] = number_format($barang->harga_jual_reseller,0,".",".");
 			
 			$row[] = $barang->setok;
 			
@@ -100,6 +104,8 @@ class Option extends CI_Controller {
 			$row[] = $barang->nama_barang;
 			$row[] = number_format($barang->harga_beli,0,".",".");
 			$row[] = number_format($barang->harga_jual,0,".",".");
+			$row[] = number_format($barang->harga_jual_online,0,".",".");
+			$row[] = number_format($barang->harga_jual_reseller,0,".",".");
 			
 			$row[] = $barang->setok;
 			
@@ -316,16 +322,14 @@ class Option extends CI_Controller {
 			'nama_barang' 		=> $this->input->post('nama_barang'),
 			'harga_beli' 		=> $this->input->post('harga_beli'),
 			'harga_jual' 		=> $this->input->post('harga_jual'),
+			'harga_jual_online' 		=> $this->input->post('harga_jual_online'),
+			'harga_jual_reseller' 		=> $this->input->post('harga_jual_reseller'),
 			'deskripsi' 		=> $this->input->post('deskripsi'),
 			'laba' 				=> $this->input->post('harga_jual')-$this->input->post('harga_beli'),
+			'laba_online' 				=> $this->input->post('harga_jual_online')-$this->input->post('harga_beli'),
+			'laba_reseller' 				=> $this->input->post('harga_jual_reseller')-$this->input->post('harga_beli'),
 			'satuan' 			=> $this->input->post('satuan'),
-			'setok' 			=> $this->input->post('setok'),
-			'mulai_promo' 		=> $this->input->post('mulai_promo'),
-			'ahir_promo' 		=> $this->input->post('ahir_promo'),
-			'jenis_promo' 		=> $this->input->post('jenis_promo'),
-			'potongan' 			=> $this->input->post('potongan'),
-			'harga_ahir' 		=> $this->input->post('harga_ahir'),
-			'setatus_promo' 	=> $this->input->post('setatus_promo'),
+			'setok' 			=> $this->input->post('setok')
 		];
 		$this->model_barang->update(array('id_barang' => $this->input->post('id')), $data);
 		echo json_encode(array("status" => TRUE));
@@ -362,16 +366,14 @@ class Option extends CI_Controller {
 			'nama_barang' 		=> $this->input->post('nama_barang'),
 			'harga_beli' 		=> $this->input->post('harga_beli'),
 			'harga_jual' 		=> $this->input->post('harga_jual'),
+			'harga_jual_online' 		=> $this->input->post('harga_jual_online'),
+			'harga_jual_reseller' 		=> $this->input->post('harga_jual_reseller'),
 			'deskripsi' 		=> $this->input->post('deskripsi'),
 			'laba' 				=> $this->input->post('harga_jual')-$this->input->post('harga_beli'),
+			'laba_online' 				=> $this->input->post('harga_jual_online')-$this->input->post('harga_beli'),
+			'laba_reseller' 				=> $this->input->post('harga_jual_reseller')-$this->input->post('harga_beli'),
 			'satuan' 			=> $this->input->post('satuan'),
 			'setok' 			=> $this->input->post('setok'),
-			'mulai_promo' 		=> $this->input->post('mulai_promo'),
-			'ahir_promo' 		=> $this->input->post('ahir_promo'),
-			'jenis_promo' 		=> $this->input->post('jenis_promo'),
-			'potongan' 			=> $this->input->post('potongan'),
-			'harga_ahir' 		=> $this->input->post('harga_ahir'),
-			'setatus_promo' 	=> $this->input->post('setatus_promo'),
 		];
 		$insert = $this->model_barang->save($data);
 		echo json_encode(array("status" => TRUE));
@@ -497,76 +499,6 @@ class Option extends CI_Controller {
 		echo json_encode( $data);
 	}
 	
-	public function add_keranjang(){
-		$data = [
-			'id' => $this->input->post('id'),
-			'name' => str_replace(array('-', ',', '.', '+','(',')','%','&','/'), '_', $this->input->post('nama')),
-			'jenis' => $this->input->post('jenis_promo'),
-			'potongan' => $this->input->post('potongan'),
-			'harga_potongan' => $this->input->post('harga_potongan'),
-			'price' => str_replace('.', '', $this->input->post('harga')),
-			'qty' => $this->input->post('qty')
-		];
-		
-		$insert = $this->cart->insert($data);
-		echo json_encode(["status" => TRUE, "data" => $data]);
-		
-		
-		
-	}
-	
-	public function list_transaksi(){
-		$data = [];
-		$no = 1; 
-        foreach ($this->cart->contents() as $items){
-			$row = [];
-			$row[] = $no;
-			$row[] = $items["name"];
-			if($items["jenis"] == "minimal"){
-				$row[] = "min";
-			}else{
-				$row[] = "dis";
-			}
-			//$row[] = $items["jenis"];
-			$row[] = $items["potongan"];
-			$row[] = $items["harga_potongan"];
-			$row[] = 'Rp. ' . number_format( $items['price'], 0 , '' , '.' ) . ',-';
-			$row[] = $items["qty"];
-			//$row[] = 'Rp. ' . number_format( $items['subtotal'], 0 , '' , '.' ) . ',-';
-			//$row[] = 'Rp. ' . number_format( $items['qty'] * $items['price'], 0 , '' , '.' ) . ',-';
-			if($items["jenis"] == 'minimal'){
-				$induk = floor($items["qty"] / $items["potongan"]);
-				$sisa = $items["qty"] % $items["potongan"];
-				$sub = ($induk * $items["harga_potongan"]) + ($items['price'] * $sisa);
-				$row[] = 'Rp. ' . number_format( $sub, 0 , '' , '.' ) . ',-';
-			}else{
-				$diskon = $items['qty'] * ($items['price'] - ($items['price'] * $items['potongan']/100));
-				$row[] = 'Rp. ' . number_format( $diskon, 0 , '' , '.' ) . ',-';
-			}
-			//add html for action
-			$row[] = '<a 
-				href="javascript:void()" style="color:rgb(255,128,128);
-				text-decoration:none" onclick="deletebarang('
-					."'".$items["rowid"]."'".','."'".$items['subtotal'].
-					"'".')"> <i class="fas fa-times"></i></a>';
-			$data[] = $row;
-			$no++;
-        }
-		$output = [
-			"data" => $data,
-		];
-		//$this->auto_update();
-		echo json_encode($output);
-	}
-	
-	public function auto_update(){
-		$tgl = date('Y-m-d');
-		$data=['sstatus_promo'=> 0];
-		$this->db->where('ahir_promo <',$tgl);
-	    $this->db->update('barang', $data );
-	    return true;
-	}
-	
 	public function cetak_nota(){
 		$this->load->model('model_toko');
 		$bayar = $this->input->post('bayar');
@@ -632,6 +564,7 @@ class Option extends CI_Controller {
 			'harga_brg' => $harga,
 			'total_harga' => $harga * $quantity,
 			'tgl_transaksi' => date('Y-m-d'),
+			'type_penjualan' => $this->input->post('type_penjualan'),
 			'waktu' => $waktu
 		];
 
@@ -702,6 +635,7 @@ class Option extends CI_Controller {
 			$row[] = $barang->nama_brg;
 			$row[] = $barang->jumlah;
 			$row[] = $barang->total_harga;
+			$row[] = $barang->type_penjualan;
 			$row[] = $barang->tgl_transaksi.' '.$barang->waktu;
 			$data[] = $row;
 		}

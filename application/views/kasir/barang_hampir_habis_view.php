@@ -46,9 +46,11 @@
                   <th>no</th>
                   <th>Nama</th>
                   <th>H beli</th>
-                  <th>H jual</th>
+                  <th>HJ offline</th>
+                  <th>HJ online</th>
+                  <th>HJ reseller</th>
                   <th>Stok</th>
-                  <th>Action</th>
+                  <th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -120,6 +122,27 @@
               "responsive": true,
               });
           //  new $.fn.dataTable.FixedHeader( table );
+
+          $("#harga_jual, #harga_beli").keyup(function() {
+            const harga_beli = $("#harga_beli").val()
+            const harga_jual = $("#harga_jual").val()
+
+            if (harga_beli != "" && harga_jual != "") {
+              const neto = harga_jual - harga_beli
+              const neto75 = 75 * neto / 100
+              const neto50 = 35 * neto / 100
+              const harga_online = Number(harga_beli) + Number(neto75)
+              const harga_reseller = Number(harga_beli) + Number(neto50)
+
+              $("#harga_jual_online_rekomendasi").text(`Rekomendasi: ${harga_online}`)
+              $("#harga_jual_reseller_rekomendasi").text(`Rekomendasi: ${harga_reseller}`)
+            } else {
+              $("#harga_jual_online_rekomendasi").text("")
+              $("#harga_jual_reseller_rekomendasi").text("")
+
+            }
+          })
+          
        });
        
        function reload_table()
@@ -134,27 +157,6 @@
           $('.modal-title').text('Input barang');
           $('#modal_form').modal('show'); 
       }
-      
-      $(function(){
-          $("#jenis_promo").change(function(){
-              if($(this).val() =="minimal")
-              {
-                  $("#harga_ahir").removeClass('d-none');
-                  $("#potongan").attr("placeholder", "minimal beli");
-                  $(".reset").val("");
-              }
-              else
-              {
-                  $("#harga_ahir").addClass('d-none');
-                  $("#potongan").attr("placeholder", "(%)");
-                  $(".reset").val("");
-              }
-              });
-          
-          tanggal();
-          
-          
-          });
           
        function save()
        {
@@ -198,26 +200,6 @@
            });
        }
        
-       function tanggal()
-       {
-           $('[data-toggle="mulai_promo"]').datepicker({
-               dateFormat: "yy-mm-dd",
-               onSelect: function (selected) {
-                   var dt = new Date(selected);
-                   dt.setDate(dt.getDate() + 1);
-                   $('[data-toggle="ahir_promo"]').datepicker("option", "minDate", dt);
-                   }
-               });
-           $('[data-toggle="ahir_promo"]').datepicker({
-               dateFormat: "yy-mm-dd",
-               onSelect: function (selected) {
-                   var dt = new Date(selected);
-                   dt.setDate(dt.getDate() - 1);
-                   $('[data-toggle="mulai_promo"]').datepicker("option", "maxDate", dt);
-                   }
-               });
-       }
-       
        function delete_barang(id)
        {
          if(confirm('yakin ingin di hapus?')){
@@ -254,21 +236,15 @@
                    $('[name="nama_barang"]').val(data.nama_barang);
                    $('[name="harga_beli"]').val(data.harga_beli);
                    $('[name="harga_jual"]').val(data.harga_jual);
+                   $('[name="harga_jual_online"]').val(data.harga_jual_online);
+                   $('[name="harga_jual_reseller"]').val(data.harga_jual_reseller);
                    $('[name="deskripsi"]').val(data.deskripsi);
                    $('[name="setok"]').val(data.setok);
                    $('[name="satuan"]').val(data.satuan);
-                   $('[name="mulai_promo"]').val(data.mulai_promo);
-                   $('[name="ahir_promo"]').val(data.ahir_promo);
-                   $('[name="jenis_promo"]').val(data.jenis_promo);
-                   $('[name="potongan"]').val(data.potongan);
-                   $('[name="harga_ahir"]').val(data.harga_ahir);
-                   $('[name="setatus_promo"]').val(data.setatus_promo);
+                   $("#harga_jual_online_rekomendasi").text("")
+                   $("#harga_jual_reseller_rekomendasi").text("")
                    $('#modal_form').modal('show');
                    $('.modal-title').text('Edit barang');
-                   if(data.jenis_promo == 'minimal')
-                   {
-                       $("#harga_ahir").removeClass('d-none');
-                   }
                },
                error: function (jqXHR, textStatus, errorThrown)
                {
@@ -325,13 +301,25 @@
                         
                   <div class="form-group">
                     <label for="harga_beli" class="col-form-label">harga beli</label>
-                    <input type="number" class="form-control" name="harga_beli" >
+                    <input type="number" class="form-control" name="harga_beli"  id="harga_beli">
                     <div class="invalid-feedback"></div>
                   </div>
                        
                   <div class="form-group">
                     <label for="harga_jual" class="col-form-label">harga jual</label>
-                    <input type="number" class="form-control " name="harga_jual"  >
+                    <input type="number" class="form-control " name="harga_jual" id="harga_jual">
+                    <div class="invalid-feedback"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="harga_jual_online" class="col-form-label">harga jual online <span style="color: red" id="harga_jual_online_rekomendasi"></span></label>
+                    <input type="number" class="form-control" name="harga_jual_online" >
+                    <div class="invalid-feedback"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="harga_jual_reseller" class="col-form-label">harga jual reseller <span style="color: red" id="harga_jual_reseller_rekomendasi"></span></label>
+                    <input type="number" class="form-control" name="harga_jual_reseller" >
                     <div class="invalid-feedback"></div>
                   </div>
                        
@@ -354,55 +342,6 @@
                     </select>
                     <div class="invalid-feedback"></div>
                   </div>
-                        
-                  <p>
-                    <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">promo</button>
-                  </p>
-
-                  <div class="collapse" id="collapseExample">
-                    <div class="card card-body">
-                                
-                      <div class="form-row mb-4">
-                        <div class="col">
-                          <label for="mulai_promo">awal promo</label>
-                          <input type="text" class="form-control" name="mulai_promo" data-toggle="mulai_promo" placeholder="tgl mulai">
-                        </div>
-                        <div class="col">
-                          <label for="ahir_promo">ahir promo</label>
-                          <input type="text" class="form-control" name="ahir_promo"  id="ahir_promo" data-toggle="ahir_promo" placeholder="tgl ahir">
-                        </div>
-                      </div>
-                               
-                      <div class="form-row mb-4">
-                        <div class="col">
-                          <label for="jenis_promo">jenis promo</label>
-                          <select class="form-control " name="jenis_promo" id="jenis_promo" >
-                            <option value="diskon">diskon</option>
-                            <option value="minimal">minimal</option>
-                          </select>
-                        </div>
-                        <div class="col">
-                          <label for="potongan">potongan</label>
-                          <input type="number" class="form-control reset" name="potongan"  id="potongan" data-toggle="min" placeholder="(%)">
-                        </div>
-                      </div>
-                              
-                      <div class="form-group d-none reset" id="harga_ahir">
-                        <label for="diskon">harga ahir</label>
-                        <input type="number" name="harga_ahir" id="diskon" class="form-control" placeholder="harga ahir">
-                      </div>
-                              
-                      <div class="form-group mt-2">
-                        <label for="setatus_promo">setatus promo</label>
-                        <select class="form-control " name="setatus_promo" >
-                          <option value="0">habis</option>
-                          <option value="1">aktif</option>
-                        </select>
-                      </div>
-                              
-                    </div><!--card card-body-->
-                  </div><!--collapse-->
-           
                 </div><!--form body-->
 
               </form>

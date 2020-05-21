@@ -44,6 +44,7 @@
 						<th>Nama</th>
             <th>Qty</th>
 						<th>Bayar</th>
+            <th>Type penjualan</th>
 						<th>Waktu</th>
 					</tr>
 				</thead>
@@ -51,7 +52,7 @@
         </tbody>
         <tfoot>
           <tr>
-            <th colspan="4" style="text-align:right">Total:</th>
+            <th colspan="5" style="text-align:right">Total:</th>
             <th></th>
           </tr>
         </tfoot>
@@ -90,12 +91,12 @@
           table = $('#tabelBarang').DataTable({
               "columnDefs": [
               {
-                  "targets": [ 0,1,2,3,4 ],
+                  "targets": [ 0,1,2,3,4,5 ],
                   "orderable": false,
               },
               ],
               "rowCallback": function( row, data, dataIndex){
-                const inputData = data[4].split(" ")[0]
+                const inputData = data[5].split(" ")[0]
                 const d = new Date(),
                     month = `${d.getMonth() + 1}`.padStart(2, '0'),
                     day = `${d.getDate()}`.padStart(2, '0'),

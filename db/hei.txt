@@ -1,0 +1,19 @@
+#tambah di tabel barang
+harga_jual_online
+harga_jual_reseller
+laba_online
+laba_reseller
+
+
+
+#hapus di tabel barang
+mulai_promo
+ahir_promo
+jenis_promo
+potongan
+setatus_promo
+harga_akhir
+
+
+#tambah di tabel penjualan
+type_penjualan

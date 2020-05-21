@@ -77,7 +77,7 @@
             <p>Total hari: <b id="total_hari"></b></p>
             <p>Total produk terjual: <b id="total_produk_terjual"></b></p>
             <p>Total keuntungan: <b id="total_keuntungan"></b></p>
-            <p>Sedekah 2.5%: <b id="total_sedekah"></b></p>
+            <p>Sedekah 10%: <b id="total_sedekah"></b></p>
             <p>Rata-rata keuntungan / hari: <b id="rata_rata"></b></p>
           </div>
           
@@ -142,7 +142,10 @@
                     if (dataSend.length == 0) {
                       dataSend = [{
                         tgl_transaksi: item.tgl_transaksi,
-                        neto: handleNeto(item)
+                        neto: handleNeto(item),
+                        nettoOnline: item.type_penjualan == 'online' ? handleNetoNoOffline(item) : 0,
+                        nettoReseller: item.type_penjualan == 'reseller' ? handleNetoNoOffline(item) : 0,
+                        nettoOffline: item.type_penjualan == 'offline' ? handleNeto(item) : 0
                       }]
                     } else {
                       const searchIndata = dataSend.find(i => i.tgl_transaksi == item.tgl_transaksi)
@@ -150,12 +153,21 @@
                       if (searchIndata == undefined) {
                         dataSend = [...dataSend, {
                           tgl_transaksi: item.tgl_transaksi,
-                          neto: handleNeto(item)
+                          neto: handleNeto(item),
+                          nettoOnline: item.type_penjualan == 'online' ? handleNetoNoOffline(item) : 0,
+                          nettoReseller: item.type_penjualan == 'reseller' ? handleNetoNoOffline(item) : 0,
+                          nettoOffline: item.type_penjualan == 'offline' ? handleNeto(item) : 0
                         }]
                       } else {
                         dataSend = dataSend.map(e => {
                           if (e.tgl_transaksi == item.tgl_transaksi) {
-                            return {...e, neto: e.neto + handleNeto(item)}
+                            return {
+                              ...e,
+                              neto: e.neto + handleNeto(item),
+                              nettoOnline: e.nettoOnline + (item.type_penjualan == 'online' ? handleNetoNoOffline(item) : 0),
+                              nettoReseller: e.nettoReseller + (item.type_penjualan == 'reseller' ? handleNetoNoOffline(item) : 0),
+                              nettoOffline: e.nettoOffline + (item.type_penjualan == 'offline' ? handleNeto(item) : 0)
+                            }
                           } else {
                             return e
                           }
@@ -181,7 +193,7 @@
                   $("#total_produk_terjual").text(obj.length)
                   $("#total_hari").text(dataSend.length)
                   $("#total_keuntungan").text(`Rp. ${toIdrFormat(totalKeuntungan)}`)
-                  $("#total_sedekah").text(`Rp. ${toIdrFormat(totalKeuntungan * 2.5 / 100)}`)
+                  $("#total_sedekah").text(`Rp. ${toIdrFormat(totalKeuntungan * 10 / 100)}`)
                   $("#rata_rata").text(`Rp. ${toIdrFormat(totalKeuntungan / dataSend.length)}`)
 
                   diagram(dataSend);
@@ -199,6 +211,10 @@
         } else {
           return item.total_harga - item.harga_beli
         }
+      }
+
+      function handleNetoNoOffline(item) {
+        return item.total_harga - item.harga_beli
       }
 
       function toIdrFormat(nominal) {
@@ -230,7 +246,10 @@
                     if (dataSend.length == 0) {
                       dataSend = [{
                         tgl_transaksi: item.tgl_transaksi,
-                        neto: handleNeto(item)
+                        neto: handleNeto(item),
+                        nettoOnline: item.type_penjualan == 'online' ? handleNetoNoOffline(item) : 0,
+                        nettoReseller: item.type_penjualan == 'reseller' ? handleNetoNoOffline(item) : 0,
+                        nettoOffline: item.type_penjualan == 'offline' ? handleNeto(item) : 0
                       }]
                     } else {
                       const searchIndata = dataSend.find(i => i.tgl_transaksi == item.tgl_transaksi)
@@ -238,12 +257,21 @@
                       if (searchIndata == undefined) {
                         dataSend = [...dataSend, {
                           tgl_transaksi: item.tgl_transaksi,
-                          neto: handleNeto(item)
+                          neto: handleNeto(item),
+                          nettoOnline: item.type_penjualan == 'online' ? handleNetoNoOffline(item) : 0,
+                          nettoReseller: item.type_penjualan == 'reseller' ? handleNetoNoOffline(item) : 0,
+                          nettoOffline: item.type_penjualan == 'offline' ? handleNeto(item) : 0
                         }]
                       } else {
                         dataSend = dataSend.map(e => {
                           if (e.tgl_transaksi == item.tgl_transaksi) {
-                            return {...e, neto: e.neto + handleNeto(item)}
+                            return {
+                              ...e,
+                              neto: e.neto + handleNeto(item),
+                              nettoOnline: e.nettoOnline + (item.type_penjualan == 'online' ? handleNetoNoOffline(item) : 0),
+                              nettoReseller: e.nettoReseller + (item.type_penjualan == 'reseller' ? handleNetoNoOffline(item) : 0),
+                              nettoOffline: e.nettoOffline + (item.type_penjualan == 'offline' ? handleNeto(item) : 0)
+                            }
                           } else {
                             return e
                           }
@@ -264,12 +292,11 @@
                       }
                     })
                   }
-                  console.log("totalKeuntungan", totalKeuntungan)
 
                   $("#total_produk_terjual").text(obj.length)
                   $("#total_hari").text(dataSend.length)
                   $("#total_keuntungan").text(`Rp. ${toIdrFormat(totalKeuntungan)}`)
-                  $("#total_sedekah").text(`Rp. ${toIdrFormat(totalKeuntungan * 2.5 / 100)}`)
+                  $("#total_sedekah").text(`Rp. ${toIdrFormat(totalKeuntungan * 10 / 100)}`)
                   $("#rata_rata").text(`Rp. ${toIdrFormat(totalKeuntungan / dataSend.length)}`)
 
                   diagram(dataSend);
@@ -301,6 +328,8 @@
           return
         }
 
+        console.log("obj", obj)
+
         if (myChart) {
           myChart.destroy();
         }
@@ -314,20 +343,6 @@
                   return d.getDate()
                 }),
                 datasets: [{
-                    label: `${getNameMonth(obj[0].tgl_transaksi)} ${getNameYear(obj[0].tgl_transaksi)}`,
-                    data: obj.map(item => item.neto),
-                    backgroundColor: [
-                        'rgba(66, 133, 244, 0.1)'
-                    ],
-                    borderColor: [
-                        'rgba(15, 157, 88, 1)'
-                    ],
-                    borderWidth: 1,
-                    pointBorderWidth: 10,
-                    pointHitRadius: 20,
-                    pointHoverBorderColor: 'rgba(15, 157, 88, 1)'
-                },
-                {
                     label: `Target`,
                     data: obj.map(item => {
                       const tgltahun = `${getNameMonth(obj[0].tgl_transaksi)} ${getNameYear(obj[0].tgl_transaksi)}`
@@ -345,29 +360,71 @@
                       }
                     }),
                     backgroundColor: [
-                        'rgba(219, 68, 55, 0.1)'
+                        'rgba(180, 234, 186 , 0.1)'
                     ],
                     borderColor: [
-                        'rgba(219, 68, 55, 1)'
+                        'rgba(180, 234, 186 , 1)'
                     ],
                     borderWidth: 1,
                     pointBorderWidth: 1,
                     pointHitRadius: 1,
-                    pointHoverBorderColor: 'rgba(219, 68, 55, 1)'
+                    pointHoverBorderColor: 'rgba(180, 234, 186 , 1)'
                 },
                 {
-                    label: `Sedekah 2.5%`,
-                    data: obj.map(item => item.neto * 2.5 / 100),
+                    label: `Total`,
+                    data: obj.map(item => item.neto),
                     backgroundColor: [
-                        'rgba(247, 202, 24, 0.1)'
+                        'rgba(66, 133, 244, 0.1)'
                     ],
                     borderColor: [
-                        'rgba(247, 202, 24, 1)'
+                        'rgba(15, 157, 88, 1)'
                     ],
                     borderWidth: 1,
-                    pointBorderWidth: 2,
-                    pointHitRadius: 2,
-                    pointHoverBorderColor: 'rgba(247, 202, 24, 1)'
+                    pointBorderWidth: 3,
+                    pointHitRadius: 5,
+                    pointHoverBorderColor: 'rgba(15, 157, 88, 1)'
+                },
+                {
+                    label: `Offline`,
+                    data: obj.map(item => item.nettoOffline),
+                    backgroundColor: [
+                        'rgba(5, 67, 197 , 0.1)'
+                    ],
+                    borderColor: [
+                        'rgba(5, 67, 197 , 1)'
+                    ],
+                    borderWidth: 1,
+                    pointBorderWidth: 5,
+                    pointHitRadius: 7,
+                    pointHoverBorderColor: 'rgba(5, 67, 197 , 1)'
+                },
+                {
+                    label: `Online`,
+                    data: obj.map(item => item.nettoOnline),
+                    backgroundColor: [
+                        'rgba(204, 35, 12 , 0.1)'
+                    ],
+                    borderColor: [
+                        'rgba(204, 35, 12 , 1)'
+                    ],
+                    borderWidth: 1,
+                    pointBorderWidth: 7,
+                    pointHitRadius: 9,
+                    pointHoverBorderColor: 'rgba(204, 35, 12 , 1)'
+                },
+                {
+                    label: `Reseller`,
+                    data: obj.map(item => item.nettoReseller),
+                    backgroundColor: [
+                        'rgba(115, 5, 197  , 0.1)'
+                    ],
+                    borderColor: [
+                        'rgba(115, 5, 197  , 1)'
+                    ],
+                    borderWidth: 1,
+                    pointBorderWidth: 9,
+                    pointHitRadius: 11,
+                    pointHoverBorderColor: 'rgba(115, 5, 197  , 1)'
                 }]
             },
             options: {

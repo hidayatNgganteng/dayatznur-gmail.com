@@ -58,10 +58,22 @@
 
                         <form class="form-horizontal" action="<?= site_url() ?>option/shoping" method="post" id="form_transaksi" role="form">
 
+                          <div class="form-group row">
+                            <label class="col-md-3 col-form-label"> Type penjualan</label>
+                              <div class="col-md-9">
+                                <select required class="form-control" name="type_penjualan" id="type_penjualan">
+                                  <option value="" selected>Pilih dulu coy!</option>
+                                  <option value="offline">Offline</option>
+                                  <option value="online">Online</option>
+                                  <option value="reseller">Reseller</option>
+                                </select>
+                              </div>
+                          </div>
+
                             <div class="form-group row">
                               <label class="col-md-3 col-form-label">id/nama (f2)</label>
                                 <div class="col-md-9">
-                                  <input class="form-control reset" id="pencarian"  name="id" type="text" placeholder="id / nama" >
+                                  <input class="form-control reset" id="pencarian" readonly  name="id" type="text" placeholder="id / nama" >
                                 </div>
                             </div>
                             
@@ -78,10 +90,6 @@
                                   <input class="form-control reset" type="text" name="harga" id="harga"  readonly="" placeholder="0"value="">
                                 </div>
                             </div>
-							
-                              <input type="hidden" class="reset" id="jenis_promo" name="jenis_promo">
-                              <input type="hidden" class="reset" id="potongan" name="potongan">
-                              <input type="hidden" class="reset" id="harga_potongan" name="harga_potongan">
                                 
                             <div class="form-group row">
                               <label class="col-md-3 col-form-label">qty</label>
@@ -89,30 +97,12 @@
                                   <input class="form-control reset" type="number" readonly="readonly" id="qty" min="0" name="qty" placeholder="qty">
                                 </div>
                             </div>
+
                             <button type="submit" class="btn btn-md btn-primary"> Selesai</button>
                         </form>
                     </div>
                 </div>
             </div>
-			
-              <!-- <table id="tabelBarang" class="table table-striped table-bordered nowrap" style="width:100%">
-                <thead>
-                  <tr>
-                    <th>no</th>
-                    <th>Nama</th>
-                    <th>jns</th>
-                    <th>ptg</th>
-                    <th>hrg ptg</th>
-                    <th>Harga</th>
-                    <th>Qty</th>
-                    <th>Sub total</th>
-                    <th>opsi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-			      <button type="button" class="btn btn-md btn-primary" id="selesai" disabled="disabled" >selesai </button> -->
         </div>
         <!-- /.container-fluid -->
 
@@ -139,126 +129,25 @@
   <script src="<?php echo base_url() ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
   <script src="<?php echo base_url() ?>assets/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
   <script>
-      var table;
       $(document).ready(function(){
-          table = $('#tabelBarang').DataTable({
-              paging: false,
-              "info": false,
-              "searching": false,
-              "ajax": {
-                  "url": "http://localhost/bordercell/option/list_transaksi",
-                  "type": "POST"
-                  },
-              "columnDefs": [
-              {
-                  "targets": [ 2,3,4,5,6,7,8 ],
-                  "orderable": false,
-              },
-              ],
-              });
-           
-           $('#pencarian').focus();
+          $("#type_penjualan").change(function() {
+            if ($(this).val() == '') {
+              $("#pencarian").attr('readonly', true).val('')
+              $("#nama_barang").attr('readonly', true).val('')
+              $("#harga").attr('readonly', true).val('')
+              $("#qty").attr('readonly', true).val('')
+            } else {
+              $("#pencarian").attr('readonly', false).val('')
+              $("#nama_barang").attr('readonly', false).val('')
+              $("#harga").attr('readonly', false).val('')
+              $("#qty").attr('readonly', false).val('')
+            }
+          })
        });
        
        function reload_table(){
            table.ajax.reload(null,false);
        }
-       
-      function subTotal(qty){
-          var harga = $('#harga').val().replace(".", "").replace(".", "");
-          var promo = $('#jenis_promo').val();
-          var potongan = $('#potongan').val();
-          var hrg_potong = $('#harga_potongan').val();
-          if(promo == 'minimal'){
-              var induk = Math.floor(qty / potongan);
-              var sisa = qty% potongan;
-              var sub = (induk*hrg_potong)+(harga*sisa);
-              $('#sub_total').val(convertToRupiah(sub));
-              $('#tambah').removeAttr("disabled");
-          }else{
-              var diskon = harga - (harga*potongan/100);
-              $('#sub_total').val(convertToRupiah(diskon*qty));
-              $('#tambah').removeAttr("disabled");
-          }
-          
-      }
-      
-      function addbarang(){
-          var id = $('#id').val();
-          var qty = $('#qty').val();
-          $.ajax({
-              url : "http://localhost/bordercell/option/add_keranjang",
-              type: "POST",
-              data: $('#form_transaksi').serialize(),
-              dataType: "JSON",
-              success: function(data){
-				  console.log("data", data)
-                  reload_table();
-                  $('#tambah').attr("disabled","disabled");
-                  $('#qty').attr("readonly","readonly");
-                  $('#bayar').focus();
-              },
-              error: function (jqXHR, textStatus, errorThrown){
-                  alert('Error adding data');
-              }
-          });
-          showTotal();
-          showKembali($('#bayar').val());
-          $('.reset').val('');
-      }
-      
-      document.onkeydown = function(e){
-        var q = $('#qty').val();
-        var byr = $('#bayar').val();
-        if(q !==''){
-          switch(e.keyCode){
-          case 13:
-          addbarang();
-          break;
-        }
-        }
-
-        if(byr !==''){
-          switch(e.keyCode){
-          case 13:
-          selesai();
-          break;
-        }
-        }
-      // 113 f2
-      // 37 kiri 38 atas 39 kanan 40 bawah
-      switch(e.keyCode){
-        case 113:
-        $('#pencarian').focus();
-        break;
-      }
-      };
-      
-      function showTotal(){
-          var total = $('#total').val().replace(".", "").replace(".", "");
-          var sub_total = $('#sub_total').val().replace(".", "").replace(".", "");
-          $('#total').val(convertToRupiah((Number(total)+Number(sub_total))));
-      }
-      
-      function showKembali(str)
-      {
-          var total = $('#total').val().replace(".", "").replace(".", "");
-          var bayar = str.replace(".", "").replace(".", "");
-          var kembali = bayar-total;
-          $('#kembali').val(convertToRupiah(kembali));
-          if (kembali >= 0)
-          {
-              $('#selesai').removeAttr("disabled");
-          }
-          else
-          {
-              $('#selesai').attr("disabled","disabled");
-          }
-          if (total == 0)
-          {
-              $('#selesai').attr("disabled","disabled");
-          }
-  	}
     	
       function convertToRupiah(angka)
       {
@@ -274,7 +163,6 @@
                 minLength: 1,
                 delay : 400,
                 source: function(request, response) { 
-
                     jQuery.ajax({
                         url:      "http://localhost/bordercell/option/cari_barang",
                         data: {
@@ -286,15 +174,23 @@
                         }   
                     })
                 },
+
                 select:  function(e, ui){
                     var nama = ui.item.nama_barang;
                     var code = ui.item.id_barang;
+                    const typePenjualan = $("#type_penjualan").val()
+                    
                     $("#pencarian").val(code);
                     $("#nama_barang").val(nama);
-                    $("#harga").val(convertToRupiah(ui.item.harga_jual));
-                    $("#jenis_promo").val(ui.item.jenis_promo);
-                    $("#potongan").val(ui.item.potongan);
-                    $("#harga_potongan").val(ui.item.harga_ahir);
+                    
+                    if (typePenjualan == 'offline') {
+                      $("#harga").val(convertToRupiah(ui.item.harga_jual));
+                    } else if (typePenjualan == 'online') {
+                      $("#harga").val(convertToRupiah(ui.item.harga_jual_online));
+                    } else {
+                      $("#harga").val(convertToRupiah(ui.item.harga_jual_reseller));
+                    }
+
                     $('#qty').removeAttr("readonly");
                     $('#qty').focus();
                     return false;
@@ -305,108 +201,8 @@
                .append( "<a>" + item.id_barang + " " + item.nama_barang + "</a>" )
                .appendTo( ul );
             };
-        });
-        
-        $('#selesai').click(function(){
-          cetak_struk();
-            // var bayar=$('#bayar').val();
-            // var kembali=$('#kembali').val();
-            // $.ajax({
-            //     url:"http://localhost/bordercell/option/cetak_nota/",
-            //     data:{bayar:bayar,kembali:kembali},
-            //     method:"POST",
-            //     success:function(data){
-            //         $('#modalNota').modal('show');
-            //         $('#isiModal').html(data);
-            //         }
-            //     });
-        });
-
-        function selesai()
-        {
-          var bayar=$('#bayar').val();
-            var kembali=$('#kembali').val();
-            $.ajax({
-                url:"http://localhost/bordercell/option/cetak_nota/",
-                data:{bayar:bayar,kembali:kembali},
-                method:"POST",
-                success:function(data){
-                    $('#modalNota').modal('show');
-                    $('#isiModal').html(data);
-                    }
-                });
-        }
-		
-		function print_nota(){
-			window.print();
-			cetak_struk();
-		}
-		
-		function cetak_struk()
-		{
-			$.ajax({
-				url : "http://localhost/bordercell/option/shoping/",
-				type: "post",
-				dataType:"json",
-				success:function(result){
-					console.log(result)
-					if(result.status == true){
-						// $('#modalNota').modal('hide');
-						reload_table();
-						$('.res').val('');
-            $('#pencarian').focus();
-					}else{
-            alert('gagal melakukan transaksi')
-          }
-				},
-				error: function(err){
-					alert('error transaksi')
-				}
-			});
-		}
-		
-		function deletebarang(id,sub_total)
-		{
-			$.ajax({
-				url : "<?= site_url('option/deletebarang')?>/"+id,
-				type: "POST",
-				dataType: "JSON",
-				success: function(data){
-					reload_table();
-				},
-				error: function (jqXHR, textStatus, errorThrown){
-					alert('Gagal hapus barang');
-				}
-			});
-			var ttl = $('#total').val().replace(".", "");
-			$('#total').val(convertToRupiah(ttl-sub_total));
-			showKembali($('#bayar').val());
-		}
+        })
   </script>
-  
-  <!-- Modal -->
-		<div class="modal fade" id="modalNota" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		  <div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				
-			  <div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			  </div>
-			
-			  <div class="modal-body" id="isiModal">
-				
-			  </div>
-			
-			  <div class="modal-footer">
-				<button type="button" class="btn btn-success" OnClick="print_nota()"><span class="fa fa-print"></span>  Cetak</button>
-				<button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span>  Tutup</button>
-				</div>
-			</div>
-		  </div>
-		</div>
-	<!-- akhir kode modal dialog -->
-  
-      
 </body>
 
 </html>
