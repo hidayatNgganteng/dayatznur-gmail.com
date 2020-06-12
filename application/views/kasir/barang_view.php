@@ -84,7 +84,7 @@
             "targets": [ 0,1,2,3,4,5,6,7 ]
           }],
           "fnRowCallback": (nRow, aData, iDisplayIndex, iDisplayIndexFull ) => {
-            if ( aData[4] == 0 ){
+            if ( aData[7] == 0 ){
               $('td', nRow).css({
                 "background-color":"red",
                 "color":"#fff"})

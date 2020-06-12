@@ -366,7 +366,7 @@
                         'rgba(180, 234, 186 , 1)'
                     ],
                     borderWidth: 1,
-                    pointBorderWidth: 1,
+                    pointBorderWidth: 0,
                     pointHitRadius: 1,
                     pointHoverBorderColor: 'rgba(180, 234, 186 , 1)'
                 },
@@ -374,57 +374,57 @@
                     label: `Total`,
                     data: obj.map(item => item.neto),
                     backgroundColor: [
-                        'rgba(66, 133, 244, 0.1)'
+                        'rgba(0, 0, 0, 0.1)'
                     ],
                     borderColor: [
-                        'rgba(15, 157, 88, 1)'
+                        '#000'
                     ],
                     borderWidth: 1,
-                    pointBorderWidth: 3,
+                    pointBorderWidth: 0,
                     pointHitRadius: 5,
-                    pointHoverBorderColor: 'rgba(15, 157, 88, 1)'
+                    pointHoverBorderColor: '#000'
                 },
                 {
                     label: `Offline`,
                     data: obj.map(item => item.nettoOffline),
                     backgroundColor: [
-                        'rgba(5, 67, 197 , 0.1)'
+                        'rgba(205, 0, 234, 0.1)'
                     ],
                     borderColor: [
-                        'rgba(5, 67, 197 , 1)'
+                        '#cd00ea'
                     ],
                     borderWidth: 1,
-                    pointBorderWidth: 5,
-                    pointHitRadius: 7,
-                    pointHoverBorderColor: 'rgba(5, 67, 197 , 1)'
+                    pointBorderWidth: 0,
+                    pointHitRadius: 5,
+                    pointHoverBorderColor: '#cd00ea'
                 },
                 {
                     label: `Online`,
                     data: obj.map(item => item.nettoOnline),
                     backgroundColor: [
-                        'rgba(204, 35, 12 , 0.1)'
+                        'rgba(238, 77, 45, 0.1)'
                     ],
                     borderColor: [
-                        'rgba(204, 35, 12 , 1)'
+                        '#ee4d2d'
                     ],
                     borderWidth: 1,
-                    pointBorderWidth: 7,
-                    pointHitRadius: 9,
-                    pointHoverBorderColor: 'rgba(204, 35, 12 , 1)'
+                    pointBorderWidth: 0,
+                    pointHitRadius: 5,
+                    pointHoverBorderColor: '#ee4d2d'
                 },
                 {
                     label: `Reseller`,
                     data: obj.map(item => item.nettoReseller),
                     backgroundColor: [
-                        'rgba(115, 5, 197  , 0.1)'
+                        'rgba(3, 172, 14, 0.1)'
                     ],
                     borderColor: [
-                        'rgba(115, 5, 197  , 1)'
+                        '#03AC0E'
                     ],
                     borderWidth: 1,
-                    pointBorderWidth: 9,
-                    pointHitRadius: 11,
-                    pointHoverBorderColor: 'rgba(115, 5, 197  , 1)'
+                    pointBorderWidth: 0,
+                    pointHitRadius: 5,
+                    pointHoverBorderColor: '#03AC0E'
                 }]
             },
             options: {
