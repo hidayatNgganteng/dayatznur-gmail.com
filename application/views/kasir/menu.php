@@ -103,6 +103,18 @@
       <span>Daftar Hutang</span></a>
   </li>
 
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDataPelanggan" aria-expanded="true" aria-controls="collapseTwo">
+    <i class="fas fa-clock"></i>
+      <span>Data Pelanggan</span>
+    </a>
+    <div id="collapseDataPelanggan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" href="<?= site_url() ?>option/data_nomor_telephone"><i class="fas fa-phone-volume"></i> Nomor Telp</a>
+        <a class="collapse-item" href="<?= site_url() ?>option/data_ppob"><i class="fas fa-universal-access"></i> PPOB</a>
+    </div>
+  </li>
+
   <!-- <hr class="sidebar-divider">
 
   <?php

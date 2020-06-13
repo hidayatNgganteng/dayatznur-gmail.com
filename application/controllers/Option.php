@@ -310,9 +310,21 @@ class Option extends CI_Controller {
 		$this->model_barang->delete_by_id($id);
 		echo json_encode(["status" => TRUE]);
 	}
+
+	public function hapus_telp($id){
+		$this->load->model('model_no_telp');
+		$this->model_no_telp->delete_by_id($id);
+		echo json_encode(["status" => TRUE]);
+	}
 	
 	public function edit_barang($id){
 		$data = $this->model_barang->get_by_id($id);
+		echo json_encode($data);
+	}
+
+	public function edit_telp($id){
+		$this->load->model('model_no_telp');
+		$data = $this->model_no_telp->get_by_id($id);
 		echo json_encode($data);
 	}
 	
@@ -334,6 +346,16 @@ class Option extends CI_Controller {
 		$this->model_barang->update(array('id_barang' => $this->input->post('id')), $data);
 		echo json_encode(array("status" => TRUE));
   }
+
+  public function update_nomor(){
+	  $this->load->model('model_no_telp');
+	$data =[
+		'nama' 		=> $this->input->post('nama'),
+		'nomor' 		=> $this->input->post('nomor'),
+	];
+	$this->model_no_telp->update(array('id' => $this->input->post('id')), $data);
+	echo json_encode(array("status" => TRUE));
+}
   
   public function update_saldo(){
     $this->load->model('model_saldo');
@@ -376,6 +398,17 @@ class Option extends CI_Controller {
 			'setok' 			=> $this->input->post('setok'),
 		];
 		$insert = $this->model_barang->save($data);
+		echo json_encode(array("status" => TRUE));
+	}
+
+	function simpan_nomor(){
+		$this->load->model('model_no_telp');
+		$this->_validate_telp();
+		$data =[
+			'nama' 		=> $this->input->post('nama'),
+			'nomor' 		=> $this->input->post('nomor')
+		];
+		$insert = $this->model_no_telp->save($data);
 		echo json_encode(array("status" => TRUE));
 	}
 
@@ -485,6 +518,30 @@ class Option extends CI_Controller {
         if($this->input->post('satuan') == ''){
             $data['inputerror'][] = 'satuan';
             $data['error_string'][] = 'Satuan is required';
+            $data['status'] = FALSE;
+        }
+ 
+        if($data['status'] === FALSE){
+            echo json_encode($data);
+            exit();
+        }
+	}
+	
+	private function _validate_telp(){
+        $data = [];
+        $data['error_string'] = [];
+        $data['inputerror'] = [];
+        $data['status'] = TRUE;
+ 
+        if($this->input->post('nama') == ''){
+            $data['inputerror'][] = 'nama';
+            $data['error_string'][] = 'Nama is required';
+            $data['status'] = FALSE;
+        }
+        
+        if($this->input->post('nomor') == ''){
+            $data['inputerror'][] = 'nomor';
+            $data['error_string'][] = 'Nomor is required';
             $data['status'] = FALSE;
         }
  
@@ -617,6 +674,14 @@ class Option extends CI_Controller {
 		$this->load->view('kasir/pemasukan_view');
 	}
 
+	public function data_nomor_telephone(){
+		$this->load->view('kasir/nomor_telp_view');
+	}
+
+	public function data_ppob(){
+		$this->load->view('kasir/ppob_view');
+	}
+
 	public function data_pengeluaran(){
 		$this->load->view('kasir/pengeluaran_view');
 	}
@@ -682,6 +747,40 @@ class Option extends CI_Controller {
 			"data" => $data,
 		];
 		echo json_encode($output);
+  }
+
+  public function get_no_telp(){
+    $this->load->model('model_no_telp');
+	$list = $this->model_no_telp->get_datatables();
+	$data = [];
+	$no = $_POST['start'];
+	$n=0;
+
+	foreach ($list as $barang) {
+		$n++;
+		$row = [];
+		$row[] = $n;
+		$row[] = $barang->nama;
+		$row[] = $barang->nomor;
+
+		if($this->session->userdata('level') == 1 ){
+			$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_telp('."'".$barang->id."'".')"><i class="far fa-edit"></i></a>
+					<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_telp('."'".$barang->id."'".')"><i class="far fa-trash-alt"></i></a>';
+		}else{
+			$row[] = '<a class="btn btn-sm btn-warning disabled" href="javascript:void(0)" title="Edit" ><i class="far fa-edit"></i></a>
+					<a class="btn btn-sm btn-danger disabled" href="javascript:void(0)" title="Hapus" ><i class="far fa-trash-alt"></i></a>';
+		}
+
+		$data[] = $row;
+	}
+	
+	$output = [
+		"draw" => $_POST['draw'],
+		"recordsTotal" => $this->model_no_telp->count_all(),
+		"recordsFiltered" => $this->model_no_telp->count_filtered(),
+		"data" => $data,
+	];
+	echo json_encode($output);
   }
 
 	public function get_pemasukan(){
