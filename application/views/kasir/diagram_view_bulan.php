@@ -260,7 +260,9 @@
                         return 30000 * 26
                       } else if (tgltahun == 'June 2020') {
                         return 35000 * 26
-                      } else {
+                      } else if (tgltahun == 'July 2020') {
+						return 40000 * 26
+					  } else {
                         return 0
                       }
                     }),
