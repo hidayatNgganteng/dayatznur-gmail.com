@@ -142,7 +142,14 @@ class Option extends CI_Controller {
     $this->load->model('model_saldo');
 
 	$jenis_saldo = $this->input->post('jenis_saldo');
-    $data_saldo = $jenis_saldo == 'mitra' ? $this->model_saldo->getSaldoMitra() : $this->model_saldo->getSaldoOrderKuota();
+	$data_saldo = 0;
+	if ($jenis_saldo == 'mitra') {
+		$data_saldo = $this->model_saldo->getSaldoMitra();
+	} else if ($jenis_saldo == 'orderkuota') {
+		$data_saldo = $this->model_saldo->getSaldoOrderKuota();
+	} else {
+		$data_saldo = $this->model_saldo->getSaldoDigipos();
+	}
 
     if ($this->input->post('harga_beli') > $data_saldo->saldo) {
       $this->session->set_flashdata('error', "Saldo ".$jenis_saldo." anda tidak mencukupi!!");
@@ -172,8 +179,16 @@ class Option extends CI_Controller {
       $this->model_barang->insert_penjualan($data);
 
       // kurangi saldo
-      $datasaldo =[ 'saldo' => $data_saldo->saldo - $this->input->post('harga_beli') ];
-	    $this->model_saldo->update(array('id' => $jenis_saldo == 'mitra' ? 0 : 1), $datasaldo);
+	  $datasaldo =[ 'saldo' => $data_saldo->saldo - $this->input->post('harga_beli') ];
+	  $id_saldo = 0;
+	  if ($jenis_saldo == 'mitra') {
+		$id_saldo = 0;
+	  } else if ($jenis_saldo == 'orderkuota') {
+		$id_saldo = 1;
+	  } else {
+		$id_saldo = 2;
+	  }
+	    $this->model_saldo->update(array('id' => $id_saldo), $datasaldo);
 	  
       // tambah saldo fisik
       $this->ubah_saldo_fisik('tambah', $this->input->post('harga_jual'));
@@ -197,7 +212,14 @@ class Option extends CI_Controller {
     $this->load->model('model_hutang');
 
 	$jenis_saldo = $this->input->post('jenis_saldo');
-    $data_saldo = $jenis_saldo == 'mitra' ? $this->model_saldo->getSaldoMitra() : $this->model_saldo->getSaldoOrderKuota();
+	$data_saldo = 0;
+	if ($jenis_saldo == 'mitra') {
+		$data_saldo = $this->model_saldo->getSaldoMitra();
+	} else if ($jenis_saldo == 'orderkuota') {
+		$data_saldo = $this->model_saldo->getSaldoOrderKuota();
+	} else {
+		$data_saldo = $this->model_saldo->getSaldoDigipos();
+	}
 
     if ($this->input->post('harga_beli') > $data_saldo->saldo) {
       echo json_encode([
@@ -226,8 +248,17 @@ class Option extends CI_Controller {
       $this->model_hutang->insert_hutang($data);
 
       // kurangi saldo
-      $datasaldo =[ 'saldo' => $data_saldo->saldo - $this->input->post('harga_beli') ];
-	    $this->model_saldo->update(array('id' => $jenis_saldo == 'mitra' ? 0 : 1), $datasaldo);
+	  $datasaldo =[ 'saldo' => $data_saldo->saldo - $this->input->post('harga_beli') ];
+	  $id_saldo = 0;
+	  if ($jenis_saldo == 'mitra') {
+		$id_saldo = 0;
+	  } else if ($jenis_saldo == 'orderkuota') {
+		$id_saldo = 1;
+	  } else {
+		$id_saldo = 2;
+	  }
+
+	 	$this->model_saldo->update(array('id' => $id_saldo), $datasaldo);
 
       echo json_encode([
         "status" => TRUE,
@@ -293,7 +324,8 @@ class Option extends CI_Controller {
   public function saldo_elektrik(){
     $this->load->model('model_saldo');
     $data['data_saldo_mitra'] = $this->model_saldo->getSaldoMitra();
-    $data['data_order_kuota'] = $this->model_saldo->getSaldoOrderKuota();
+	$data['data_order_kuota'] = $this->model_saldo->getSaldoOrderKuota();
+	$data['data_order_digipos'] = $this->model_saldo->getSaldoDigipos();
 
 		$this->load->view('kasir/saldo_view_elektrik', $data);
 	}

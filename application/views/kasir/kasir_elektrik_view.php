@@ -92,6 +92,7 @@
                           <select required class="form-control" name="jenis_saldo" id="jenis_saldo">
                             <option value="mitra">Mitra</option>
                             <option value="orderkuota">Order Kuota</option>
+                            <option value="digipos">Digipos</option>
                           </select>
                         </div>
                     </div>

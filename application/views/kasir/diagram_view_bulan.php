@@ -277,8 +277,8 @@
                     pointHitRadius: 1,
                     pointHoverBorderColor: 'rgba(219, 68, 55, 1)'
                 },{
-                    label: 'Sedekah 2.5%',
-                    data: obj.map(item => item.neto * 2.5 / 100),
+                    label: 'Sedekah 10%',
+                    data: obj.map(item => item.neto * 10 / 100),
                     backgroundColor: [
                         'rgba(247, 202, 24, 0.1)'
                     ],

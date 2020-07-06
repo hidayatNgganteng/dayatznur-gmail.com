@@ -35,7 +35,7 @@
 
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
               <h4>Saldo Mitra</h4>
               <?php
                   if ($data_saldo_mitra->saldo > 250000) { ?>
@@ -56,7 +56,7 @@
                   echo '<button class="btn btn-success" onclick="edit_barang(0)"><i class="glyphicon glyphicon-plus"></i> edit</button><br><br>';
               } ?>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <h4>Saldo OrderKuota</h4>
               <?php
                   if ($data_order_kuota->saldo > 250000) { ?>
@@ -75,6 +75,27 @@
                   <?php
                   if($this->session->userdata('level')==1) {
                   echo '<button class="btn btn-info" onclick="edit_barang(1)"><i class="glyphicon glyphicon-plus"></i> edit</button><br><br>';
+              } ?>
+            </div>
+            <div class="col-md-4">
+              <h4>Saldo Digipos</h4>
+              <?php
+                  if ($data_order_digipos->saldo > 250000) { ?>
+                      <h2 class="alert alert-success" role="alert" data-saldo="<?php echo $data_order_digipos->saldo ?>" data-saldoId="<?php echo $data_order_digipos->id ?>" id="saldo_view_digipos"> <?php
+                  } else if ($data_order_digipos->saldo > 100000 && $data_order_digipos->saldo <= 250000) { ?>
+                      <h2 class="alert alert-warning" role="alert" data-saldo="<?php echo $data_order_digipos->saldo ?>" data-saldoId="<?php echo $data_order_digipos->id ?>" id="saldo_view_digipos"> <?php
+                  } else { ?>
+                      <h2 class="alert alert-danger" role="alert" data-saldo="<?php echo $data_order_digipos->saldo ?>" data-saldoId="<?php echo $data_order_digipos->id ?>" id="saldo_view_digipos"> <?php
+                  }
+                      $saldo = number_format($data_order_digipos->saldo,2,',','.');
+                      $saldoInArray = explode(",",$saldo);
+                      echo "Rp " . $saldoInArray[0];
+                  ?>
+                  </h2>
+
+                  <?php
+                  if($this->session->userdata('level')==1) {
+                  echo '<button class="btn btn-danger" onclick="edit_barang(2)"><i class="glyphicon glyphicon-plus"></i> edit</button><br><br>';
               } ?>
             </div>
           </div>
@@ -108,9 +129,14 @@
           const saldoId = $("#saldo_view_mitra").attr('data-saldoId')
           $('#saldo').val(saldo)
           $("#saldoId").val(saldoId)  
-        } else {
+        } else if (type == 1) {
           const saldo = $("#saldo_view_orderkuota").attr('data-saldo')
           const saldoId = $("#saldo_view_orderkuota").attr('data-saldoId')
+          $('#saldo').val(saldo)
+          $("#saldoId").val(saldoId)
+        } else {
+          const saldo = $("#saldo_view_digipos").attr('data-saldo')
+          const saldoId = $("#saldo_view_digipos").attr('data-saldoId')
           $('#saldo').val(saldo)
           $("#saldoId").val(saldoId)
         }

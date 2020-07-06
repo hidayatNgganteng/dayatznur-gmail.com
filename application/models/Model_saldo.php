@@ -16,6 +16,12 @@ class Model_saldo extends CI_Model {
     {
     	$query = $this->db->get_where($this->table, array('id' => 1));
 		return $query->row();	
+	}
+	
+	function getSaldoDigipos()
+    {
+    	$query = $this->db->get_where($this->table, array('id' => 2));
+		return $query->row();	
     }
     
     public function update($where, $data)
