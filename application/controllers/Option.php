@@ -348,6 +348,12 @@ class Option extends CI_Controller {
 		$this->model_no_telp->delete_by_id($id);
 		echo json_encode(["status" => TRUE]);
 	}
+
+	public function hapus_ppob($id){
+		$this->load->model('model_ppob');
+		$this->model_ppob->delete_by_id($id);
+		echo json_encode(["status" => TRUE]);
+	}
 	
 	public function edit_barang($id){
 		$data = $this->model_barang->get_by_id($id);
@@ -357,6 +363,12 @@ class Option extends CI_Controller {
 	public function edit_telp($id){
 		$this->load->model('model_no_telp');
 		$data = $this->model_no_telp->get_by_id($id);
+		echo json_encode($data);
+	}
+
+	public function edit_ppob($id){
+		$this->load->model('model_ppob');
+		$data = $this->model_ppob->get_by_id($id);
 		echo json_encode($data);
 	}
 	
@@ -381,12 +393,25 @@ class Option extends CI_Controller {
 
   public function update_nomor(){
 	  $this->load->model('model_no_telp');
+	  $this->_validate_telp();
 	$data =[
 		'nama' 		=> $this->input->post('nama'),
 		'nomor' 		=> $this->input->post('nomor'),
 	];
 	$this->model_no_telp->update(array('id' => $this->input->post('id')), $data);
 	echo json_encode(array("status" => TRUE));
+}
+
+public function update_ppob(){
+	$this->load->model('model_ppob');
+	$this->_validate_ppob();
+  $data =[
+	  'nama' 		=> $this->input->post('nama'),
+	  'nomor' 		=> $this->input->post('nomor'),
+	  'kategori_ppob' 		=> $this->input->post('jenis_ppob'),
+  ];
+  $this->model_ppob->update(array('id_pelanggan' => $this->input->post('id')), $data);
+  echo json_encode(array("status" => TRUE));
 }
   
   public function update_saldo(){
@@ -441,6 +466,18 @@ class Option extends CI_Controller {
 			'nomor' 		=> $this->input->post('nomor')
 		];
 		$insert = $this->model_no_telp->save($data);
+		echo json_encode(array("status" => TRUE));
+	}
+
+	function simpan_ppob(){
+		$this->load->model('model_ppob');
+		$this->_validate_ppob();
+		$data =[
+			'nama' 		=> $this->input->post('nama'),
+			'nomor' 		=> $this->input->post('nomor'),
+			'kategori_ppob' 		=> $this->input->post('jenis_ppob')
+		];
+		$insert = $this->model_ppob->save($data);
 		echo json_encode(array("status" => TRUE));
 	}
 
@@ -574,6 +611,36 @@ class Option extends CI_Controller {
         if($this->input->post('nomor') == ''){
             $data['inputerror'][] = 'nomor';
             $data['error_string'][] = 'Nomor is required';
+            $data['status'] = FALSE;
+        }
+ 
+        if($data['status'] === FALSE){
+            echo json_encode($data);
+            exit();
+        }
+	}
+	
+	private function _validate_ppob(){
+        $data = [];
+        $data['error_string'] = [];
+        $data['inputerror'] = [];
+        $data['status'] = TRUE;
+ 
+        if($this->input->post('nama') == ''){
+            $data['inputerror'][] = 'nama';
+            $data['error_string'][] = 'Nama is required';
+            $data['status'] = FALSE;
+        }
+        
+        if($this->input->post('nomor') == ''){
+            $data['inputerror'][] = 'nomor';
+            $data['error_string'][] = 'Nomor is required';
+            $data['status'] = FALSE;
+		}
+		
+		if($this->input->post('jenis_ppob') == ''){
+            $data['inputerror'][] = 'jenis_ppob';
+            $data['error_string'][] = 'jenis ppob is required';
             $data['status'] = FALSE;
         }
  
@@ -813,6 +880,47 @@ class Option extends CI_Controller {
 		"data" => $data,
 	];
 	echo json_encode($output);
+  }
+
+  public function get_ppob(){
+    $this->load->model('model_ppob');
+	$list = $this->model_ppob->get_datatables();
+	$data = [];
+	$no = $_POST['start'];
+	$n=0;
+
+	foreach ($list as $barang) {
+		$n++;
+		$row = [];
+		$row[] = $n;
+		$row[] = $barang->nama_ppob;
+		$row[] = $barang->nama;
+		$row[] = $barang->nomor;
+
+		if($this->session->userdata('level') == 1 ){
+			$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_ppob('."'".$barang->id_pelanggan."'".')"><i class="far fa-edit"></i></a>
+					<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_ppob('."'".$barang->id_pelanggan."'".')"><i class="far fa-trash-alt"></i></a>';
+		}else{
+			$row[] = '<a class="btn btn-sm btn-warning disabled" href="javascript:void(0)" title="Edit" ><i class="far fa-edit"></i></a>
+					<a class="btn btn-sm btn-danger disabled" href="javascript:void(0)" title="Hapus" ><i class="far fa-trash-alt"></i></a>';
+		}
+
+		$data[] = $row;
+	}
+	
+	$output = [
+		"draw" => $_POST['draw'],
+		"recordsTotal" => $this->model_ppob->count_all(),
+		"recordsFiltered" => $this->model_ppob->count_filtered(),
+		"data" => $data,
+	];
+	echo json_encode($output);
+  }
+
+  public function get_kategori_ppob(){
+	$this->load->model('model_ppob');
+	$all_kategori_ppob = $this->model_ppob->get_all_kategori_ppob();
+	echo json_encode($all_kategori_ppob);
   }
 
 	public function get_pemasukan(){

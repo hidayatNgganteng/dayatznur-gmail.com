@@ -26,29 +26,30 @@
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
-          <div class="h3 ml-auto">SABAAAARRRRRR COYYYYYYYYYY! Emang gampang ape bikin program! palalu jitak!!</div>
+          <div class="h3 ml-auto">PPOB</div>
 
           <?php $this->load->view('kasir/menu_kanan') ?>
         </nav>
 
         <!-- Begin Page Content -->
-        <!-- <div class="container-fluid">
+        <div class="container-fluid">
             <?php
             if($this->session->userdata('level')==1) {
-            //   echo '<button class="btn btn-success" onclick="tambah_telp()"><i class="glyphicon glyphicon-plus"></i> tambah</button><br><br>';
+              echo '<button class="btn btn-success" onclick="tambah_ppob()"><i class="glyphicon glyphicon-plus"></i> tambah</button><br><br>';
             } ?>
 			
 			<table id="tabelBarang" class="table table-striped table-bordered nowrap" style="width:100%">
 				<thead>
 					<tr>
 						<th>no</th>
-						<th>Nama</th>
-                        <th>No telp</th>
-                        <th>Aksi</th>
+						<th>Jenis ppob</th>
+            <th>Nama pel</th>
+            <th>Id pel</th>
+            <th>Aksi</th>
 					</tr>
 				</thead>
 			</table>
-        </div> -->
+        </div>
 
       </div>
 
@@ -79,7 +80,11 @@
 
                 <input type="hidden" value="" name="id"/> 
                 <div class="form-body">
-                       
+                  <div class="form-group mt-2">
+                    <label for="jenis_ppob">Jenis ppob</label>
+                    <select class="form-control " name="jenis_ppob" id="jenis_ppob"></select>
+                  </div>
+
                   <div class="form-group">
                       <label for="nama" class="col-form-label">Nama</label>
                       <input type="text" class="form-control " name="nama" >
@@ -117,131 +122,152 @@
   <script src="<?php echo base_url() ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
   <script src="<?php echo base_url() ?>assets/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
   <script>
-    //   var table;
-    //   var lunasiHutangProses = false
-    //   $(document).ready(function(){
-    //       table = $('#tabelBarang').DataTable({
-    //           "columnDefs": [
-    //           {
-    //               "targets": [ 0,1,2,3 ],
-    //               "orderable": false,
-    //           },
-    //           ],
-    //           "order": [],
-    //           "serverSide": true, 
-    //           "ajax": {
-    //               "url": "http://localhost/bordercell/option/get_no_telp",
-    //               "type": "POST"
-    //               },
-    //           "lengthChange": false,
-    //           "responsive": true,
-    //           });
-    //       });
+      var table;
+      $(document).ready(function(){
+          table = $('#tabelBarang').DataTable({
+              "columnDefs": [
+              {
+                  "targets": [ 0,1,2,3,4 ],
+                  "orderable": false,
+              },
+              ],
+              "order": [],
+              "serverSide": true, 
+              "ajax": {
+                  "url": "http://localhost/bordercell/option/get_ppob",
+                  "type": "POST",
+                  },
+              "lengthChange": false,
+              "responsive": true,
+              });
+          });
        
-    //    function reload_table()
-    //    {
-    //        table.ajax.reload(null,false);
-    //    }
+       function reload_table()
+       {
+           table.ajax.reload(null,false);
+       }
 
-    //    function save()
-    //    {
-    //        console.log("A")
-    //        var url;
-    //        if(save_method == 'add')
-    //        {
-    //            url = "<?php echo site_url('option/simpan_nomor')?>";
-    //        }
-    //        else
-    //        {
-    //            url = "<?php echo site_url('option/update_nomor')?>";
-    //        }
-
-    //        console.log("B")
+       function save() {
+          var url
+          if(save_method == 'add') {
+            url = "<?php echo site_url('option/simpan_ppob')?>";
+          } else {
+            url = "<?php echo site_url('option/update_ppob')?>";
+          }
            
-           
-    //        $.ajax({
-    //            url : url,
-    //            type: "POST",
-    //            data: $('#form').serialize(),
-    //            dataType: "JSON",
-    //            success: function(data)
-    //            {
-    //                if(data.status)
-    //                {
-    //                    $('#modal_form').modal('hide');
-    //                    reload_table();
-    //                }
-    //                else
-    //                {
-    //                    for (var i = 0; i < data.inputerror.length; i++)
-    //                    {
-    //                        //$('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error');
-    //                        $('[name="'+data.inputerror[i]+'"]').addClass('is-invalid');
-    //                        $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]);
-    //                    }
-    //                }            
-    //            },
-    //            error: function (jqXHR, textStatus, errorThrown)
-    //            {
-    //                console.log("err", errorThrown)
-    //                alert('error');
-    //            }
-    //        });
-    //    }
+           $.ajax({
+               url : url,
+               type: "POST",
+               data: $('#form').serialize(),
+               dataType: "JSON",
+               success: function(data)
+               {
+                   if(data.status)
+                   {
+                       $('#modal_form').modal('hide');
+                       reload_table();
+                   }
+                   else
+                   {
+                       for (var i = 0; i < data.inputerror.length; i++)
+                       {
+                           //$('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error');
+                           $('[name="'+data.inputerror[i]+'"]').addClass('is-invalid');
+                           $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]);
+                       }
+                   }            
+               },
+               error: function (jqXHR, textStatus, errorThrown)
+               {
+                   console.log("err", errorThrown)
+                   alert('error');
+               }
+           })
+       }
        
-    //    function edit_telp(id)
-    //    {
-    //        save_method = 'update';
-    //        $('#form')[0].reset();
-    //        $.ajax({
-    //            url : "<?php echo site_url('option/edit_telp')?>/" + id,
-    //            type: "GET",
-    //            dataType: "JSON",
-    //            success: function(data)
-    //            {
-    //                $('[name="id"]').val(data.id);
-    //                $('[name="nama"]').val(data.nama);
-    //                $('[name="nomor"]').val(data.nomor);
-    //                $('#modal_form').modal('show');
-    //                $('.modal-title').text('Edit nomor telefon');
-    //            },
-    //            error: function (jqXHR, textStatus, errorThrown)
-    //            {
-    //                console.log("errorThrown", errorThrown)
-    //                console.log("textStatus", textStatus)
-    //                alert('Error get data from ajax');
-    //            }
-    //            });
-    //    }
+       function edit_ppob(id) {
+           save_method = 'update'
+           $('#form')[0].reset()
 
-    //    function delete_telp(id)
-    //    {
-    //      if(confirm('yakin ingin di hapus?')){
-    //            $.ajax({
-    //                url : "<?php echo site_url('option/hapus_telp')?>/"+id,
-    //                type: "POST",
-    //                dataType: "JSON",
-    //                success: function(data)
-    //                {
-                       
-    //                    reload_table();
-    //                },
-    //                error: function (jqXHR, textStatus, errorThrown)
-    //                {
-    //                    alert('Error deleting data');
-    //                }
-    //           });
-           
-    //        }
-    //    }
+           $.ajax({
+               url : "<?php echo site_url('option/edit_ppob')?>/" + id,
+               type: "GET",
+               dataType: "JSON",
+               success: data => {
+                  $.ajax({
+                    url : "<?php echo site_url('option/get_kategori_ppob')?>/",
+                    type: "GET",
+                    dataType: "JSON",
+                    success: data_kategori => {
+                      let el = ""
 
-    //    function tambah_telp ()
-    //   {
-    //       save_method = 'add';
-    //       $('#form')[0].reset();
-    //       $('.modal-title').text('Input data telefon');
-    //       $('#modal_form').modal('show'); 
-    //   }
+                      for (const item of data_kategori) {
+                        if (item.id_kategori == data.kategori_ppob) {
+                          el += `<option value=${item.id_kategori} selected>${item.nama_ppob}</option>`
+                        } else {
+                          el += `<option value=${item.id_kategori}>${item.nama_ppob}</option>`
+                        }
+                      }
+
+                      $("#jenis_ppob").html(el)
+                    },
+                    error: (jqXHR, textStatus, errorThrown) => {
+                      alert('error')
+                    }
+                  })
+
+                  $('[name="id"]').val(data.id_pelanggan);
+                  $('[name="nama"]').val(data.nama);
+                  $('[name="nomor"]').val(data.nomor);
+                  $('#modal_form').modal('show');
+                  $('.modal-title').text('Edit nomor ppob');
+               },
+               error: (jqXHR, textStatus, errorThrown) => {
+                  alert('Error get data from ajax');
+               }
+            })
+       }
+
+       function delete_ppob(id) {
+          if(confirm('yakin ingin di hapus?')){
+              $.ajax({
+                url : "<?php echo site_url('option/hapus_ppob')?>/"+id,
+                type: "POST",
+                dataType: "JSON",
+                success: function(data) {
+                  reload_table();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                  alert('Error deleting data');
+                }
+            })
+          }
+       }
+
+       function tambah_ppob () {
+          $.ajax({
+            url : "<?php echo site_url('option/get_kategori_ppob')?>/",
+            type: "GET",
+            dataType: "JSON",
+            success: data => {
+              let el = ""
+
+              for (const item of data) {
+                el += `<option value=${item.id_kategori}>${item.nama_ppob}</option>`
+              }
+
+              $("#jenis_ppob").html(el)
+
+              save_method = 'add';
+              $('#form')[0].reset();
+              $('.modal-title').text('Input data ppob');
+              $('#modal_form').modal('show');   
+            },
+            error: (jqXHR, textStatus, errorThrown) => {
+              alert('error')
+            }
+          })
+      }
   </script>
 </body>
 

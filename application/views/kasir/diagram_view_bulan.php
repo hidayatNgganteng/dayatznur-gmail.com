@@ -152,7 +152,7 @@
         if (item.type_product == 'elektrik') {
           return item.total_harga - item.harga_beli_elektrik
         } else {
-          return item.total_harga - item.harga_beli
+          return item.total_harga - (item.harga_beli * item.jumlah)
         }
       }
        

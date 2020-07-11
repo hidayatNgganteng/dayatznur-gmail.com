@@ -209,12 +209,12 @@
         if (item.type_product == 'elektrik') {
           return item.total_harga - item.harga_beli_elektrik
         } else {
-          return item.total_harga - item.harga_beli
+          return item.total_harga - (item.harga_beli * item.jumlah)
         }
       }
 
       function handleNetoNoOffline(item) {
-        return item.total_harga - item.harga_beli
+        return item.total_harga - (item.harga_beli * item.jumlah)
       }
 
       function toIdrFormat(nominal) {
@@ -233,13 +233,13 @@
       }
        
       $(function(){
-        //cek_bulan();
           $.ajax({
               url:"http://localhost/bordercell/option/diagram",
               method: "GET",
               success:function(data)
               {
                   var obj=JSON.parse(data);
+                  console.log("obj", obj)
                   let dataSend = []
 
                   obj.map(item => {
@@ -279,6 +279,8 @@
                       }
                     }
                   })
+
+                  console.log("dataSend", dataSend)
 
                   let totalKeuntungan = 0
                   if (dataSend.length && dataSend.length == 1) {
@@ -327,8 +329,6 @@
           $("#no-data-diagram").modal('show')
           return
         }
-
-        console.log("obj", obj)
 
         if (myChart) {
           myChart.destroy();
