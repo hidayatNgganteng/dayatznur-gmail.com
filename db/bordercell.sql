@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 10, 2020 at 03:22 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.2.28
+-- Host: localhost
+-- Generation Time: Jul 13, 2020 at 03:07 AM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.1.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -58,7 +58,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `l
 (16, 'VOUCHER INDOSAT FREEDOM 14GB', 47200, 55000, 7800, 'pcs', 1, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, 0, 0),
 (17, 'VOUCHER INDOSAT FREEDOM 8GB', 33300, 36000, 2700, 'pcs', 2, 1, '8GB PEMBAGIAN : \r\n4GB UTAMA\r\n2GB MALAM\r\n2GB LOKAL', 0, 0, 0, 0),
 (18, 'VOUCHER INDOSAT FREEDOM 4GB', 23800, 27000, 3200, 'pcs', 0, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, 0, 0),
-(19, 'PERDANA SMARTFREN DATA TOTAL KUOTA 5GB', 12050, 15000, 2950, 'pcs', 5, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, 0, 0),
+(19, 'PERDANA SMARTFREN DATA TOTAL KUOTA 5GB', 12050, 15000, 2950, 'pcs', 4, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, 0, 0),
 (20, 'VOUCHER SMARTFREN 16GB ( 8gb 24 jam + 8 GB malam)', 36500, 40000, 3500, 'pcs', 5, 1, '8GB MALAM\r\n8GB UTAMA', 0, 0, -36500, -36500),
 (21, 'VOUCHER SMARTFREN 10GB ( 5gb 24 jam + 5 GB malam )', 26500, 28000, 1500, 'pcs', 4, 1, '5gb 24jam\r\n5gb jam 00-06 ', 0, 0, -26500, -26500),
 (22, 'VOUCHER INDOSAT YOUTUBE 7 HARI UNLIMITED+ 1GB', 15600, 18000, 2400, 'pcs', 0, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, 0, 0),
@@ -174,7 +174,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `l
 (136, 'KABEL DATA SAMSUNG ORIGINAL USB CABLE PUTIH - (typec/type-c/type c)', 15000, 25000, 10000, 'pcs', 2, 1, 'Belum ada deskripsi, silahkan ubah', 22500, 18500, 7500, 3500),
 (137, 'KABEL DATA SAMSUNG ORIGINAL USB CABLE HITAM - (typec/type-c/type c)', 15000, 25000, 10000, 'pcs', 3, 1, 'Belum ada deskripsi, silahkan ubah', 22500, 18500, 7500, 3500),
 (138, 'CHARGER NOKIA ORIGINAL 99% LUBANG KECIL', 10000, 20000, 10000, 'pcs', 3, 1, 'Belum ada deskripsi, silahkan ubah', 17500, 13500, 7500, 3500),
-(139, 'POPSOCKET POLOS ', 645, 2000, 1355, 'pcs', 10, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, 0, 0),
+(139, 'POPSOCKET POLOS ', 645, 3000, 2355, 'pcs', 10, 1, 'Belum ada deskripsi, silahkan ubah', 2500, 1500, 1855, 855),
 (140, 'TEMPELAN HP/ GURITA', 750, 3000, 2250, 'pcs', 20, 1, 'Belum ada deskripsi, silahkan ubah', 1700, 1500, 950, 750),
 (141, 'HEADSET XIAOMI PISTON 2', 10999, 25000, 14001, 'pcs', 4, 1, 'Belum ada deskripsi, silahkan ubah', 21500, 15600, 10501, 4601),
 (142, 'KABEL DATA QTOP TOPLES IPHONE', 5000, 15000, 10000, 'pcs', 48, 1, 'Belum ada deskripsi, silahkan ubah', 12500, 8500, 7500, 3500),
@@ -184,7 +184,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `l
 (147, '3D Diamond Softcase VIVO iQOO NEO', 7470, 20000, 12530, 'pcs', 1, 1, 'Belum ada deskripsi, silahkan ubah', 17000, 12000, 9530, 4530),
 (148, '3D Diamond Softcase REALME A5/ A3S/ AX5/ REALME C1', 7470, 20000, 12530, 'pcs', 1, 1, 'Belum ada deskripsi, silahkan ubah', 17000, 12000, 9530, 4530),
 (149, 'PERDANA INDOSAT FREEDOM 8GB (30 HR)', 30000, 35000, 5000, 'pcs', 1, 1, '8GB PEMBAGIAN : \r\n4GB UTAMA\r\n2GB MALAM\r\n2GB LOKAL', 0, 0, 0, 0),
-(150, 'VOUCHER AXIS 1 GB (5 HR)- Cahyo Sales', 8000, 10000, 2000, 'pcs', 8, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, -8000, -8000),
+(150, 'VOUCHER AXIS 1 GB (5 HR)- Cahyo Sales', 8000, 10000, 2000, 'pcs', 7, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, -8000, -8000),
 (152, 'VOUCHER XL 4,5 GB (30 HR)- Cahyo Sales', 26500, 30000, 3500, 'pcs', 2, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, -26500, -26500),
 (153, 'VOUCHER TRI 1,5 GB (1 TH)  - Indy cell', 13500, 15000, 1500, 'pcs', 8, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, -13500, -13500),
 (154, 'VOUCHER TRI 6 GB (1 TH) - Indy cell', 34000, 36000, 2000, 'pcs', 5, 1, 'contoh', 0, 0, -34000, -34000),
@@ -201,7 +201,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `l
 (165, 'VOUCHER INDOSAT 3 GB + ULT YOUTUBE (30 HARI)', 57000, 60000, 3000, 'pcs', 3, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, 0, 0),
 (166, 'VOUCHER INDOSAT 1 GB + UNLIMITED APP (30 HARI)', 25000, 27000, 2000, 'pcs', 9, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, -25000, -25000),
 (167, 'VOUCHER TELKOMSEL 8 GB (30 HARI)', 55000, 60000, 5000, 'pcs', 4, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, -55000, -55000),
-(170, 'VOUCHER SMARTFREN UNLIMITED LITE _500MB/HR_(28 HR) - ricky glorie', 47500, 50000, 2500, 'pcs', 6, 1, 'Belum ada deskripsi, silahkan ubah', 49375, 48375, 1875, 875),
+(170, 'VOUCHER SMARTFREN UNLIMITED LITE _500MB/HR_(28 HR) - ricky glorie', 47500, 50000, 2500, 'pcs', 5, 1, 'Belum ada deskripsi, silahkan ubah', 49375, 48375, 1875, 875),
 (171, 'VOUCHER SMARTFREN UNLIMITED _1GB/HR_(5 HR) - ricky glorie', 19000, 21000, 2000, 'pcs', 7, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, 0, 0),
 (172, 'VOUCHER SMARTFREN 10N+ 1,5GB_24JAM_(7 HR) - ricky glorie', 9550, 12000, 2450, 'pcs', 8, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, 0, 0),
 (173, 'VOUCHER SMARTFREN 10N+ 1GB_24JAM_(7 HR) - ricky glorie', 7500, 10000, 2500, 'pcs', 1, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, 0, 0),
@@ -209,7 +209,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `l
 (175, 'VOUCHER TELKOMSEL 4 GB OMG 30 HR', 36000, 39000, 3000, 'pcs', 0, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, -36000, -36000),
 (176, 'PERDANA TELKOMSEL 6,5 GB 30 HARI', 25000, 28000, 3000, 'pcs', 3, 1, 'contoh', 0, 0, -25000, -25000),
 (177, 'PERDANA AXIS 1 GB 30 HR', 11000, 14000, 3000, 'pcs', 3, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, 0, 0),
-(178, 'PERDANA AXIS 2GB 30 HARI ', 19000, 22000, 3000, 'pcs', 4, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, 0, 0),
+(178, 'PERDANA AXIS 2GB 30 HARI ', 19000, 22000, 3000, 'pcs', 3, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, 0, 0),
 (179, 'PERDANA TRI 1 GB ', 5500, 10000, 4500, 'pcs', 3, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, -5500, -5500),
 (180, 'VOUCHER TRI 6 GB + UNLIMITED YOUTUBE (30 HR)', 54000, 57000, 3000, 'pcs', 4, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, -54000, -54000),
 (183, 'PERDANA SMARTFREN 1ON+ 3GB 930 HR)', 18500, 21000, 2500, 'pcs', 7, 1, 'Belum ada deskripsi, silahkan ubah', 0, 0, 0, 0),
@@ -256,7 +256,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `l
 (261, 'Flashdisk Kingston 4GB DataTraveler', 15300, 25000, 9700, 'pcs', 3, 1, 'LINK : https://shopee.co.id/product/31561478/770810862', 22575, 18695, 7275, 3395),
 (262, 'Flashdisk Kingston 2GB DataTraveler', 14300, 20000, 5700, 'pcs', 4, 1, 'LINK : https://shopee.co.id/product/31561478/770805453', 18575, 16295, 4275, 1995),
 (263, 'VOUCHER AXIS 5GB / 30 HARI', 42500, 44000, 1500, 'pcs', 3, 1, 'DAPAT 3GB LOKAL. JADI 8GB', 0, 0, 0, 0),
-(264, 'VOUCHER AXIS 2 GB ( 7 HARI )', 14500, 17000, 2500, 'pcs', 7, 1, '', 0, 0, -14500, -14500),
+(264, 'VOUCHER AXIS 2 GB ( 7 HARI )', 14500, 17000, 2500, 'pcs', 6, 1, '', 0, 0, -14500, -14500),
 (265, 'SANDISK Flashdisk USB 2.0 16 GB', 56742, 75000, 18258, 'pcs', 1, 1, 'LINK : https://shopee.co.id/product/1657263/1553173387', 70400, 63100, 13658, 6358),
 (266, 'SANDISK FLASHDISK USB 3.0 32GB', 81830, 95000, 13170, 'pcs', 1, 1, 'LINK : https://shopee.co.id/product/1657263/1553126803', 91700, 86400, 9870, 4570),
 (267, 'SANDISK FLASHDISK USB 3.0 16 GB', 65660, 80000, 14340, 'pcs', 1, 1, 'LINK : https://shopee.co.id/product/1657263/1553121529', 76400, 70600, 10740, 4940),
@@ -290,12 +290,15 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_beli`, `harga_jual`, `l
 (299, 'voucher telkomsel 3,5 GB / 7 HR', 19000, 22000, 3000, 'pcs', 3, 1, '', 0, 0, -19000, -19000),
 (301, 'MASKER DARI AMIN', 108500, 124000, 15500, 'pcs', 0, 1, '', 0, 0, -108500, -108500),
 (302, 'voucher axis 3 GB + 1 GB LOKAL / 3OHR', 29000, 32000, 3000, 'pcs', 4, 1, '', 0, 0, -29000, -29000),
-(303, 'VOUCHER INDOSAT 2GB + ULT APPS', 38500, 41000, 2500, 'pcs', 5, 1, '', 0, 0, -38500, -38500),
+(303, 'VOUCHER INDOSAT 2GB + ULT APPS', 38500, 41000, 2500, 'pcs', 4, 1, '', 0, 0, -38500, -38500),
 (304, 'Tripod Spider Flexible Mini Tripot Hp Handphone Camera Kamera zen1', 10250, 25000, 14750, 'pcs', 6, 1, 'LINK : https://shopee.co.id/product/4627733/2431599242', 21300, 15400, 11050, 5150),
 (305, 'V-GEN CLASS 6 Micro SD Vgen 4GB Micro SDHC Memory Card Originall', 30000, 45000, 15000, 'pcs', 4, 1, 'LINK : https://shopee.co.id/product/82062421/1379462079', 41250, 35250, 11250, 5250),
 (306, 'V-GEN CLASS 6 Micro SD Vgen 8GB Micro SDHC Memory Card Originall', 32500, 50000, 17500, 'pcs', 3, 1, 'LINK : https://shopee.co.id/product/82062421/1379462079', 45600, 38600, 13100, 6100),
 (307, 'V-GEN CLASS 6 Micro SD Vgen 16GB Micro SDHC Memory Card Originall', 43000, 60000, 17000, 'pcs', 3, 1, 'LINK : https://shopee.co.id/product/82062421/1379462079', 55700, 48900, 12700, 5900),
-(308, 'V-GEN CLASS 6 Micro SD Vgen 32GB Micro SDHC Memory Card Originall', 61500, 77000, 15500, 'pcs', 3, 1, 'LINK : https://shopee.co.id/product/82062421/1379462079', 73100, 66900, 11600, 5400);
+(308, 'V-GEN CLASS 6 Micro SD Vgen 32GB Micro SDHC Memory Card Originall', 61500, 77000, 15500, 'pcs', 3, 1, 'LINK : https://shopee.co.id/product/82062421/1379462079', 73100, 66900, 11600, 5400),
+(309, 'V-GEN Micro SD Vgen Class 10 8GB TURBO SERIES Class10 Memory Card ORIGINAL V GEN', 34000, 55000, 21000, 'pcs', 3, 1, 'link: https://shopee.co.id/product/82062421/1372661310', 49750, 41350, 15750, 7350),
+(310, 'V-GEN Micro SD Vgen Class 10 16GB TURBO SERIES Class10 Memory Card ORIGINAL V GEN', 45000, 65000, 20000, 'pcs', 3, 1, 'link: https://shopee.co.id/product/82062421/1372661310', 60000, 52000, 15000, 7000),
+(311, 'V-GEN Micro SD Vgen Class 10 32GB TURBO SERIES Class10 Memory Card ORIGINAL V GEN', 64500, 85000, 20500, 'pcs', 3, 1, 'link: https://shopee.co.id/product/82062421/1372661310', 79875, 71675, 15375, 7175);
 
 -- --------------------------------------------------------
 
@@ -313,8 +316,8 @@ CREATE TABLE `barang_elektrik` (
 --
 
 INSERT INTO `barang_elektrik` (`id`, `saldo`) VALUES
-(0, '653219'),
-(1, '3739'),
+(0, '631119'),
+(1, '561971'),
 (2, '175200');
 
 -- --------------------------------------------------------
@@ -335,7 +338,7 @@ CREATE TABLE `cookie` (
 
 INSERT INTO `cookie` (`id_cookie`, `id_user_cookie`, `cookie`) VALUES
 (1, 1, '0ge2vwm2f428783kngpw11e58xcrapm1'),
-(2, 4, 'r04hf5lyb4k7jm7357hs7o70e79sihwchk0devlxnz7kk40kaoflads7439q2jclzbez6rk1iiwegi1ulqfdklzfyclj0ig17jctrxvqrp9bvulashgh176bwrq0ersa');
+(2, 4, 't2rens32tswk0jadj0k51d3pwhv3fed03lq2kd734889xb89w69p9dq3lsi62aq3cfmckfz5m7ii4wyy7secz4vdi9djgo7fdjmh8qh4oytbjskn86tyfcpem1ufwiuv');
 
 -- --------------------------------------------------------
 
@@ -485,18 +488,20 @@ INSERT INTO `hutang_elektrik` (`id_hutang_elektrik`, `nama_brg`, `harga_beli`, `
 (132, 'Token Listrik 100k - hunen', 100175, 102000, '2020-07-03', '09:33:00', 'lunas'),
 (133, 'Pulsa Telkomsel 10k - arfa', 10425, 12000, '2020-07-03', '16:33:00', 'lunas'),
 (134, 'Token listrik 100k - amin', 100175, 102000, '2020-07-04', '10:11:00', 'hutang'),
-(135, 'Pulsa telkomsel 55k - salma yayu kul', 54650, 57000, '2020-07-04', '18:10:00', 'hutang'),
+(135, 'Pulsa telkomsel 55k - salma yayu kul', 54650, 57000, '2020-07-04', '18:10:00', 'lunas'),
 (136, 'Pulsa telkomsel 25k - didi', 24950, 27000, '2020-07-05', '21:14:00', 'lunas'),
 (137, 'Pulsa Axis 10k - didi', 10805, 12000, '2020-07-05', '21:14:00', 'lunas'),
 (138, 'Pulsa telkomsel 25k - amjad', 24950, 27000, '2020-07-05', '21:15:00', 'lunas'),
 (139, 'Pulsa indosat 5k - amin', 5795, 7000, '2020-07-06', '17:13:00', 'hutang'),
 (140, 'paket data telkomsel - pakde amin', 43401, 45000, '2020-07-06', '17:13:00', 'lunas'),
-(141, 'Pulsa xl 25k yukul', 24825, 27000, '2020-07-07', '09:14:00', 'hutang'),
+(141, 'Pulsa xl 25k yukul', 24825, 27000, '2020-07-07', '09:14:00', 'lunas'),
 (142, 'Pulsa Telkomsel 20k - FATHUR', 20095, 22000, '2020-07-07', '12:47:00', 'lunas'),
 (143, 'Pulsa Telkomsel 25k - iloh', 24950, 27000, '2020-07-08', '09:57:00', 'hutang'),
 (144, 'Pulsa Telkomsel 25k - amin gunung', 24950, 27000, '2020-07-08', '09:57:00', 'lunas'),
-(145, 'pulsa telkomsel 35k - fathur', 34850, 37000, '2020-07-10', '07:43:00', 'hutang'),
-(146, 'Pulsa Telkomsel 25k - arfa', 24874, 27000, '2020-07-10', '07:45:00', 'hutang');
+(145, 'pulsa telkomsel 35k - fathur', 34850, 37000, '2020-07-10', '07:43:00', 'lunas'),
+(146, 'Pulsa Telkomsel 25k - arfa', 24874, 27000, '2020-07-10', '07:45:00', 'lunas'),
+(147, 'Pulsa telkomsel 25k - iloh', 24874, 27000, '2020-07-11', '10:53:00', 'hutang'),
+(148, 'Pulsa telkomsel 5k - arfa', 5800, 7000, '2020-07-13', '08:01:00', 'hutang');
 
 -- --------------------------------------------------------
 
@@ -506,14 +511,14 @@ INSERT INTO `hutang_elektrik` (`id_hutang_elektrik`, `nama_brg`, `harga_beli`, `
 
 CREATE TABLE `kategori_ppob` (
   `id_kategori` int(10) NOT NULL,
-  `nama` varchar(50) NOT NULL
+  `nama_ppob` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `kategori_ppob`
 --
 
-INSERT INTO `kategori_ppob` (`id_kategori`, `nama`) VALUES
+INSERT INTO `kategori_ppob` (`id_kategori`, `nama_ppob`) VALUES
 (1, 'TAGIHAN PLN'),
 (2, 'PDAM'),
 (3, 'GAS'),
@@ -786,7 +791,9 @@ INSERT INTO `login` (`id_login`, `id_user`, `browser`, `browser_version`, `os`, 
 (272, 4, 'Chrome', '83.0.4103.116', 'Windows 7', '::1', 0, '2020-07-07 03:46:45'),
 (273, 4, 'Chrome', '83.0.4103.116', 'Windows 7', '::1', 0, '2020-07-07 10:04:06'),
 (274, 4, 'Chrome', '83.0.4103.116', 'Windows 7', '::1', 0, '2020-07-07 04:23:48'),
-(275, 4, 'Chrome', '83.0.4103.116', 'Windows 7', '::1', 0, '2020-07-07 07:41:41');
+(275, 4, 'Chrome', '83.0.4103.116', 'Windows 7', '::1', 0, '2020-07-07 07:41:41'),
+(276, 4, 'Chrome', '83.0.4103.116', 'Mac OS X', '::1', 0, '2020-07-07 09:39:02'),
+(277, 4, 'Chrome', '83.0.4103.116', 'Mac OS X', '::1', 0, '2020-07-07 07:56:41');
 
 -- --------------------------------------------------------
 
@@ -815,9 +822,6 @@ INSERT INTO `no_telephone` (`id`, `nama`, `nomor`) VALUES
 (9, 'Pakde nur 8', '087784882526'),
 (10, 'Pakde nur - paket 1', '081398540424'),
 (11, 'Pakde nur - paket 2', '08891523677'),
-(13, 'IRHAM MASIH HUTANG + DIPAKE FARHAN 5K', '5000 + 5000'),
-(14, 'No token pakde mardi [nama pel: rd TMII]', '14236668613'),
-(15, 'No token mba yuni [nama pel: sumardiono]', '86017909234'),
 (16, 'kode voucher axis 1GB/5Hr masih aktiv, isi ulang m', '572574116938484');
 
 -- --------------------------------------------------------
@@ -830,8 +834,17 @@ CREATE TABLE `pelanggan_ppob` (
   `id_pelanggan` int(10) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `kategori_ppob` int(10) NOT NULL,
-  `nomor` int(25) NOT NULL
+  `nomor` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pelanggan_ppob`
+--
+
+INSERT INTO `pelanggan_ppob` (`id_pelanggan`, `nama`, `kategori_ppob`, `nomor`) VALUES
+(1, 'KOMPLEK TMII (ats nama: rd TMII)', 6, '14236668613'),
+(2, 'Mba yuni (ats nm: sumardiyono)', 6, '86017909234'),
+(3, 'SUMINTRI', 1, '525041051349');
 
 -- --------------------------------------------------------
 
@@ -1727,7 +1740,34 @@ INSERT INTO `pemasukan` (`id_pemasukan`, `nama`, `nominal`, `date`, `time`) VALU
 (914, 'PENJUALAN: Pulsa Telkomsel 10k', 12000, '2020-07-10', '07:50:00'),
 (915, 'PENJUALAN: Pulsa XL 10k', 12000, '2020-07-10', '07:51:00'),
 (916, 'PENJUALAN: Pulsa telkomsel 25k - temen zulfa', 27000, '2020-07-10', '08:05:00'),
-(917, 'PENJUALAN: Token Listrik 50k', 52000, '2020-07-10', '08:12:00');
+(917, 'PENJUALAN: Token Listrik 50k', 52000, '2020-07-10', '08:12:00'),
+(918, 'PENJUALAN: Pulsa tri 5k', 7000, '2020-07-10', '09:40:00'),
+(919, 'PENJUALAN: Pulsa telkomsel 50k', 52000, '2020-07-10', '11:12:00'),
+(920, 'PENJUALAN: Pulsa Indosat 50k', 52000, '2020-07-10', '16:16:00'),
+(921, 'PENJUALAN: Pulsa axis 5k', 7000, '2020-07-11', '10:47:00'),
+(922, 'PENJUALAN: VOUCHER AXIS 2 GB ( 7 HARI )', 17000, '2020-07-11', '10:48:00'),
+(923, 'PENJUALAN: pulsa telkomsel 35k - fathur', 37000, '2020-07-11', '10:49:00'),
+(924, 'PENJUALAN: Pulsa Telkomsel 25k - arfa', 27000, '2020-07-11', '10:49:00'),
+(925, 'PENJUALAN: Pulsa telkomsel 5k - yu omah', 7000, '2020-07-11', '10:50:00'),
+(926, 'PENJUALAN: Token listrik 100k - pakde ansor', 102000, '2020-07-11', '10:51:00'),
+(927, 'PENJUALAN: Pulsa telkomsel 25k - pakde nur', 27000, '2020-07-11', '10:52:00'),
+(928, 'PENJUALAN: Pulsa telkomsel 25k - ali', 27000, '2020-07-11', '10:52:00'),
+(929, 'PENJUALAN: pulsa xl 5k - pakde nur', 7000, '2020-07-11', '11:00:00'),
+(930, 'PENJUALAN: pulsa xl 5k - pakde nur', 7000, '2020-07-11', '11:00:00'),
+(931, 'PENJUALAN: pulsa telkomsel 10k - pakde nur', 12000, '2020-07-11', '11:00:00'),
+(932, 'PENJUALAN: Pulsa XL 10K - pak amin', 12000, '2020-07-11', '11:13:00'),
+(933, 'PENJUALAN: VOUCHER SMARTFREN UNLIMITED LITE _500MB/HR_(28 HR) - ricky glorie', 50000, '2020-07-11', '11:31:00'),
+(934, 'PENJUALAN: Pulsa telkomsel 25k', 27000, '2020-07-11', '11:42:00'),
+(935, 'PENJUALAN: VOUCHER INDOSAT 2GB + ULT APPS', 41000, '2020-07-11', '14:02:00'),
+(936, 'PENJUALAN: Pulsa tri 10k', 12000, '2020-07-11', '17:06:00'),
+(937, 'PENJUALAN: PERDANA SMARTFREN DATA TOTAL KUOTA 5GB', 15000, '2020-07-11', '19:07:00'),
+(938, 'PENJUALAN: PERDANA AXIS 2GB 30 HARI ', 22000, '2020-07-11', '19:07:00'),
+(939, 'PENJUALAN: VOUCHER AXIS 1 GB (5 HR)- Cahyo Sales', 10000, '2020-07-11', '19:10:00'),
+(940, 'PENJUALAN: token listrik 50k', 52000, '2020-07-11', '20:49:00'),
+(941, 'PENJUALAN: pulsa axis 10k', 12000, '2020-07-11', '21:07:00'),
+(942, 'PENJUALAN: Pulsa xl 25k yukul', 27000, '2020-07-13', '07:58:00'),
+(943, 'PENJUALAN: Pulsa telkomsel 55k - salma yayu kul', 57000, '2020-07-13', '07:59:00'),
+(944, 'PENJUALAN: pulsa xl 15k - yayu kul', 17000, '2020-07-13', '08:00:00');
 
 -- --------------------------------------------------------
 
@@ -1878,7 +1918,12 @@ INSERT INTO `pengeluaran` (`id_pengeluaran`, `nama`, `nominal`, `date`, `time`) 
 (133, 'mamake bayar listrik kurang', 59471, '2020-07-07', '17:42:00'),
 (134, 'linda beli pulpen', 5000, '2020-07-08', '09:59:00'),
 (135, 'Voucher Mas Yoga', 1084200, '2020-07-09', '10:08:00'),
-(136, 'beli pukis + jajan', 61000, '2020-07-09', '16:24:00');
+(136, 'beli pukis + jajan', 61000, '2020-07-09', '16:24:00'),
+(137, 'fengemis nini nini', 2000, '2020-07-10', '13:34:00'),
+(138, 'bos nyolong parah, buat beli jambu', 500000, '2020-07-11', '11:07:00'),
+(139, 'fengemis nini nini gada retcehhhh', 2000, '2020-07-11', '12:45:00'),
+(140, 'fengamen & fengemis', 1000, '2020-07-11', '17:24:00'),
+(141, 'isi saldo dong order kuota sama mitra', 800000, '2020-07-11', '21:08:00');
 
 -- --------------------------------------------------------
 
@@ -2854,7 +2899,34 @@ INSERT INTO `penjualan` (`id_penjualan`, `kasir`, `kode_brg`, `nama_brg`, `harga
 (1032, 0, 0, 'Pulsa Telkomsel 10k', 10625, 12000, 1, 12000, '2020-07-10', '07:50:00', 'elektrik', 'offline'),
 (1033, 0, 0, 'Pulsa XL 10k', 10820, 12000, 1, 12000, '2020-07-10', '07:51:00', 'elektrik', 'offline'),
 (1034, 0, 0, 'Pulsa telkomsel 25k - temen zulfa', 24900, 27000, 1, 27000, '2020-07-10', '08:05:00', 'elektrik', 'offline'),
-(1035, 0, 0, 'Token Listrik 50k', 50150, 52000, 1, 52000, '2020-07-10', '08:12:00', 'elektrik', 'offline');
+(1035, 0, 0, 'Token Listrik 50k', 50150, 52000, 1, 52000, '2020-07-10', '08:12:00', 'elektrik', 'offline'),
+(1036, 0, 0, 'Pulsa tri 5k', 5331, 7000, 1, 7000, '2020-07-10', '09:40:00', 'elektrik', 'offline'),
+(1037, 0, 0, 'Pulsa telkomsel 50k', 49470, 52000, 1, 52000, '2020-07-10', '11:12:00', 'elektrik', 'offline'),
+(1038, 0, 0, 'Pulsa Indosat 50k', 49075, 52000, 1, 52000, '2020-07-10', '16:16:00', 'elektrik', 'offline'),
+(1039, 0, 0, 'Pulsa axis 5k', 5850, 7000, 1, 7000, '2020-07-11', '10:47:00', 'elektrik', 'offline'),
+(1040, 0, 264, 'VOUCHER AXIS 2 GB ( 7 HARI )', 0, 17000, 1, 17000, '2020-07-11', '10:48:00', 'non-elektrik', 'offline'),
+(1041, 0, 0, 'pulsa telkomsel 35k - fathur', 34850, 37000, 1, 37000, '2020-07-11', '10:49:00', 'elektrik', 'offline'),
+(1042, 0, 0, 'Pulsa Telkomsel 25k - arfa', 24874, 27000, 1, 27000, '2020-07-11', '10:49:00', 'elektrik', 'offline'),
+(1043, 0, 0, 'Pulsa telkomsel 5k - yu omah', 5811, 7000, 1, 7000, '2020-07-11', '10:50:00', 'elektrik', 'offline'),
+(1044, 0, 0, 'Token listrik 100k - pakde ansor', 100175, 102000, 1, 102000, '2020-07-11', '10:51:00', 'elektrik', 'offline'),
+(1045, 0, 0, 'Pulsa telkomsel 25k - pakde nur', 24874, 27000, 1, 27000, '2020-07-11', '10:52:00', 'elektrik', 'offline'),
+(1046, 0, 0, 'Pulsa telkomsel 25k - ali', 24874, 27000, 1, 27000, '2020-07-11', '10:52:00', 'elektrik', 'offline'),
+(1047, 0, 0, 'pulsa xl 5k - pakde nur', 5775, 7000, 1, 7000, '2020-07-11', '11:00:00', 'elektrik', 'offline'),
+(1048, 0, 0, 'pulsa xl 5k - pakde nur', 5775, 7000, 1, 7000, '2020-07-11', '11:00:00', 'elektrik', 'offline'),
+(1049, 0, 0, 'pulsa telkomsel 10k - pakde nur', 10550, 12000, 1, 12000, '2020-07-11', '11:00:00', 'elektrik', 'offline'),
+(1050, 0, 0, 'Pulsa XL 10K - pak amin', 10820, 12000, 1, 12000, '2020-07-11', '11:13:00', 'elektrik', 'offline'),
+(1051, 0, 170, 'VOUCHER SMARTFREN UNLIMITED LITE _500MB/HR_(28 HR) - ricky glorie', 0, 50000, 1, 50000, '2020-07-11', '11:31:00', 'non-elektrik', 'offline'),
+(1052, 0, 0, 'Pulsa telkomsel 25k', 24874, 27000, 1, 27000, '2020-07-11', '11:42:00', 'elektrik', 'offline'),
+(1053, 0, 303, 'VOUCHER INDOSAT 2GB + ULT APPS', 0, 41000, 1, 41000, '2020-07-11', '14:02:00', 'non-elektrik', 'offline'),
+(1054, 0, 0, 'Pulsa tri 10k', 10231, 12000, 1, 12000, '2020-07-11', '17:06:00', 'elektrik', 'offline'),
+(1055, 0, 19, 'PERDANA SMARTFREN DATA TOTAL KUOTA 5GB', 0, 15000, 1, 15000, '2020-07-11', '19:07:00', 'non-elektrik', 'offline'),
+(1056, 0, 178, 'PERDANA AXIS 2GB 30 HARI ', 0, 22000, 1, 22000, '2020-07-11', '19:07:00', 'non-elektrik', 'offline'),
+(1057, 0, 150, 'VOUCHER AXIS 1 GB (5 HR)- Cahyo Sales', 0, 10000, 1, 10000, '2020-07-11', '19:10:00', 'non-elektrik', 'offline'),
+(1058, 0, 0, 'token listrik 50k', 50150, 52000, 1, 52000, '2020-07-11', '20:49:00', 'elektrik', 'offline'),
+(1059, 0, 0, 'pulsa axis 10k', 10820, 12000, 1, 12000, '2020-07-11', '21:07:00', 'elektrik', 'offline'),
+(1060, 0, 0, 'Pulsa xl 25k yukul', 24825, 27000, 1, 27000, '2020-07-13', '07:58:00', 'elektrik', 'offline'),
+(1061, 0, 0, 'Pulsa telkomsel 55k - salma yayu kul', 54650, 57000, 1, 57000, '2020-07-13', '07:59:00', 'elektrik', 'offline'),
+(1062, 0, 0, 'pulsa xl 15k - yayu kul', 14990, 17000, 1, 17000, '2020-07-13', '08:00:00', 'elektrik', 'offline');
 
 -- --------------------------------------------------------
 
@@ -2872,7 +2944,7 @@ CREATE TABLE `saldo_fisik` (
 --
 
 INSERT INTO `saldo_fisik` (`id`, `saldo`) VALUES
-(1, 1053252);
+(1, 490252);
 
 -- --------------------------------------------------------
 
@@ -3044,7 +3116,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=309;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=312;
 
 --
 -- AUTO_INCREMENT for table `barang_elektrik`
@@ -3062,7 +3134,7 @@ ALTER TABLE `cookie`
 -- AUTO_INCREMENT for table `hutang_elektrik`
 --
 ALTER TABLE `hutang_elektrik`
-  MODIFY `id_hutang_elektrik` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
+  MODIFY `id_hutang_elektrik` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
 -- AUTO_INCREMENT for table `kategori_ppob`
@@ -3074,7 +3146,7 @@ ALTER TABLE `kategori_ppob`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=276;
+  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=278;
 
 --
 -- AUTO_INCREMENT for table `no_telephone`
@@ -3086,25 +3158,25 @@ ALTER TABLE `no_telephone`
 -- AUTO_INCREMENT for table `pelanggan_ppob`
 --
 ALTER TABLE `pelanggan_ppob`
-  MODIFY `id_pelanggan` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pelanggan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pemasukan`
 --
 ALTER TABLE `pemasukan`
-  MODIFY `id_pemasukan` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=918;
+  MODIFY `id_pemasukan` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=945;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
-  MODIFY `id_pengeluaran` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `id_pengeluaran` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1036;
+  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1063;
 
 --
 -- AUTO_INCREMENT for table `saldo_fisik`
