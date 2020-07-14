@@ -267,6 +267,55 @@ class Option extends CI_Controller {
     }
   } 
 
+  public function save_menabung(){
+    $this->load->model('model_saldo');
+    $this->load->model('model_menabung');
+
+    $saldo_fisik = $this->model_saldo->getSaldoFisik();
+    $kategori_input = $this->input->post('kategori');
+    $nominal_input =$this->input->post('nominal');
+    $date_input = $this->input->post('date');
+
+    if ($nominal_input > $saldo_fisik->saldo) {
+      echo json_encode([
+        "status" => FALSE,
+        "message" => 'Saldo fisik anda tidak mencukupi!!',
+      ]);
+    } else {
+      $data_tabungan = $this->model_menabung->get_by_date($date_input);
+      
+      if (count($data_tabungan) == 0) {
+        $data =[
+          'kategori_menabung' => $kategori_input,
+          'bulan'             => $date_input,
+          'nominal'           => $nominal_input
+        ];
+  
+        $this->model_menabung->insert_menabung($data);
+      } else {
+        $item = null;
+        foreach($data_tabungan as $struct) {
+          if ($kategori_input == $struct->kategori_menabung) {
+            $item = $struct;
+            break;
+          }
+        }
+
+        $dataSaving =[ 'nominal'  => $item->nominal + $nominal_input ];
+        $this->model_menabung->update(array('id_menabung' => $item->id_menabung), $dataSaving);
+      }
+
+      
+      $dataSaldo =[ 'saldo' => $saldo_fisik->saldo - $nominal_input ];
+      $this->model_saldo->updateSaldoFisik(array('id' => '1'), $dataSaldo);
+
+      echo json_encode([
+        "status" => TRUE,
+        "message" => "Sukses tersimpan!",
+      ]);
+    }
+  } 
+
   public function lunasi_hutang($id){
     $this->load->model('model_hutang');
 
@@ -769,6 +818,14 @@ public function update_ppob(){
 		$this->load->view('kasir/hutang_view');
 	}
 
+	public function menabung(){
+		$this->load->view('kasir/menabung_view');
+  }
+  
+  public function menabung_details($date){
+		$this->load->view('kasir/menabung_detail', ['date' => $date]);
+	}
+
 	public function data_pemasukan(){
 		$this->load->view('kasir/pemasukan_view');
 	}
@@ -846,6 +903,56 @@ public function update_ppob(){
 			"data" => $data,
 		];
 		echo json_encode($output);
+  }
+
+  function date_to_month_name($d) {
+    $yrdata = strtotime($d);
+    return date('M-Y', $yrdata);
+  }
+
+  public function get_menabung(){
+    $this->load->model('model_menabung');
+		$list = $this->model_menabung->get_datatables();
+		$data = [];
+		$no = $_POST['start'];
+		$n=0;
+
+		foreach ($list as $barang) {
+			$n++;
+			$row = [];
+			$row[] = $n;
+      $row[] = date('M-Y', strtotime($barang->bulan));
+			$row[] = '<a href="'.site_url().'option/menabung_details/'.$barang->bulan.'" class="btn btn-sm btn-success">Details</a>';
+      
+      $dataNowLength = count($data);
+      if ($dataNowLength == 0) {
+        $data[] = $row;
+      } else {
+        if ($data[$dataNowLength - 1][1] != date('M-Y', strtotime($barang->bulan))) {
+          $data[] = $row;
+        }
+      }
+		}
+		
+		$output = [
+      "data" => $data,
+      "draw" => $_POST['draw'],
+			"recordsTotal" => $this->model_menabung->count_all(),
+			"recordsFiltered" => $this->model_menabung->count_filtered(),
+    ];
+		echo json_encode($output);
+  }
+
+  public function get_menabung_by_date($date){
+    $this->load->model('model_menabung');
+		$data_by_date = $this->model_menabung->get_by_date($date);
+		echo json_encode($data_by_date);
+  }
+
+  public function get_kontrakan_by_tahun($tahun){
+    $this->load->model('model_menabung');
+		$data = $this->model_menabung->get_kontrakan_by_tahun($tahun);
+		echo json_encode($data);
   }
 
   public function get_no_telp(){

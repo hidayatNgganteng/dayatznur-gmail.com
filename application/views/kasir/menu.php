@@ -45,6 +45,14 @@
   <hr class="sidebar-divider">
 
   <li class="nav-item">
+    <a class="nav-link" href="<?= site_url() ?>option/menabung">
+    <i class="fas fa-save"></i>
+      <span>Menabung</span></a>
+  </li>
+
+  <hr class="sidebar-divider">
+
+  <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_barang" aria-expanded="true" aria-controls="collapse_barang">
       <i class="fas fa-fw fa-cubes"></i>
       <span>Data barang</span>
