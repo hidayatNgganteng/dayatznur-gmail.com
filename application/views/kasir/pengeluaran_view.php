@@ -141,7 +141,6 @@
                data: $('#form').serialize(),
                dataType: "JSON",
                success: function(data){
-                 console.log("data", data)
                    if(data.status){
                        $('#modal_form').modal('hide');
                        reload_table();

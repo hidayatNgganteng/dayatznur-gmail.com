@@ -270,6 +270,7 @@ class Option extends CI_Controller {
   public function save_menabung(){
     $this->load->model('model_saldo');
     $this->load->model('model_menabung');
+    $this->load->model('model_io');
 
     $saldo_fisik = $this->model_saldo->getSaldoFisik();
     $kategori_input = $this->input->post('kategori');
@@ -305,7 +306,20 @@ class Option extends CI_Controller {
         $this->model_menabung->update(array('id_menabung' => $item->id_menabung), $dataSaving);
       }
 
-      
+      // pengeluaran
+      $datestring = '%H:%i';
+      $time 		= time();
+      $waktu 		= mdate($datestring, $time);
+
+      $data = [
+        'nama' 		=> 'Masuk Tabungan',
+        'nominal' 		=> $nominal_input,
+        'date' => date('Y-m-d'),
+        'time' => $waktu
+      ];
+      $insert = $this->model_io->save_pengeluaran($data);
+	  
+		  //  kurangi saldo fisik
       $dataSaldo =[ 'saldo' => $saldo_fisik->saldo - $nominal_input ];
       $this->model_saldo->updateSaldoFisik(array('id' => '1'), $dataSaldo);
 

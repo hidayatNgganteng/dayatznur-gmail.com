@@ -52,7 +52,7 @@
       justify-content: center;
     }
     .mg-top {
-      margin-top: 70px;
+      margin-top: 40px;
     }
   </style>
 </head>
@@ -76,7 +76,7 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
             <div class="row">
-              <div class="col-md-10">
+              <div class="col-md-12">
                 <div class="content">
                   <h2>Kontrakan</h2>
                   <div class="progress progress_bar basicColor">
@@ -85,13 +85,10 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-2 flex-center">
-                <button class="btn btn-info" onclick="nabung(1)"><i class="glyphicon glyphicon-plus"></i> Nabung</button>
-              </div>
             </div>
 
             <div class="row mg-top">
-              <div class="col-md-10">
+              <div class="col-md-12">
                 <div class="content">
                   <h2>Sedekah</h2>
                   <div class="progress progress_bar basicColor">
@@ -100,13 +97,10 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-2 flex-center">
-                <button class="btn btn-success" onclick="nabung(2)"><i class="glyphicon glyphicon-plus"></i> Nabung</button>
-              </div>
             </div>
 
             <div class="row mg-top">
-              <div class="col-md-10">
+              <div class="col-md-12">
                 <div class="content">
                   <h2>Kas toko</h2>
                   <div class="progress progress_bar basicColor">
@@ -115,12 +109,14 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-2 flex-center">
-                <button class="btn btn-danger" onclick="nabung(3)"><i class="glyphicon glyphicon-plus"></i> Nabung</button>
+            </div>
+
+            <div class="row mg-top">
+              <div class="col-md-6">
+                <button class="btn btn-success" onclick="nabung()"><i class="glyphicon glyphicon-plus"></i> Nabung</button>
               </div>
             </div>
         </div>
-
       </div>
 
       <?php $this->load->view('kasir/footer') ?>
@@ -145,6 +141,7 @@
   <script src="<?php echo base_url() ?>assets/bootstrap-progressbar/bootstrap-progressbar.js"></script>
   <script>
       var lunasiHutangProses = false
+      var ktgKontrak, ktgSedekah, ktgKas
       $(document).ready(function(){
           var url = "<?php echo site_url('option/get_menabung_by_date/'.$date.'') ?>";
           var url_kontrakan = "<?php echo site_url('option/get_kontrakan_by_tahun/'.date('Y', strtotime($date)).'') ?>";
@@ -154,9 +151,9 @@
             type: "POST",
             dataType: "JSON",
             success: function(data){
-              var ktgKontrak = data.find(item => item.kategori_menabung == 1)
-              var ktgSedekah = data.find(item => item.kategori_menabung == 2)
-              var ktgKas = data.find(item => item.kategori_menabung == 3)
+              ktgKontrak = data.find(item => item.kategori_menabung == 1)
+              ktgSedekah = data.find(item => item.kategori_menabung == 2)
+              ktgKas = data.find(item => item.kategori_menabung == 3)
 
               $("#kontrakan").attr('data-transitiongoal', ktgKontrak.nominal)
               $("#sedekah").attr('data-transitiongoal', ktgSedekah.nominal)
@@ -228,8 +225,8 @@
 
                       const currentDateData = dataSend.find(item => item.tgl_transaksi_full.split("-")[1] == dateSplit[1])
 
-                      $("#kas").attr('aria-valuemax', Math.ceil(currentDateData.neto))
-                      $("#kas-total").text(`Rp. ${Math.ceil(currentDateData.neto)}`)
+                      $("#kas").attr('aria-valuemax', Math.ceil(currentDateData.neto) - Math.ceil(ktgSedekah.nominal) - Math.ceil(ktgKontrak.nominal))
+                      $("#kas-total").text(`Rp. ${Math.ceil(currentDateData.neto) - Math.ceil(ktgSedekah.nominal) - Math.ceil(ktgKontrak.nominal)}`)
                       $('#kas').progressbar({
                         display_text: 'fill',
                         percent_format: percent => {
@@ -281,15 +278,30 @@
           }
         }
 
-       function nabung(kategori) {
-        $("#form-kategori").val(kategori)
+       function nabung() {
         $("#form-date").val("<?php echo $date ?>")
         $('#form')[0].reset()
         $('#modal_form').modal('show') 
        }
 
-       function save(kategori) {
+       function save() {
         const url = "<?php echo site_url('option/save_menabung') ?>";
+        const kategori = $("#form-kategori").val()
+        let valMax = 0
+        const nominal = $("#form-nominal").val()
+
+        if (kategori == 1) {
+          valMax = $("#kontrakan").attr('aria-valuemax') - ktgKontrak.nominal
+        } else if (kategori == 2) {
+          valMax = $("#sedekah").attr('aria-valuemax') - ktgSedekah.nominal
+        } else {
+          valMax = $("#kas").attr('aria-valuemax') - ktgKas.nominal
+        }
+
+        if (nominal > valMax) {
+          alert(`Tabungan tidak boleh melebihi target (Rp. ${valMax})!!!!`)
+          return
+        }
 
         $.ajax({
           url : url,
@@ -326,13 +338,20 @@
             
             <div class="modal-body form">
               <form id="form" class="form-horizontal">
-                <input type="hidden" class="form-control" name="kategori" id="form-kategori">
                 <input type="hidden" class="form-control" name="date" id="form-date">
                 <div class="form-body">
                   <div class="form-group">
                     <label for="nominal" class="col-form-label">Nominal</label>
-                    <input type="text" class="form-control " name="nominal">
+                    <input type="text" class="form-control " name="nominal" id="form-nominal">
                     <div class="invalid-feedback"></div>
+                  </div>
+                  <div class="form-group mt-2">
+                    <label for="kategori">Kategori</label>
+                    <select class="form-control " name="kategori" id="form-kategori">
+                      <option value="1">Kontrakan</option>
+                      <option value="2">Sedekah</option>
+                      <option value="3">Kas Toko</option>
+                    </select>
                   </div>
                 </div>
               </form>
