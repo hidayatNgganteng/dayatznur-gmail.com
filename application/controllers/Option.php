@@ -38,7 +38,8 @@ class Option extends CI_Controller {
 			if($this->session->userdata('level') == 1 ){
 				$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_barang('."'".$barang->id_barang."'".')"><i class="far fa-edit"></i></a>
 				  	  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_barang('."'".$barang->id_barang."'".')"><i class="far fa-trash-alt"></i></a>
-				  	  <a deskripsi="'.$barang->deskripsi.'" id="'.$barang->id_barang.'" class="btn btn-sm btn-info" href="javascript:void(0)" title="Info" onclick="open_deskripsi('."'".$barang->id_barang."'".')"><i class="far fa-comment"></i></a>';
+						<a deskripsi="'.$barang->deskripsi.'" id="'.$barang->id_barang.'" class="btn btn-sm btn-info" href="javascript:void(0)" title="Info" onclick="open_deskripsi('."'".$barang->id_barang."'".')"><i class="far fa-comment"></i></a>
+						<a class="btn btn-sm btn-success" href="javascript:void(0)" onclick="copy('."'".$barang->id_barang."'".')"><i class="far fa-copy"></i></a>';
 			}else{
 				$row[] = '<a class="btn btn-sm btn-warning disabled" href="javascript:void(0)" title="Edit" ><i class="far fa-edit"></i></a>
 				  	  <a class="btn btn-sm btn-danger disabled" href="javascript:void(0)" title="Hapus" ><i class="far fa-trash-alt"></i></a>

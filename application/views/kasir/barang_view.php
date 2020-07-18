@@ -233,6 +233,36 @@
                });
        }
 
+       function copy(id) {
+        save_method = 'add'
+        $('#form')[0].reset();
+          $.ajax({
+          url : "<?php echo site_url('option/edit_barang')?>/" + id,
+          type: "GET",
+          dataType: "JSON",
+          success: function(data) {
+            $('[name="id"]').val(data.id_barang)
+            $('[name="setatus_barang"]').val(data.setatus_barang)
+            $('[name="nama_barang"]').val(data.nama_barang)
+            $('[name="harga_beli"]').val(data.harga_beli)
+            $('[name="harga_jual"]').val(data.harga_jual)
+            $('[name="harga_jual_online"]').val(data.harga_jual_online)
+            $('[name="harga_jual_reseller"]').val(data.harga_jual_reseller)
+            $('[name="deskripsi"]').val(data.deskripsi)
+            $('[name="setok"]').val(data.setok)
+            $('[name="satuan"]').val(data.satuan)
+            $("#harga_jual_online_rekomendasi").text("")
+            $("#harga_jual_reseller_rekomendasi").text("")
+
+            $('#modal_form').modal('show')
+            $('.modal-title').text('Salin barang')
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            alert('Error get data from ajax')
+          }
+        })
+       }
+
        function open_deskripsi(id){
         var deskripsi = $(`#${id}`).attr('deskripsi')
         $("#deskripsi").text(deskripsi)
