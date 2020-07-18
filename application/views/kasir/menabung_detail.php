@@ -54,6 +54,11 @@
     .mg-top {
       margin-top: 40px;
     }
+    .notes {
+      color: red;
+      font-style: italic;
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -114,6 +119,12 @@
             <div class="row mg-top">
               <div class="col-md-6">
                 <button class="btn btn-success" onclick="nabung()"><i class="glyphicon glyphicon-plus"></i> Nabung</button>
+              </div>
+            </div>
+
+            <div class="row mg-top">
+              <div class="col-md-6">
+                <p class="notes">#Utamakan kontrakan Dahulu ya! Terimakasih</p>
               </div>
             </div>
         </div>

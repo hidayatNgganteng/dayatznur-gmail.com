@@ -45,9 +45,15 @@
   <hr class="sidebar-divider">
 
   <li class="nav-item">
-    <a class="nav-link" href="<?= site_url() ?>option/menabung">
-    <i class="fas fa-save"></i>
-      <span>Menabung</span></a>
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_nabung" aria-expanded="true" aria-controls="collapse_nabung">
+      <i class="fas fa-fw fa-save"></i>
+      <span>Nabung</span>
+    </a>
+    <div id="collapse_nabung" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" href="<?= site_url() ?>option/menabung"><i class="fas fa-clipboard"></i> Menabung</a>
+        <a class="collapse-item" href="<?= site_url() ?>option/tabungan"><i class="fas fa-balance-scale"></i> Tabungan</a>
+    </div>
   </li>
 
   <hr class="sidebar-divider">

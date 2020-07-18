@@ -271,6 +271,7 @@ class Option extends CI_Controller {
     $this->load->model('model_saldo');
     $this->load->model('model_menabung');
     $this->load->model('model_io');
+    $this->load->model('model_tabungan');
 
     $saldo_fisik = $this->model_saldo->getSaldoFisik();
     $kategori_input = $this->input->post('kategori');
@@ -323,12 +324,66 @@ class Option extends CI_Controller {
       $dataSaldo =[ 'saldo' => $saldo_fisik->saldo - $nominal_input ];
       $this->model_saldo->updateSaldoFisik(array('id' => '1'), $dataSaldo);
 
+      // update total saldo
+      if ($kategori_input == 1) {
+        $tabunganKontrakanSaatIni = $this->model_tabungan->getSaldoKontrakan();
+        $where = [ 'kategori_tabungan' => $kategori_input ];
+        $data = [ 'nominal' => $tabunganKontrakanSaatIni->nominal + $nominal_input];
+
+        $this->model_tabungan->update($where, $data);
+      } else if ($kategori_input == 3)  {
+        $tabunganKasSaatIni = $this->model_tabungan->getSaldoKas();
+        $where = [ 'kategori_tabungan' => $kategori_input ];
+        $data = [ 'nominal' => $tabunganKasSaatIni->nominal + $nominal_input];
+
+        $this->model_tabungan->update($where, $data);
+      }
+
       echo json_encode([
         "status" => TRUE,
         "message" => "Sukses tersimpan!",
       ]);
     }
   } 
+
+  public function simpan_pengeluaran_tabungan(){
+    $this->_validate_simpan_pengeluaran_tabungan();
+
+    $this->load->model('model_tabungan');
+
+    // pengeluaran
+    $kategori = $this->input->post('kategori');
+    $keterangan = $this->input->post('keterangan');
+    $nominal = $this->input->post('nominal');
+
+    $data = [
+      'kategori_menabung' 		=> $kategori,
+      'nama' 		=> $keterangan,
+      'nominal' => $nominal,
+      'date' => date('Y-m-d')
+    ];
+    $insert = $this->model_tabungan->insert_pengeluaran($data);
+    $tabungan_akhir = 0;
+
+    // kurangi saldo tabungan sesuai kategori
+    if ($kategori == 1) {
+      $tabunganKontrakanSaatIni = $this->model_tabungan->getSaldoKontrakan();
+      $tabungan_akhir = $tabunganKontrakanSaatIni->nominal - $nominal;
+      $dataSave = ['nominal' => $tabungan_akhir];
+      $this->model_tabungan->update(array('kategori_tabungan' => 1), $dataSave);
+    } else if ($kategori == 3) {
+      $tabunganKasSaatIni = $this->model_tabungan->getSaldoKas();
+      $tabungan_akhir = $tabunganKasSaatIni->nominal - $nominal;
+      $dataSave = ['nominal' => $tabungan_akhir];
+      $this->model_tabungan->update(array('kategori_tabungan' => 3), $dataSave);
+    }
+
+    echo json_encode([
+      "status" => TRUE,
+      "kategori" => $kategori,
+      "tabungan_akhir" => $tabungan_akhir
+    ]);
+  }
 
   public function lunasi_hutang($id){
     $this->load->model('model_hutang');
@@ -616,6 +671,52 @@ public function update_ppob(){
             exit();
         }
     }
+
+    private function _validate_simpan_pengeluaran_tabungan(){
+      $this->load->model('model_tabungan');
+      $data = [];
+      $data['error_string'] = [];
+      $data['inputerror'] = [];
+      $data['status'] = TRUE;
+
+      if($this->input->post('nominal') == ''){
+          $data['inputerror'][] = 'nominal';
+          $data['error_string'][] = 'Nominal tidak boleh kosong!';
+          $data['status'] = FALSE;
+      } else {
+        $nominal = $this->input->post('nominal');
+        $kategori = $this->input->post('kategori') == 1 ? 'Kontrakan' : 'Kas toko';
+
+        if ($this->input->post('kategori') == 1) {
+          $tabunganKontrakanSaatIni = $this->model_tabungan->getSaldoKontrakan();
+
+          if ($nominal > $tabunganKontrakanSaatIni->nominal) {
+            $data['inputerror'][] = 'nominal';
+            $data['error_string'][] = 'Nominal tidak boleh lebih dari tabungan '.$kategori.'('.$tabunganKontrakanSaatIni->nominal.')';
+            $data['status'] = FALSE;
+          }
+        } else if ($this->input->post('kategori') == 3) {
+          $tabunganKasSaatIni = $this->model_tabungan->getSaldoKas();
+
+          if ($nominal > $tabunganKasSaatIni->nominal) {
+            $data['inputerror'][] = 'nominal';
+            $data['error_string'][] = 'Nominal tidak boleh lebih dari tabungan '.$kategori.'('.$tabunganKasSaatIni->nominal.')';
+            $data['status'] = FALSE;
+          }
+        }
+      }
+
+      if($this->input->post('keterangan') == ''){
+        $data['inputerror'][] = 'keterangan';
+        $data['error_string'][] = 'Keterangan tidak boleh kosong!';
+        $data['status'] = FALSE;
+    }
+
+      if($data['status'] === FALSE){
+          echo json_encode($data);
+          exit();
+      }
+  }
 	
 	private function _validate(){
         $data = [];
@@ -835,6 +936,13 @@ public function update_ppob(){
 	public function menabung(){
 		$this->load->view('kasir/menabung_view');
   }
+
+  public function tabungan(){
+    $this->load->model('model_tabungan');
+    $data['saldo_kontrakan'] = $this->model_tabungan->getSaldoKontrakan();
+    $data['saldo_kas'] = $this->model_tabungan->getSaldoKas();
+		$this->load->view('kasir/tabungan_view', $data);
+  }
   
   public function menabung_details($date){
 		$this->load->view('kasir/menabung_detail', ['date' => $date]);
@@ -879,6 +987,39 @@ public function update_ppob(){
 			"draw" => $_POST['draw'],
 			"recordsTotal" => $this->model_penjualan->count_all(),
 			"recordsFiltered" => $this->model_penjualan->count_filtered(),
+			"data" => $data,
+		];
+		echo json_encode($output);
+  }
+
+  function numberToRupiah($no) {
+    $saldo = number_format($no,2,',','.');
+    $saldoInArray = explode(",",$saldo);
+    return "Rp " . $saldoInArray[0];
+  }
+
+  public function get_laporan_tabungan(){
+		$this->load->model('model_tabungan');
+		$list = $this->model_tabungan->get_datatables();
+		$data = [];
+		$no = $_POST['start'];
+		$n=0;
+
+		foreach ($list as $barang) {
+			$n++;
+			$row = [];
+			$row[] = $n;
+			$row[] = $barang->kategori_menabung == 1 ? 'Kontrakan' : 'Kas Toko';
+			$row[] = $barang->nama;
+      $row[] = $this->numberToRupiah($barang->nominal);
+      $row[] = $barang->date;
+			$data[] = $row;
+		}
+		
+		$output = [
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->model_tabungan->count_all(),
+			"recordsFiltered" => $this->model_tabungan->count_filtered(),
 			"data" => $data,
 		];
 		echo json_encode($output);
