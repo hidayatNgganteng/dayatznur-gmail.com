@@ -54,7 +54,7 @@
           </h2>
         </div>
         <div class="col-md-6">
-          <h4>Kas</h4>
+          <h4>Kas toko</h4>
           <h2 class="alert alert-info" role="alert" id="saldo-kas">
             <?php
               $saldo = number_format($saldo_kas->nominal,2,',','.');
