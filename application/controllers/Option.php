@@ -926,7 +926,8 @@ public function update_ppob(){
 
   public function get_menabung(){
     $this->load->model('model_menabung');
-		$list = $this->model_menabung->get_datatables();
+    $list = $this->model_menabung->get_datatables();
+    $isThisMonthExist = $this->model_menabung->get_by_date(date('Y-m-01'));
 		$data = [];
 		$no = $_POST['start'];
 		$n=0;
@@ -946,21 +947,44 @@ public function update_ppob(){
           $data[] = $row;
         }
       }
-		}
+    }
+
+    if (count($isThisMonthExist) == 0) {
+      $dataNew = [];
+      $dataNew[] = $n;
+      $dataNew[] = date('M-Y', strtotime(date('Y-m-01')));
+      $dataNew[] = '<a href="'.site_url().'option/menabung_details/'.date('Y-m-01').'" class="btn btn-sm btn-success">Details</a>';
+      $data[] = $dataNew;
+    }
 		
 		$output = [
       "data" => $data,
       "draw" => $_POST['draw'],
 			"recordsTotal" => $this->model_menabung->count_all(),
-			"recordsFiltered" => $this->model_menabung->count_filtered(),
+      "recordsFiltered" => $this->model_menabung->count_filtered()
     ];
 		echo json_encode($output);
   }
 
   public function get_menabung_by_date($date){
     $this->load->model('model_menabung');
-		$data_by_date = $this->model_menabung->get_by_date($date);
-		echo json_encode($data_by_date);
+    $data_by_date = $this->model_menabung->get_by_date($date);
+    
+    if (count($data_by_date) == 0) {
+      for ($i = 1; $i <= 3; $i++) {
+        $data = [
+          'kategori_menabung' => $i,
+          'bulan'             => $date,
+          'nominal'           => 0
+        ];
+  
+        $this->model_menabung->insert_menabung($data);
+      }
+
+      echo json_encode($this->model_menabung->get_by_date($date));
+    } else {
+      echo json_encode($data_by_date);
+    }
   }
 
   public function get_kontrakan_by_tahun($tahun){

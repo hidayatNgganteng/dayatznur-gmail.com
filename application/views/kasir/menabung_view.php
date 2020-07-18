@@ -87,7 +87,7 @@
               "type": "POST"
             },
             "lengthChange": false,
-            "responsive": true,
+            "responsive": true
           })
         })
        
