@@ -20,6 +20,21 @@
       margin-top: 50px;
       margin-bottom: 50px;
     }
+    .message {
+        padding: 15px 15px;
+        background-color: #ff3300;
+      }
+      .textMessage {
+        text-align: center;
+        color: #ffffff; 
+        font-weight: bold; 
+        animation: blinker 1s linear infinite;
+      }
+      @keyframes blinker {
+        50% {
+          opacity: 0;
+        }
+      }
   </style>
 </head>
 
@@ -28,6 +43,8 @@
     <?php $this->load->view('kasir/menu') ?>
 
     <div id="content-wrapper" class="d-flex flex-column">
+      <?php $this->load->view('kasir/message') ?>
+
       <div id="content">
 
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">

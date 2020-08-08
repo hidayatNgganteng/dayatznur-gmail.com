@@ -13,6 +13,23 @@
   <link href="<?= base_url() ?>assets/Responsive-2.2.2/css/responsive.bootstrap4.min.css" rel="stylesheet">
   <link href="<?= base_url() ?>assets/jquery-ui-1.12.1.custom/jquery-ui.min.css" rel="stylesheet">
   <title>kasir</title>
+   <style type="text/css">
+    .message {
+        padding: 15px 15px;
+        background-color: #ff3300;
+      }
+      .textMessage {
+        text-align: center;
+        color: #ffffff; 
+        font-weight: bold; 
+        animation: blinker 1s linear infinite;
+      }
+      @keyframes blinker {
+        50% {
+          opacity: 0;
+        }
+      }
+  </style>
 </head>
 
 <body id="page-top">
@@ -20,6 +37,8 @@
     <?php $this->load->view('kasir/menu') ?>
 
     <div id="content-wrapper" class="d-flex flex-column">
+      <?php $this->load->view('kasir/message') ?>
+
       <div id="content">
 
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -261,8 +280,10 @@
                       } else if (tgltahun == 'June 2020') {
                         return 35000 * 26
                       } else if (tgltahun == 'July 2020') {
-						return 40000 * 26
-					  } else {
+						            return 40000 * 26
+					            } else if (tgltahun == 'August 2020') {
+                        return 45000 * 26
+                      } else {
                         return 0
                       }
                     }),
