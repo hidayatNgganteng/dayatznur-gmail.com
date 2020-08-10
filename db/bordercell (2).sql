@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 10, 2020 at 03:08 AM
+-- Generation Time: Aug 10, 2020 at 03:10 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.1.32
 
@@ -605,12 +605,12 @@ INSERT INTO `hutang_elektrik` (`id_hutang_elektrik`, `nama_brg`, `harga_beli`, `
 (201, 'Pulsa Telkomsel 25k - iloh', 24850, 27000, '2020-08-06', '09:49:00', 'hutang'),
 (202, 'voucher telkomsel - kang tahrim', 20550, 22000, '2020-08-06', '09:51:00', 'lunas'),
 (203, 'Pulsa Telkomsel 25k - FAIK', 24850, 27000, '2020-08-07', '09:23:00', 'lunas'),
-(204, 'ISI DANA 10K - FARHAN', 10250, 12000, '2020-08-07', '09:39:00', 'hutang'),
+(204, 'ISI DANA 10K - FARHAN', 10250, 12000, '2020-08-07', '09:39:00', 'lunas'),
 (205, 'Pulsa Telkomsel 10k - arfa', 10575, 12000, '2020-08-07', '13:34:00', 'hutang'),
 (206, 'data game mobile legend - amin gunung', 23700, 26000, '2020-08-08', '11:48:00', 'lunas'),
 (207, 'Pulsa telkomsel 25k - ilham', 24850, 27000, '2020-08-08', '11:49:00', 'lunas'),
 (208, 'Token listrik 100k - amin wadas', 100175, 102000, '2020-08-08', '15:07:00', 'hutang'),
-(209, 'Pulsa telkomsel 5k - farhan', 5900, 7000, '2020-08-08', '19:41:00', 'hutang'),
+(209, 'Pulsa telkomsel 5k - farhan', 5900, 7000, '2020-08-08', '19:41:00', 'lunas'),
 (210, 'isi data Xtra combo - mba neno', 53650, 56000, '2020-08-10', '08:00:00', 'hutang'),
 (211, 'Pulsa telkomsel 50k - wahyu gunung', 49470, 52000, '2020-08-10', '08:03:00', 'hutang');
 
@@ -2339,7 +2339,10 @@ INSERT INTO `pemasukan` (`id_pemasukan`, `nama`, `nominal`, `date`, `time`) VALU
 (1304, 'PENJUALAN: Pulsa telkomsel 70k - hunen', 72000, '2020-08-10', '07:59:00'),
 (1305, 'PENJUALAN: Pulsa telkomsel 25k - ilham', 27000, '2020-08-10', '08:02:00'),
 (1306, 'PENJUALAN: data game mobile legend - amin gunung', 26000, '2020-08-10', '08:07:00'),
-(1307, 'PENJUALAN: Pulsa Telkomsel 25k - FAIK', 27000, '2020-08-10', '08:07:00');
+(1307, 'PENJUALAN: Pulsa Telkomsel 25k - FAIK', 27000, '2020-08-10', '08:07:00'),
+(1308, 'PENJUALAN: Pulsa telkomsel 5k - farhan', 7000, '2020-08-10', '08:09:00'),
+(1309, 'PENJUALAN: ISI DANA 10K - FARHAN', 12000, '2020-08-10', '08:09:00'),
+(1310, 'farhan ngebosi', 1000, '2020-08-10', '08:10:00');
 
 -- --------------------------------------------------------
 
@@ -3941,7 +3944,9 @@ INSERT INTO `penjualan` (`id_penjualan`, `kasir`, `kode_brg`, `nama_brg`, `harga
 (1411, 0, 0, 'Pulsa telkomsel 70k - hunen', 69600, 72000, 1, 72000, '2020-08-10', '07:59:00', 'elektrik', 'offline'),
 (1412, 0, 0, 'Pulsa telkomsel 25k - ilham', 24850, 27000, 1, 27000, '2020-08-10', '08:02:00', 'elektrik', 'offline'),
 (1413, 0, 0, 'data game mobile legend - amin gunung', 23700, 26000, 1, 26000, '2020-08-10', '08:07:00', 'elektrik', 'offline'),
-(1414, 0, 0, 'Pulsa Telkomsel 25k - FAIK', 24850, 27000, 1, 27000, '2020-08-10', '08:07:00', 'elektrik', 'offline');
+(1414, 0, 0, 'Pulsa Telkomsel 25k - FAIK', 24850, 27000, 1, 27000, '2020-08-10', '08:07:00', 'elektrik', 'offline'),
+(1415, 0, 0, 'Pulsa telkomsel 5k - farhan', 5900, 7000, 1, 7000, '2020-08-10', '08:09:00', 'elektrik', 'offline'),
+(1416, 0, 0, 'ISI DANA 10K - FARHAN', 10250, 12000, 1, 12000, '2020-08-10', '08:09:00', 'elektrik', 'offline');
 
 -- --------------------------------------------------------
 
@@ -3959,7 +3964,7 @@ CREATE TABLE `saldo_fisik` (
 --
 
 INSERT INTO `saldo_fisik` (`id`, `saldo`) VALUES
-(1, 700200);
+(1, 720200);
 
 -- --------------------------------------------------------
 
@@ -4247,7 +4252,7 @@ ALTER TABLE `pelanggan_ppob`
 -- AUTO_INCREMENT for table `pemasukan`
 --
 ALTER TABLE `pemasukan`
-  MODIFY `id_pemasukan` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1308;
+  MODIFY `id_pemasukan` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1311;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran`
@@ -4265,7 +4270,7 @@ ALTER TABLE `pengeluaran_tabungan`
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1415;
+  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1417;
 
 --
 -- AUTO_INCREMENT for table `saldo_fisik`
