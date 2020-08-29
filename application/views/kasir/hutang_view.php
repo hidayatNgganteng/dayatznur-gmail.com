@@ -52,7 +52,7 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-            
+        <h3>Total hutang yg belum dibayar: <span id="total_hutang" style="color: red; font-weight: bold"></span></h3>
 			
 			<table id="tabelBarang" class="table table-striped table-bordered nowrap" style="width:100%">
 				<thead>
@@ -131,6 +131,21 @@
               "lengthChange": false,
               "responsive": true,
               });
+
+            // get total hutang yang belum lunas
+            $.ajax({
+              url : "<?php echo site_url('option/get_total_hutang') ?>",
+              type: "GET",
+              dataType: "JSON",
+              success: function(data){
+                $("#total_hutang").text(`Rp.${data.total}`)
+              },
+              error: function (jqXHR, textStatus, errorThrown){
+                alert('error');
+              }
+            });
+
+
           });
        
        function reload_table()
@@ -163,6 +178,7 @@
             }
           });
         }
+        
        }
       
   </script>

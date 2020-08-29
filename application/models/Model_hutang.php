@@ -80,4 +80,11 @@ class Model_Hutang extends CI_Model {
 		$query = $this->db->get();
 		return $query->row();
 	}
+
+	public function get_total_hutang()
+	{
+		$query = $this->db->query("SELECT sum(harga_jual) as total FROM `hutang_elektrik` WHERE status='hutang'");
+		return $query->row();
+	}
+	
 }

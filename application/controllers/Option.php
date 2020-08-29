@@ -1061,6 +1061,12 @@ public function update_ppob(){
 		echo json_encode($output);
   }
 
+  public function get_total_hutang(){
+    $this->load->model('model_hutang');
+	$hutang = $this->model_hutang->get_total_hutang();	
+	echo json_encode($hutang);
+  }
+
   function date_to_month_name($d) {
     $yrdata = strtotime($d);
     return date('M-Y', $yrdata);
