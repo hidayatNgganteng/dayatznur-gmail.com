@@ -1155,13 +1155,9 @@ public function update_ppob(){
 		$row[] = $barang->nama;
 		$row[] = $barang->nomor;
 
-		if($this->session->userdata('level') == 1 ){
+		
 			$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_telp('."'".$barang->id."'".')"><i class="far fa-edit"></i></a>
 					<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_telp('."'".$barang->id."'".')"><i class="far fa-trash-alt"></i></a>';
-		}else{
-			$row[] = '<a class="btn btn-sm btn-warning disabled" href="javascript:void(0)" title="Edit" ><i class="far fa-edit"></i></a>
-					<a class="btn btn-sm btn-danger disabled" href="javascript:void(0)" title="Hapus" ><i class="far fa-trash-alt"></i></a>';
-		}
 
 		$data[] = $row;
 	}
@@ -1190,13 +1186,9 @@ public function update_ppob(){
 		$row[] = $barang->nama;
 		$row[] = $barang->nomor;
 
-		if($this->session->userdata('level') == 1 ){
+		
 			$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_ppob('."'".$barang->id_pelanggan."'".')"><i class="far fa-edit"></i></a>
 					<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_ppob('."'".$barang->id_pelanggan."'".')"><i class="far fa-trash-alt"></i></a>';
-		}else{
-			$row[] = '<a class="btn btn-sm btn-warning disabled" href="javascript:void(0)" title="Edit" ><i class="far fa-edit"></i></a>
-					<a class="btn btn-sm btn-danger disabled" href="javascript:void(0)" title="Hapus" ><i class="far fa-trash-alt"></i></a>';
-		}
 
 		$data[] = $row;
 	}

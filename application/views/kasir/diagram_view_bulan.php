@@ -283,6 +283,10 @@
 						            return 40000 * 26
 					            } else if (tgltahun == 'August 2020') {
                         return 45000 * 26
+                      } else if (tgltahun == 'September 2020') {
+                        return 50000 * 26
+                      } else if (tgltahun == 'October 2020') {
+                        return 55000 * 26
                       } else {
                         return 0
                       }
@@ -298,8 +302,8 @@
                     pointHitRadius: 1,
                     pointHoverBorderColor: 'rgba(219, 68, 55, 1)'
                 },{
-                    label: 'Sedekah 10%',
-                    data: obj.map(item => item.neto * 10 / 100),
+                    label: 'Sedekah 50%',
+                    data: obj.map(item => item.neto > 700000 ? (item.neto - 700000) * 50 / 100 : item.neto * 50 / 100),
                     backgroundColor: [
                         'rgba(247, 202, 24, 0.1)'
                     ],

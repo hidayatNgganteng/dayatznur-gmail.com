@@ -31,7 +31,8 @@ class Model_barang extends CI_Model {
 		$this->_get_datatables_query();
 		if($_POST['length'] != -1)
 		$this->db->limit($_POST['length'], $_POST['start']);
-		$this->db->where('setok', '1');
+		$this->db->where('setok >', '0');
+		$this->db->where('setok <=', '2');
 		$query = $this->db->get();
 		return $query->result();
 	}

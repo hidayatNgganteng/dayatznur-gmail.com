@@ -96,7 +96,7 @@
             <p>Total hari: <b id="total_hari"></b></p>
             <p>Total produk terjual: <b id="total_produk_terjual"></b></p>
             <p>Total keuntungan: <b id="total_keuntungan"></b></p>
-            <p>Sedekah 10%: <b id="total_sedekah"></b></p>
+            <p>Sedekah 50%: <b id="total_sedekah"></b></p>
             <p>Rata-rata keuntungan / hari: <b id="rata_rata"></b></p>
           </div>
           
@@ -212,7 +212,7 @@
                   $("#total_produk_terjual").text(obj.length)
                   $("#total_hari").text(dataSend.length)
                   $("#total_keuntungan").text(`Rp. ${toIdrFormat(totalKeuntungan)}`)
-                  $("#total_sedekah").text(`Rp. ${toIdrFormat(totalKeuntungan * 10 / 100)}`)
+                  $("#total_sedekah").text(`Rp. ${totalKeuntungan > 700000 ? toIdrFormat((totalKeuntungan - 700000) * 50 / 100) : toIdrFormat(totalKeuntungan * 50 / 100)}`)
                   $("#rata_rata").text(`Rp. ${toIdrFormat(totalKeuntungan / dataSend.length)}`)
 
                   diagram(dataSend);
@@ -317,7 +317,7 @@
                   $("#total_produk_terjual").text(obj.length)
                   $("#total_hari").text(dataSend.length)
                   $("#total_keuntungan").text(`Rp. ${toIdrFormat(totalKeuntungan)}`)
-                  $("#total_sedekah").text(`Rp. ${toIdrFormat(totalKeuntungan * 10 / 100)}`)
+                  $("#total_sedekah").text(`Rp. ${totalKeuntungan > 700000 ? toIdrFormat((totalKeuntungan - 700000) * 50 / 100) : toIdrFormat(totalKeuntungan * 50 / 100)}`)
                   $("#rata_rata").text(`Rp. ${toIdrFormat(totalKeuntungan / dataSend.length)}`)
 
                   diagram(dataSend);
@@ -378,7 +378,11 @@
 						            return 40000  
 					           } else if (tgltahun == 'August 2020') {
                         return 45000
-                     } else{
+                     } else if (tgltahun == 'September 2020') {
+                        return 50000
+                     } else if (tgltahun == 'October 2020') {
+                        return 55000
+                     } else {
                         return 0
                       }
                     }),

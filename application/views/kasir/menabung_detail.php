@@ -264,8 +264,8 @@
                       })
 
                       // sedekah
-                      $("#sedekah").attr('aria-valuemax', Math.ceil(currentDateData.neto * 10 / 100))
-                      $("#sedekah-total").text(`Rp. ${Math.ceil(currentDateData.neto * 10 / 100)}`)
+                      $("#sedekah").attr('aria-valuemax', Math.ceil(currentDateData.neto > 700000 ? (currentDateData.neto - 700000) * 50 / 100 : currentDateData.neto * 50 / 100))
+                      $("#sedekah-total").text(`Rp. ${Math.ceil(currentDateData.neto > 700000 ? (currentDateData.neto - 700000) * 50 / 100 : currentDateData.neto * 50 / 100)}`)
                       $('#sedekah').progressbar({
                         display_text: 'fill',
                         percent_format: percent => {
