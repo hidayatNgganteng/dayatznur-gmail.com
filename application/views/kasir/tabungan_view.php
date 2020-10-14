@@ -145,7 +145,7 @@
             "order": [],
             "serverSide": true, 
             "ajax": {
-              "url": "http://localhost/bordercell/option/get_laporan_tabungan",
+              "url": "<?php echo base_url(); ?>option/get_laporan_tabungan",
               "type": "POST"
             },
             "lengthChange": false,

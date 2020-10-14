@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= site_url() ?>">
     <div class="sidebar-brand-icon">
-      <img style="width: auto; height: 50px" src="http://localhost/bordercell/assets/images/p.png">
+      <img style="width: auto; height: 50px" src="<?php echo base_url(); ?>assets/images/p.png">
     </div>
     <div class="sidebar-brand-text mx-1">
       <?php

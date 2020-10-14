@@ -102,7 +102,7 @@
             "order": [],
             "serverSide": true, 
             "ajax": {
-              "url": "http://localhost/bordercell/option/get_menabung",
+              "url": "<?php echo base_url(); ?>option/get_menabung",
               "type": "POST"
             },
             "lengthChange": false,

@@ -149,7 +149,7 @@
               "order": [],
               "serverSide": true, 
               "ajax": {
-                  "url": "http://localhost/bordercell/option/get_no_telp",
+                  "url": "<?php echo base_url(); ?>option/get_no_telp",
                   "type": "POST"
                   },
               "lengthChange": false,

@@ -158,7 +158,7 @@
               "order": [],
               "serverSide": true, 
               "ajax": {
-                  "url": "http://localhost/bordercell/option/get_data_laba",
+                  "url": "<?php echo base_url(); ?>option/get_data_laba",
                   "type": "POST"
                   },
               "lengthChange": false,

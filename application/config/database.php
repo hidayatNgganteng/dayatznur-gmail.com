@@ -76,9 +76,15 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'bordercell',
+	
+	'username' => 'u9658674_bordercell',
+	'password' => 'bordercell2020',
+	'database' => 'u9658674_bordercell',
+
+	// 'username' => 'root',
+	// 'password' => '',
+	// 'database' => 'bordercell',
+
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

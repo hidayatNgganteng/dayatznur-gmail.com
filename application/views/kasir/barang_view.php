@@ -115,7 +115,7 @@
           "order": [],
           "serverSide": true, 
           "ajax": {
-            "url": "http://localhost/bordercell/option/get_barang",
+            "url": "<?php echo base_url(); ?>option/get_barang",
             "type": "POST"
           },
           "lengthChange": false,

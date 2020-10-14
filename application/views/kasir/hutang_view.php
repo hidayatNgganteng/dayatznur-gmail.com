@@ -125,7 +125,7 @@
               "order": [],
               "serverSide": true, 
               "ajax": {
-                  "url": "http://localhost/bordercell/option/get_hutang",
+                  "url": "<?php echo base_url(); ?>option/get_hutang",
                   "type": "POST"
                   },
               "lengthChange": false,

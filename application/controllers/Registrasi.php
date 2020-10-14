@@ -7,7 +7,7 @@ class Registrasi extends CI_Controller {
                 parent::__construct();
                 $this->load->model('model_registrasi');
                 if($this->session->userdata('id')){
-                        header("location: http://localhost/bordercell");
+                        header("location: ".base_url());
                 }
         }
 	

@@ -182,7 +182,7 @@
                 delay : 400,
                 source: function(request, response) { 
                     jQuery.ajax({
-                        url:      "http://localhost/bordercell/option/cari_barang",
+                        url:      "<?php echo base_url(); ?>option/cari_barang",
                         data: {
                           keyword : request.term
                         },

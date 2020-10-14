@@ -132,7 +132,7 @@
               "order": [],
               "serverSide": true, 
               "ajax": {
-                  "url": "http://localhost/bordercell/option/get_pengeluaran",
+                  "url": "<?php echo base_url(); ?>option/get_pengeluaran",
                   "type": "POST"
                   },
               "lengthChange": false,

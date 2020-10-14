@@ -6,7 +6,7 @@ class Option extends CI_Controller {
 		parent::__construct();
 		$this->load->model('model_barang');
 		if(!$this->session->userdata('id')){
-			header('location:http://localhost/bordercell');
+			header('location:'.base_url());
 		}
 	}
 	
@@ -1400,7 +1400,7 @@ public function update_ppob(){
 		$this->load->helper('cookie');
 		delete_cookie('id');
 		$this->session->sess_destroy();
-		header('location:http://localhost/bordercell');
+		header('location: '.base_url());
 	}
 
 	public function pengunjung(){

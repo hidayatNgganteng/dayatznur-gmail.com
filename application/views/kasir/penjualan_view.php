@@ -130,7 +130,7 @@
               "order": [],
               "serverSide": true, 
               "ajax": {
-                  "url": "http://localhost/bordercell/option/get_penjualan",
+                  "url": "<?php echo base_url(); ?>option/get_penjualan",
                   "type": "POST"
                   },
               "lengthChange": false,

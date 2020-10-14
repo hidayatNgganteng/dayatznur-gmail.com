@@ -131,7 +131,7 @@
             "order": [],
             "serverSide": true, 
             "ajax": {
-                "url": "http://localhost/bordercell/option/get_data_user",
+                "url": "<?php echo base_url(); ?>option/get_data_user",
                 "type": "POST"
                 },
             "lengthChange": false,

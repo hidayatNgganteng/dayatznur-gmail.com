@@ -214,7 +214,7 @@
               var date = "<?php echo $date ?>"
               var dateSplit = date.split("-")
               $.ajax({
-                  url:'http://localhost/bordercell/option/cari_diagram_perbulan',
+                  url: '<?php echo base_url(); ?>option/cari_diagram_perbulan',
                   data:{bulan: dateSplit[1], tahun: dateSplit[0]},
                   method: "POST",
                     success:function(data)

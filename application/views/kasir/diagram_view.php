@@ -149,7 +149,7 @@
         var bulan = $("#bulan").val();
         var tahun = $("#tahun").val();
         $.ajax({
-            url:'http://localhost/bordercell/option/cari_diagram',
+            url: '<?php echo base_url(); ?>option/cari_diagram',
             data:{bulan:bulan, tahun:tahun},
             method: "POST",
               success:function(data)
@@ -253,7 +253,7 @@
        
       $(function(){
           $.ajax({
-              url:"http://localhost/bordercell/option/diagram",
+              url: "<?php echo base_url(); ?>option/diagram",
               method: "GET",
               success:function(data)
               {

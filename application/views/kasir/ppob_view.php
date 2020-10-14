@@ -153,7 +153,7 @@
               "order": [],
               "serverSide": true, 
               "ajax": {
-                  "url": "http://localhost/bordercell/option/get_ppob",
+                  "url": "<?php echo base_url(); ?>option/get_ppob",
                   "type": "POST",
                   },
               "lengthChange": false,

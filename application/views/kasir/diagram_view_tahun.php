@@ -106,7 +106,7 @@
        
       $(function(){
           $.ajax({
-              url:"http://localhost/bordercell/option/diagram_pertahun",
+              url: "<?php echo base_url(); ?>option/diagram_pertahun",
               method: "GET",
               success:function(data)
               {
