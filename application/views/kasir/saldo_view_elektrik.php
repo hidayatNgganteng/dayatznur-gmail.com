@@ -97,7 +97,7 @@
               } ?>
             </div>
             <div class="col-md-4">
-              <h4>Saldo Digipos</h4>
+              <h4>Saldo Digipos (chip tsel)</h4>
               <?php
                   if ($data_order_digipos->saldo > 250000) { ?>
                       <h2 class="alert alert-success" role="alert" data-saldo="<?php echo $data_order_digipos->saldo ?>" data-saldoId="<?php echo $data_order_digipos->id ?>" id="saldo_view_digipos"> <?php
@@ -117,6 +117,53 @@
                   echo '<button class="btn btn-danger" onclick="edit_barang(2)"><i class="glyphicon glyphicon-plus"></i> edit</button><br><br>';
               } ?>
             </div>
+          </div>
+          
+          <hr style="border-top: dotted 1px;">
+
+          <div class="row">
+            <div class="col-md-4">
+                <h4>Saldo I-Simple (chip isat)</h4>
+                <?php
+                    if ($data_order_isimple->saldo > 250000) { ?>
+                        <h2 class="alert alert-success" role="alert" data-saldo="<?php echo $data_order_isimple->saldo ?>" data-saldoId="<?php echo $data_order_isimple->id ?>" id="saldo_view_isimple"> <?php
+                    } else if ($data_order_isimple->saldo > 100000 && $data_order_isimple->saldo <= 250000) { ?>
+                        <h2 class="alert alert-warning" role="alert" data-saldo="<?php echo $data_order_isimple->saldo ?>" data-saldoId="<?php echo $data_order_isimple->id ?>" id="saldo_view_isimple"> <?php
+                    } else { ?>
+                        <h2 class="alert alert-danger" role="alert" data-saldo="<?php echo $data_order_isimple->saldo ?>" data-saldoId="<?php echo $data_order_isimple->id ?>" id="saldo_view_isimple"> <?php
+                    }
+                        $saldo = number_format($data_order_isimple->saldo,2,',','.');
+                        $saldoInArray = explode(",",$saldo);
+                        echo "Rp " . $saldoInArray[0];
+                    ?>
+                    </h2>
+
+                    <?php
+                    if($this->session->userdata('level')==1) {
+                    echo '<button class="btn btn-info" onclick="edit_barang(3)"><i class="glyphicon glyphicon-plus"></i> edit</button><br><br>';
+                } ?>
+              </div>
+              <div class="col-md-4">
+                <h4>Saldo Rita (chip tri)</h4>
+                <?php
+                    if ($data_order_rita->saldo > 250000) { ?>
+                        <h2 class="alert alert-success" role="alert" data-saldo="<?php echo $data_order_rita->saldo ?>" data-saldoId="<?php echo $data_order_rita->id ?>" id="saldo_view_rita"> <?php
+                    } else if ($data_order_rita->saldo > 100000 && $data_order_rita->saldo <= 250000) { ?>
+                        <h2 class="alert alert-warning" role="alert" data-saldo="<?php echo $data_order_rita->saldo ?>" data-saldoId="<?php echo $data_order_rita->id ?>" id="saldo_view_rita"> <?php
+                    } else { ?>
+                        <h2 class="alert alert-danger" role="alert" data-saldo="<?php echo $data_order_rita->saldo ?>" data-saldoId="<?php echo $data_order_rita->id ?>" id="saldo_view_rita"> <?php
+                    }
+                        $saldo = number_format($data_order_rita->saldo,2,',','.');
+                        $saldoInArray = explode(",",$saldo);
+                        echo "Rp " . $saldoInArray[0];
+                    ?>
+                    </h2>
+
+                    <?php
+                    if($this->session->userdata('level')==1) {
+                    echo '<button class="btn btn-success" onclick="edit_barang(4)"><i class="glyphicon glyphicon-plus"></i> edit</button><br><br>';
+                } ?>
+              </div>
           </div>
         </div>
 
@@ -151,6 +198,16 @@
         } else if (type == 1) {
           const saldo = $("#saldo_view_orderkuota").attr('data-saldo')
           const saldoId = $("#saldo_view_orderkuota").attr('data-saldoId')
+          $('#saldo').val(saldo)
+          $("#saldoId").val(saldoId)
+        } else if (type == 3) {
+          const saldo = $("#saldo_view_isimple").attr('data-saldo')
+          const saldoId = $("#saldo_view_isimple").attr('data-saldoId')
+          $('#saldo').val(saldo)
+          $("#saldoId").val(saldoId)
+        } else if (type == 4) {
+          const saldo = $("#saldo_view_rita").attr('data-saldo')
+          const saldoId = $("#saldo_view_rita").attr('data-saldoId')
           $('#saldo').val(saldo)
           $("#saldoId").val(saldoId)
         } else {

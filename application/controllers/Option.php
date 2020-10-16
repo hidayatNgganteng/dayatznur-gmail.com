@@ -148,6 +148,10 @@ class Option extends CI_Controller {
 		$data_saldo = $this->model_saldo->getSaldoMitra();
 	} else if ($jenis_saldo == 'orderkuota') {
 		$data_saldo = $this->model_saldo->getSaldoOrderKuota();
+	} else if ($jenis_saldo == 'isimple') {
+		$data_saldo = $this->model_saldo->getSaldoISimple();
+	} else if ($jenis_saldo == 'rita') {
+		$data_saldo = $this->model_saldo->getSaldoRita();
 	} else {
 		$data_saldo = $this->model_saldo->getSaldoDigipos();
 	}
@@ -186,6 +190,10 @@ class Option extends CI_Controller {
 		$id_saldo = 0;
 	  } else if ($jenis_saldo == 'orderkuota') {
 		$id_saldo = 1;
+	  } else if ($jenis_saldo == 'isimple') {
+		$id_saldo = 3;
+	  } else if ($jenis_saldo == 'rita') {
+		$id_saldo = 4;
 	  } else {
 		$id_saldo = 2;
 	  }
@@ -218,6 +226,10 @@ class Option extends CI_Controller {
 		$data_saldo = $this->model_saldo->getSaldoMitra();
 	} else if ($jenis_saldo == 'orderkuota') {
 		$data_saldo = $this->model_saldo->getSaldoOrderKuota();
+	} else if ($jenis_saldo == 'isimple') {
+		$data_saldo = $this->model_saldo->getSaldoISimple();
+	} else if ($jenis_saldo == 'rita') {
+		$data_saldo = $this->model_saldo->getSaldoRita();
 	} else {
 		$data_saldo = $this->model_saldo->getSaldoDigipos();
 	}
@@ -255,6 +267,10 @@ class Option extends CI_Controller {
 		$id_saldo = 0;
 	  } else if ($jenis_saldo == 'orderkuota') {
 		$id_saldo = 1;
+	  } else if ($jenis_saldo == 'isimple') {
+		$id_saldo = 3;
+	  } else if ($jenis_saldo == 'rita') {
+		$id_saldo = 4;
 	  } else {
 		$id_saldo = 2;
 	  }
@@ -445,6 +461,8 @@ class Option extends CI_Controller {
     $data['data_saldo_mitra'] = $this->model_saldo->getSaldoMitra();
 	$data['data_order_kuota'] = $this->model_saldo->getSaldoOrderKuota();
 	$data['data_order_digipos'] = $this->model_saldo->getSaldoDigipos();
+	$data['data_order_isimple'] = $this->model_saldo->getSaldoISimple();
+	$data['data_order_rita'] = $this->model_saldo->getSaldoRita();
 
 		$this->load->view('kasir/saldo_view_elektrik', $data);
 	}

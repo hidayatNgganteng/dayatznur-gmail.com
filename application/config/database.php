@@ -77,13 +77,13 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	
-	'username' => 'u9658674_bordercell',
-	'password' => 'bordercell2020',
-	'database' => 'u9658674_bordercell',
+	// 'username' => 'u9658674_bordercell',
+	// 'password' => 'bordercell2020',
+	// 'database' => 'u9658674_bordercell',
 
-	// 'username' => 'root',
-	// 'password' => '',
-	// 'database' => 'bordercell',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'bordercell',
 
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

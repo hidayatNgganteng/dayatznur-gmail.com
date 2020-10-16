@@ -23,8 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://admin.bordercell.com/';
-// $config['base_url'] = 'http://localhost/bordercell/';
+// $config['base_url'] = 'http://admin.bordercell.com/';
+$config['base_url'] = 'http://localhost/bordercell/';
 
 date_default_timezone_set('Asia/jakarta');
 /*

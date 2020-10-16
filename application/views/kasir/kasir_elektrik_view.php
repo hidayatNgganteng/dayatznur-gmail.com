@@ -109,7 +109,9 @@
                           <select required class="form-control" name="jenis_saldo" id="jenis_saldo">
                             <option value="mitra">Mitra</option>
                             <option value="orderkuota">Order Kuota</option>
-                            <option value="digipos">Digipos</option>
+                            <option value="digipos">Digipos (chip tsel)</option>
+                            <option value="isimple">I-Simple (chip isat)</option>
+                            <option value="rita">Rita (chip tri)</option>
                           </select>
                         </div>
                     </div>

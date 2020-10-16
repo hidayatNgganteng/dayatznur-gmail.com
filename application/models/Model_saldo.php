@@ -22,6 +22,18 @@ class Model_saldo extends CI_Model {
     {
     	$query = $this->db->get_where($this->table, array('id' => 2));
 		return $query->row();	
+	}
+	
+	function getSaldoISimple()
+    {
+    	$query = $this->db->get_where($this->table, array('id' => 3));
+		return $query->row();	
+	}
+	
+	function getSaldoRita()
+    {
+    	$query = $this->db->get_where($this->table, array('id' => 4));
+		return $query->row();	
     }
     
     public function update($where, $data)
